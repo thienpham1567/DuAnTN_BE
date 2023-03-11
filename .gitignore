@@ -1,4 +1,4 @@
 # file to ignore if you want to use git to track your eclipse workspace metadata directory. 
-/.metadata/
+.metadata/*
 
 
