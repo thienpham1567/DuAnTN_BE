@@ -11,5 +11,6 @@ import shoesShop.entity.Role;
 public class UserCreationDTO {
 	private String username;
 	private String password;
+	private String firstName;
 	private Collection<Role> roles;
 }

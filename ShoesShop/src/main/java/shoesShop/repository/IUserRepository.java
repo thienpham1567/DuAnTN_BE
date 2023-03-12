@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import shoesShop.entity.User;
 
-@Repository
 public interface IUserRepository extends JpaRepository<User, Integer>{
 
 }

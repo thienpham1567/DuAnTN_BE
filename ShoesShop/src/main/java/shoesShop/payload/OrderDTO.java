@@ -9,6 +9,4 @@ import shoesShop.entity.User;
 @AllArgsConstructor
 public class OrderDTO {
 	 private User user;
-	 
-	 
 }
