@@ -45,9 +45,10 @@ CREATE TABLE [Orders] (
   [Updated] datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   [OrderAmount] decimal(11,2) NOT NULL,
   [UserId] int,
-  [OrdersStatusId] int,
+  [OrderStatusId] int,
   PRIMARY KEY ([OrderId]),
   CONSTRAINT [FK_Orders.UserId] FOREIGN KEY ([UserId]) REFERENCES [Users]([UserId])
+  CONSTRAINT [FK_Orders.OrderStatusId] FOREIGN KEY ([OrderStatusId]) REFERENCES [OrderStatus]([OrderStatusId])
 );
 
 CREATE TABLE [OrderDetails] (
