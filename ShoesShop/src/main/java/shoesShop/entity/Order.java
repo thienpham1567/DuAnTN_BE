@@ -10,5 +10,5 @@ import lombok.Data;
 public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Integer orderId;
 }
