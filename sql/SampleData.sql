@@ -3,23 +3,23 @@ insert into [Brands](Name) values('Nike'),('Puma'),('Addidas');
 insert into [Categories](Description,Code) values('For men','Men'),('For women','Women'),('For kid','Kid');
 
 insert into Products(Name,ImageLink,Price,InStock,IsAvailable,BrandId,CategoryId)
-values(N'Nike Force 1 Low ASW','https://static.nike.com/a/images/c_limit,w_592,f_a…b2d-675f1de5dd6e/force-1-low-asw-shoes-5fp6WC.png',200,2,1,1,3),
-(N'Nike Air Max 270 GO','https://static.nike.com/a/images/c_limit,w_592,f_a…1db02/air-max-270-go-easy-on-off-shoes-cKPvgH.png',100,10,1,1,3),
-(N'Nike Air Max 90 LTR SE','https://static.nike.com/a/images/c_limit,w_592,f_a…1d8034/air-max-90-ltr-se-younger-shoes-ZHBVdP.png',150,12,1,1,3),
-(N'Retaliate 2 Sneakers Kids','https://images.puma.com/image/upload/f_auto,q_auto…08/sv01/fnd/GBR/fmt/png/Retaliate-2-Sneakers-Kids',100,15,1,2,3),
-(N'Rider FV Future Vintage Sneakers Youth','https://images.puma.com/image/upload/f_auto,q_auto…BR/fmt/png/Rider-FV-Future-Vintage-Sneakers-Youth',100,10,1,2,3),
+values(N'Nike Force 1 Low ASW','https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/1cda356d-09f0-402f-92d7-e41e9a57b0fc/dunk-low-older-shoes-1b2qSK.png',200,2,1,1,3),
+(N'Nike Air Max 270 GO','https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/4c96ea9f-ca01-4697-bfd3-187ab4432c93/air-max-270-go-older-easy-on-off-shoes-dlD632.png',100,10,1,1,3),
+(N'Nike Air Max 90 LTR SE','https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/53682b53-52a1-44de-9b55-a7e1b8eb37e6/court-borough-low-2-older-shoes-chDVgV.png',150,12,1,1,3),
+(N'Retaliate 2 Sneakers Kids','https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_350,h_350/global/392737/01/sv01/fnd/PNA/fmt/png/RS-TRCK-Vacay-Queen-Big-KIds''-Sneakers',100,15,1,2,3),
+(N'Rider FV Future Vintage Sneakers Youth','https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_350,h_350/global/380560/05/sv01/fnd/PNA/fmt/png/Suede-Classic-XXI-Sneakers-Big-Kids',100,10,1,2,3),
 
-(N'Nike ACG Air Zoom Gaiadome GORE-TEX','https://static.nike.com/a/images/c_limit,w_592,f_a…c/acg-air-zoom-gaiadome-gore-tex-shoes-2t1Qbv.png',250,5,1,1,1),
-(N'Jordan Max Aura 4','https://static.nike.com/a/images/c_limit,w_592,f_a…e-08856ed76f78/jordan-max-aura-4-shoes-cKMcXJ.png',230,9,1,1,1),
-(N'Nike Go FlyEase','https://static.nike.com/a/images/c_limit,w_592,f_a…08a924b78/go-flyease-easy-on-off-shoes-3svRCL.png',190,10,1,1,1),
-(N'Slipstream Leather Sneakers','https://images.puma.com/image/upload/f_auto,q_auto…/sv01/fnd/GBR/fmt/png/Slipstream-Leather-Sneakers',110,10,1,2,1),
-(N'RS-X Efekt PRM Sneakers','https://images.puma.com/image/upload/f_auto,q_auto…6/09/sv01/fnd/GBR/fmt/png/RS-X-Efekt-PRM-Sneakers',100,10,1,2,1),
+(N'Nike ACG Air Zoom Gaiadome GORE-TEX','https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/16146248-1627-4300-bbd9-77f7a00f6ed6/air-jordan-xxxvii-low-pf-basketball-shoes-7z7ltC.png',250,5,1,1,1),
+(N'Jordan Max Aura 4','https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/9b0a3ee6-843c-4303-ba08-8bebfcd9b4e1/jordan-why-not-6-pf-shoes-Bsggwn.png',230,9,1,1,1),
+(N'Nike Go FlyEase','https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/cef1c1e1-8e83-4a1c-9202-8c60bd221a76/air-jordan-1-mid-se-craft-shoes-RmP7J6.png',190,10,1,1,1),
+(N'Slipstream Leather Sneakers','https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_500,h_500/global/389277/01/sv01/fnd/PNA/fmt/png/Suede-Camowave-Sneakers',110,10,1,2,1),
+(N'RS-X Efekt PRM Sneakers','https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_500,h_500/global/374915/05/sv01/fnd/PNA/fmt/png/Suede-Classic-XXI-Sneakers',100,10,1,2,1),
 
-(N'Sustainnable Materials','https://static.nike.com/a/images/c_limit,w_592,f_a…uperrep-4-next-nature-hiit-class-shoes-vL8WXL.png',100,10,1,1,2),
-(N'Bestseller','https://static.nike.com/a/images/c_limit,w_592,f_a…a05b-3124ece1962c/icon-classic-sandals-Jrc3kN.png',150,10,1,1,2),
-(N'RS-X Efekt PRM Sneakers','https://images.puma.com/image/upload/f_auto,q_auto…6/03/sv01/fnd/GBR/fmt/png/RS-X-Efekt-PRM-Sneakers',200,4,1,2,2),
-(N'Cassia Via Sneakers Women','https://images.puma.com/image/upload/f_auto,q_auto…03/sv01/fnd/GBR/fmt/png/Cassia-Via-Sneakers-Women',230,9,1,2,2),
-(N'Mayze Stack Sneakers Women','https://images.puma.com/image/upload/f_auto,q_auto…3/sv01/fnd/GBR/fmt/png/Mayze-Stack-Sneakers-Women',200,15,1,2,2);
+(N'Sustainnable Materials','https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/a434379e-98ac-4b7a-bb31-5b179e9a010b/metcon-8-amp-training-shoes-cZ5hVh.png',100,10,1,1,2),
+(N'Bestseller','https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/b38395a0-3d85-4bfe-b897-14717ba923ae/nikecourt-legacy-next-nature-shoes-rdTfqH.png',150,10,1,1,2),
+(N'RS-X Efekt PRM Sneakers','https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_350,h_350/global/389267/03/sv01/fnd/PNA/fmt/png/PUMA-180-Sneakers',200,4,1,2,2),
+(N'Cassia Via Sneakers Women','https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_350,h_350/global/389873/02/sv01/fnd/PNA/fmt/png/Cali-Dream-Camo-Women''s-Sneakers',230,9,1,2,2),
+(N'Mayze Stack Sneakers Women','https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_350,h_350/global/307624/02/sv01/fnd/PNA/fmt/png/BMW-M-Motorsport-TRC-Mira-Tech-Motorsport-Women''s-Shoes',200,15,1,2,2);
 
 insert into Products(Name,ImageLink,Price,InStock,IsAvailable,BrandId,CategoryId)
 values('OZWEEGO SHOES','https://assets.adidas.com/images/w_383,h_383,f_auto,q_auto,fl_lossy,c_fill,g_auto/59b4f21d63de4245aa8bacb600b23e52_9366/ozweego-shoes.jpg',120,10,0,3,1),
