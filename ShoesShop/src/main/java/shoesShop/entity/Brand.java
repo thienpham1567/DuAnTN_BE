@@ -21,6 +21,8 @@ public class Brand {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer brandId;
 	
-	@NotEmpty
-	String name;
+	public String name;
+	
+	@OneToMany(mappedBy = "brand")
+	List<Product> products = new ArrayList<>();
 }

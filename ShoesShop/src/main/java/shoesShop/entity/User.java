@@ -1,9 +1,13 @@
 package shoesShop.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -15,11 +19,18 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer userId;
-	private String password;
-	private String middleName;
-	private String lastName;
-	private String email;
-	private String userAddress;
-	private boolean isActive;
+	
+	public String password;
+	public String middleName;
+	public String lastName;
+	public String email;
+	public String userAddress;
+	public boolean isActive;
+	
+	@OneToMany(mappedBy = "user")
+	List<Order> orders = new ArrayList();
+	
+	@OneToMany(mappedBy = "user")
+	List<User> roles = new ArrayList();
 }	
 	

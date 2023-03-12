@@ -10,11 +10,22 @@ import shoesShop.entity.Product;
 import shoesShop.repository.IProductRepository;
 
 @Service
-public class ProductService {
+public class ProductService extends RecordManager<Product>{
 	@Autowired
-	IProductRepository productRepo;
+	private IProductRepository productRepo;
 	
+	@Override
 	public List<Product> getAll(){
 		return productRepo.findAll();
+	}
+	
+	@Override
+	public Product getOne(int id){
+		return productRepo.findById(id).get();
+	}
+	
+	@Override
+	public Product create(Product record) {
+		return productRepo.save(record);
 	}
 }
