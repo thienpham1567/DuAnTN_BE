@@ -11,4 +11,5 @@ public class UserRole {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer userRoleId;
+	
 }
