@@ -13,16 +13,16 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "UserRoles")
-public class UserRole {
+public class DbUserRole {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer userRoleId;
 	
 	@ManyToOne
 	@JoinColumn(name = "UserId", referencedColumnName = "UserId")
-	public User user;
+	public DbUser user;
 	
 	@ManyToOne
 	@JoinColumn(name = "RoleId", referencedColumnName = "RoleId")
-	public Role role;
+	public DbRole role;
 }

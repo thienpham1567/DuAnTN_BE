@@ -2,7 +2,7 @@ package shoesShop.entity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,27 +17,25 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "Products")
-public class Product {
+@Table(name = "Orders")
+public class DbOrder {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer productId;
+	private Integer orderId;
 	
-	public String name;
-	public String imageLink;
-	public double price;
-	public int inStock;
 	public LocalDateTime created;
-	public boolean isAvailable;
+	public LocalDateTime updated;
+	public String orderAddress;
+	public double orderAmount;
 	
 	@ManyToOne
-	@JoinColumn(name = "BrandId", referencedColumnName = "BrandId")
-	public Brand brand;
+	@JoinColumn(name = "UserId", referencedColumnName = "UserId")
+	public DbUser user;
 	
 	@ManyToOne
-	@JoinColumn(name = "CategoryId", referencedColumnName = "CategoryId")
-	public Category category;
+	@JoinColumn(name = "OrderStatusId", referencedColumnName = "OrderStatusId")
+	public DbOrderStatus orderStatus;
 	
 	@OneToMany(mappedBy = "orderDetail")
-	List<OrderDetail> orderDetails = new ArrayList();
+	Collection<DbOrderDetail> orderDetails = new ArrayList();
 }

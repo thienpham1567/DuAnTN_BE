@@ -3,7 +3,7 @@ package shoesShop.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import shoesShop.entity.User;
+import shoesShop.entity.DbUser;
 
-public interface IUserRepository extends JpaRepository<User, Integer> {
+public interface IUserRepository extends JpaRepository<DbUser, Integer> {
 }

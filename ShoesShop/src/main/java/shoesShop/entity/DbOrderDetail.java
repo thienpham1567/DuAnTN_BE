@@ -13,7 +13,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "OrderDetails")
-public class OrderDetail {
+public class DbOrderDetail {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer orderDetailId;
@@ -23,9 +23,9 @@ public class OrderDetail {
 	
 	@ManyToOne
 	@JoinColumn(name = "ProductId", referencedColumnName = "ProductId")
-	public Product product;
+	public DbProduct product;
 	
 	@ManyToOne
 	@JoinColumn(name = "OrderId", referencedColumnName = "OrderId")
-	public Order order;	
+	public DbOrder order;	
 }

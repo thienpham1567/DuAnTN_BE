@@ -1,7 +1,7 @@
 package shoesShop.entity;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,14 +14,15 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "OrderStatus")
-public class OrderStatus {
+@Table(name = "Roles")
+public class DbRole {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer orderStatusId;
+	private Integer roleId;
 	
-	private String description;
+	public String description;
+	public String code;
 	
-	@OneToMany(mappedBy = "orderStatus")
-	List<Order> orders = new ArrayList();
+	@OneToMany(mappedBy = "role")
+	Collection<DbUser> users = new ArrayList();
 }

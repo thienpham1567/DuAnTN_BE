@@ -1,7 +1,7 @@
 package shoesShop.entity;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +15,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "Categories")
-public class Category {
+public class DbCategory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer categoryId;
@@ -24,5 +24,5 @@ public class Category {
 	public String code;
 	
 	@OneToMany(mappedBy = "category")
-	List<Product> products = new ArrayList();
+	Collection<DbProduct> products = new ArrayList();
 }

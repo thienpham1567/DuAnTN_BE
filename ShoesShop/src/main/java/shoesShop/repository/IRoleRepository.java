@@ -2,7 +2,7 @@ package shoesShop.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import shoesShop.entity.Role;
+import shoesShop.entity.DbRole;
 
-public interface IRoleRepository extends JpaRepository<Role, Integer> {
+public interface IRoleRepository extends JpaRepository<DbRole, Integer> {
 }

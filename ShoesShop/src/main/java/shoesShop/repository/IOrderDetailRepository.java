@@ -2,7 +2,7 @@ package shoesShop.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import shoesShop.entity.OrderDetail;
+import shoesShop.entity.DbOrderDetail;
 
-public interface IOrderDetailRepository extends JpaRepository<OrderDetail, Integer> {
+public interface IOrderDetailRepository extends JpaRepository<DbOrderDetail, Integer> {
 }

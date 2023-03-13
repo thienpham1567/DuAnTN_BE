@@ -4,13 +4,13 @@ import java.util.Collection;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import shoesShop.entity.Role;
+import shoesShop.entity.DbRole;
 
 @Getter
 @AllArgsConstructor
-public class UserCreationDTO {
+public class UserLoginDTO {
 	private String username;
 	private String password;
 	private String firstName;
-	private Collection<Role> roles;
+	private Collection<DbRole> roles;
 }

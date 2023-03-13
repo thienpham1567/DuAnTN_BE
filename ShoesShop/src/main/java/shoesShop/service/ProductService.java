@@ -6,26 +6,26 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import shoesShop.entity.Product;
+import shoesShop.entity.DbProduct;
 import shoesShop.repository.IProductRepository;
 
 @Service
-public class ProductService extends RecordManager<Product>{
+public class ProductService extends RecordManager<DbProduct>{
 	@Autowired
 	private IProductRepository productRepo;
 	
 	@Override
-	public List<Product> getAll(){
+	public List<DbProduct> getAll(){
 		return productRepo.findAll();
 	}
 	
 	@Override
-	public Product getOne(int id){
+	public DbProduct getOne(int id){
 		return productRepo.findById(id).get();
 	}
 	
 	@Override
-	public Product create(Product record) {
+	public DbProduct create(DbProduct record) {
 		return productRepo.save(record);
 	}
 }

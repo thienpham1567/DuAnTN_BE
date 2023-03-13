@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import shoesShop.entity.Product;
+import shoesShop.entity.DbProduct;
 import shoesShop.payload.ProductDTO;
 import shoesShop.service.ProductService;
 
