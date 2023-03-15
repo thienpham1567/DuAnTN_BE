@@ -25,7 +25,7 @@ public class DbUser {
 	public String lastName;
 	public String email;
 	public String userAddress;
-	public boolean isActive;
+	public Boolean isActive;
 	
 	@OneToMany(mappedBy = "user")
 	Collection<DbOrder> orders = new ArrayList();

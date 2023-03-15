@@ -26,7 +26,7 @@ public class DbOrder {
 	public LocalDateTime created;
 	public LocalDateTime updated;
 	public String orderAddress;
-	public double orderAmount;
+	public Double orderAmount;
 	
 	@ManyToOne
 	@JoinColumn(name = "UserId", referencedColumnName = "UserId")

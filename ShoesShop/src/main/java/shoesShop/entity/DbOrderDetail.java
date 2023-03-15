@@ -18,8 +18,8 @@ public class DbOrderDetail {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer orderDetailId;
 	
-	public double detailPrice;
-	public int quantity;
+	public Double detailPrice;
+	public Integer quantity;
 	
 	@ManyToOne
 	@JoinColumn(name = "ProductId", referencedColumnName = "ProductId")

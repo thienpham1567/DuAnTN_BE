@@ -19,5 +19,5 @@ public class Product {
 	public int categoryId;
 	
 	// Collections
-	Collection<Integer> orderDetailIds = new ArrayList();
+	public Collection<Integer> orderDetailIds = new ArrayList();
 }

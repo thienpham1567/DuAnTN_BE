@@ -13,9 +13,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Data
+@AllArgsConstructor
 @Entity
 @Table(name = "Products")
 public class DbProduct {
@@ -25,10 +30,10 @@ public class DbProduct {
 	
 	public String name;
 	public String imageLink;
-	public double price;
-	public int inStock;
+	public Double price;
+	public Integer inStock;
 	public LocalDateTime created;
-	public boolean isAvailable;
+	public Boolean isAvailable;
 	
 	@ManyToOne
 	@JoinColumn(name = "BrandId", referencedColumnName = "BrandId")
