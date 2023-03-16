@@ -1,12 +1,9 @@
 package shoesShop.converter;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import shoesShop.entity.DbOrderDetail;
 import shoesShop.entity.DbProduct;
 import shoesShop.model.Product;
 import shoesShop.repository.IBrandRepository;
@@ -34,9 +31,8 @@ public class ProductConverter implements ICombiner<DbProduct>, IConverter<Produc
 	}
 
 	@Override
-	public DbProduct convertDbToModel(Product input) {
+	public DbProduct convertModelToDb(Product input) {
 		return input == null ? null : new DbProduct(
-					input.productId,
 					input.name,
 					input.imageLink,
 					input.price,
@@ -44,14 +40,24 @@ public class ProductConverter implements ICombiner<DbProduct>, IConverter<Produc
 					input.created,
 					input.isAvailable,
 					brandRepo.findById(input.brandId).get(),
-					categoryRepo.findById(input.categoryId).get(),
-					input.orderDetailIds.stream().map(id -> orderDetailRepo.findById(id).get()).collect(Collectors.toList())
+					categoryRepo.findById(input.categoryId).get()
+					//input.orderDetailIds.stream().map(id -> orderDetailRepo.findById(id).get()).collect(Collectors.toList())
 				);
 	}
 
 	@Override
-	public Product convertModelToDb(DbProduct input) {
-		// TODO Auto-generated method stub
-		return null;
+	public Product convertDbToModel(DbProduct input) {
+		return input == null ? null : new Product(
+				input.productId,
+				input.name,
+				input.imageLink,
+				input.price,
+				input.inStock,
+				input.created,
+				input.isAvailable,
+				input.brand.brandId,
+				input.category.categoryId
+				//input.orderDetailIds.stream().map(id -> orderDetailRepo.findById(id).get()).collect(Collectors.toList())
+			);
 	}
 }

@@ -21,7 +21,7 @@ import lombok.Data;
 public class DbOrder {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer orderId;
+	public Integer orderId;
 	
 	public LocalDateTime created;
 	public LocalDateTime updated;
@@ -36,6 +36,6 @@ public class DbOrder {
 	@JoinColumn(name = "OrderStatusId", referencedColumnName = "OrderStatusId")
 	public DbOrderStatus orderStatus;
 	
-	@OneToMany(mappedBy = "orderDetail")
+	@OneToMany(mappedBy = "order")
 	Collection<DbOrderDetail> orderDetails = new ArrayList();
 }

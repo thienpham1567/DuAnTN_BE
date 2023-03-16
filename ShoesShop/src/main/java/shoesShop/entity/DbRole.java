@@ -18,11 +18,11 @@ import lombok.Data;
 public class DbRole {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer roleId;
+	public Integer roleId;
 	
 	public String description;
 	public String code;
 	
 	@OneToMany(mappedBy = "role")
-	Collection<DbUser> users = new ArrayList();
+	Collection<DbUserRole> userRoles = new ArrayList();
 }

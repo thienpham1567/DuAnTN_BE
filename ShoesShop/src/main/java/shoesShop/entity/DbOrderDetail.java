@@ -16,7 +16,7 @@ import lombok.Data;
 public class DbOrderDetail {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer orderDetailId;
+	public Integer orderDetailId;
 	
 	public Double detailPrice;
 	public Integer quantity;

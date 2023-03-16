@@ -16,7 +16,7 @@ import lombok.Data;
 public class DbUserRole {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer userRoleId;
+	public Integer userRoleId;
 	
 	@ManyToOne
 	@JoinColumn(name = "UserId", referencedColumnName = "UserId")

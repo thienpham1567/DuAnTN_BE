@@ -18,7 +18,7 @@ import lombok.Data;
 public class DbUser {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer userId;
+	public Integer userId;
 	
 	public String password;
 	public String middleName;
@@ -31,6 +31,6 @@ public class DbUser {
 	Collection<DbOrder> orders = new ArrayList();
 	
 	@OneToMany(mappedBy = "user")
-	Collection<DbUser> roles = new ArrayList();
+	Collection<DbUserRole> userRoles = new ArrayList();
 }	
 	

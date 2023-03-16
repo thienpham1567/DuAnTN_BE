@@ -18,9 +18,9 @@ import lombok.Data;
 public class DbOrderStatus {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer orderStatusId;
+	public Integer orderStatusId;
 	
-	private String description;
+	public String description;
 	
 	@OneToMany(mappedBy = "orderStatus")
 	Collection<DbOrder> orders = new ArrayList();

@@ -18,7 +18,7 @@ import lombok.Data;
 public class DbBrand {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer brandId;
+	public Integer brandId;
 	
 	public String name;
 	
