@@ -7,5 +7,5 @@ public interface IRecordManager<T> {
 	T retrieveOne(Integer id) throws Exception;
 	T create(T record) throws Exception;
 	T update(T record, Integer id) throws Exception;
-	boolean delete(Integer id) throws Exception;
+	Boolean delete(Integer id) throws Exception;
 }

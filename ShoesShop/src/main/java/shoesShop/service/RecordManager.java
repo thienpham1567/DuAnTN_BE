@@ -19,7 +19,7 @@ public abstract class RecordManager<T> implements IRecordManager<T>{
 		throw new Exception();
 	}
 	
-	public boolean delete(Integer id) throws Exception {
+	public Boolean delete(Integer id) throws Exception {
 		throw new Exception();
 	}
 }
