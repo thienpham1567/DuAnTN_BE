@@ -1,6 +1,6 @@
 package shoesShop.converter;
 
-public interface IConverter<TDb, TModel> {
-	TModel convertModelToDb(TDb input);
-	TDb convertDbToModel(TModel input);
+public interface IConverter<TEntity, TModel> {
+	TEntity convertModelToDb(TModel input);
+	TModel convertDbToModel(TEntity input);
 }

@@ -3,7 +3,7 @@ package shoesShop.converter;
 import shoesShop.entity.DbProduct;
 import shoesShop.model.Product;
 
-public class ProductConverter implements ICombiner<DbProduct>, IConverter<Product, DbProduct>{	
+public class ProductConverter implements ICombiner<DbProduct>, IConverter<DbProduct, Product>{	
 	@Override
 	public void combine(DbProduct original, DbProduct update) {
 		original.category = update.category;

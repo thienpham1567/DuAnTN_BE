@@ -3,7 +3,7 @@ package shoesShop.converter;
 import shoesShop.entity.DbBrand;
 import shoesShop.model.Brand;
 
-public class BrandConverter implements IConverter<Brand, DbBrand>{
+public class BrandConverter implements IConverter<DbBrand, Brand>{
 
 	@Override
 	public DbBrand convertModelToDb(Brand input) {
