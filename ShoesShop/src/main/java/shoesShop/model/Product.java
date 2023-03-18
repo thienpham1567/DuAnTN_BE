@@ -6,17 +6,20 @@ import java.util.Collection;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 public class Product {
-	public Product(Integer productId, String name, String imageLink, Double price, Integer inStock,
-			LocalDateTime created, Boolean isAvailable, Integer brandId, Integer categoryId) {
+	public Product() {
+	}
+
+	public Product(Integer productId, String name, String imageLink, Double price, Integer inStock, Boolean isAvailable, Integer brandId, Integer categoryId) {
 		super();
 		this.productId = productId;
 		this.name = name;
 		this.imageLink = imageLink;
 		this.price = price;
 		this.inStock = inStock;
-		this.created = created;
+		this.created = LocalDateTime.now();
 		this.isAvailable = isAvailable;
 		this.brandId = brandId;
 		this.categoryId = categoryId;
@@ -27,22 +30,23 @@ public class Product {
 	public String name;
 	@NotEmpty
 	public String imageLink;
-	@NotEmpty
+	@NotNull
 	@Min(0)
 	public Double price;
-	@NotEmpty
+	@NotNull
 	@Min(0)
 	public Integer inStock;
-	public LocalDateTime created;
-	public Boolean isAvailable;
 	
+	public LocalDateTime created = LocalDateTime.now();
+	public Boolean isAvailable;
+
 	// Ids
 	public Integer productId;
-	@NotEmpty
+	@NotNull
 	public Integer brandId;
-	@NotEmpty
+	@NotNull
 	public Integer categoryId;
 	
 	// Collections
-	public Collection<Integer> orderDetailIds = new ArrayList();
+	public Collection<Integer> orderDetailIds = new ArrayList<>();
 }

@@ -1,30 +1,15 @@
 package shoesShop.converter;
 
-import java.util.stream.Collectors;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import shoesShop.entity.DbProduct;
 import shoesShop.model.Product;
-import shoesShop.repository.IBrandRepository;
-import shoesShop.repository.ICategoryRepository;
-import shoesShop.repository.IOrderDetailRepository;
 
-public class ProductConverter implements ICombiner<DbProduct>, IConverter<Product, DbProduct>{
-	@Autowired
-	private IBrandRepository brandRepo;
-	
-	@Autowired
-	private ICategoryRepository categoryRepo;
-	
-	@Autowired
-	private IOrderDetailRepository orderDetailRepo;
-	
+public class ProductConverter implements ICombiner<DbProduct>, IConverter<Product, DbProduct>{	
 	@Override
 	public void combine(DbProduct original, DbProduct update) {
 		original.category = update.category;
-		original.created = update.created;
+		original.brand = update.brand;
 		original.name = update.name;
+		original.imageLink = update.imageLink;
 		original.price = update.price;
 		original.inStock = update.inStock;
 		original.isAvailable = update.isAvailable;
@@ -37,11 +22,8 @@ public class ProductConverter implements ICombiner<DbProduct>, IConverter<Produc
 					input.imageLink,
 					input.price,
 					input.inStock,
-					input.created,
 					input.isAvailable,
-					brandRepo.findById(input.brandId).get(),
-					categoryRepo.findById(input.categoryId).get()
-					//input.orderDetailIds.stream().map(id -> orderDetailRepo.findById(id).get()).collect(Collectors.toList())
+					input.created
 				);
 	}
 
@@ -53,11 +35,9 @@ public class ProductConverter implements ICombiner<DbProduct>, IConverter<Produc
 				input.imageLink,
 				input.price,
 				input.inStock,
-				input.created,
 				input.isAvailable,
 				input.brand.brandId,
 				input.category.categoryId
-				//input.orderDetailIds.stream().map(id -> orderDetailRepo.findById(id).get()).collect(Collectors.toList())
 			);
 	}
 }

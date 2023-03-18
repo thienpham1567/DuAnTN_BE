@@ -1,5 +1,6 @@
 package shoesShop.entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -10,9 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "Categories")
 public class DbCategory {
@@ -24,5 +29,5 @@ public class DbCategory {
 	public String code;
 	
 	@OneToMany(mappedBy = "category")
-	Collection<DbProduct> products = new ArrayList();
+	Collection<DbProduct> products = new ArrayList<>();
 }

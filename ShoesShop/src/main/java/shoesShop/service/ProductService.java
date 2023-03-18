@@ -1,7 +1,6 @@
 package shoesShop.service;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +9,20 @@ import org.springframework.stereotype.Service;
 import shoesShop.converter.ProductConverter;
 import shoesShop.entity.DbProduct;
 import shoesShop.model.Product;
+import shoesShop.repository.IBrandRepository;
+import shoesShop.repository.ICategoryRepository;
 import shoesShop.repository.IProductRepository;
 
 @Service
 public class ProductService extends RecordManager<Product>{
 	@Autowired
 	private IProductRepository productRepo;
+	
+	@Autowired
+	private IBrandRepository brandRepo;
+	
+	@Autowired
+	private ICategoryRepository categoryRepo;
 	
 	ProductConverter converter = new ProductConverter();
 	
@@ -34,6 +41,8 @@ public class ProductService extends RecordManager<Product>{
 	@Override
 	public Product create(Product product) {
 		DbProduct dbProduct = this.converter.convertModelToDb(product);
+		dbProduct.brand = this.brandRepo.findById(product.brandId).get();
+		dbProduct.category =  this.categoryRepo.findById(product.categoryId).get();
 		DbProduct createdProduct = this.productRepo.save(dbProduct);
 		return this.converter.convertDbToModel(createdProduct);
 	}
@@ -41,6 +50,9 @@ public class ProductService extends RecordManager<Product>{
 	@Override
 	public Product update(Product product, Integer id) {
 		DbProduct updateProduct = this.converter.convertModelToDb(product);
+		updateProduct.brand = this.brandRepo.findById(product.brandId).get();
+		updateProduct.category =  this.categoryRepo.findById(product.categoryId).get();
+		
 		DbProduct dbProduct = this.productRepo.findById(id).get();
 		if(dbProduct != null) {
 			this.converter.combine(dbProduct, updateProduct);

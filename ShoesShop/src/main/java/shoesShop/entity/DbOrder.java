@@ -13,9 +13,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "Orders")
 public class DbOrder {
@@ -37,5 +41,5 @@ public class DbOrder {
 	public DbOrderStatus orderStatus;
 	
 	@OneToMany(mappedBy = "order")
-	Collection<DbOrderDetail> orderDetails = new ArrayList();
+	Collection<DbOrderDetail> orderDetails = new ArrayList<>();
 }

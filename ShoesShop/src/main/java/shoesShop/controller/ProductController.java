@@ -1,7 +1,6 @@
 package shoesShop.controller;
 
 import java.util.Collection;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,12 +17,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import shoesShop.entity.DbProduct;
 import shoesShop.model.Product;
 import shoesShop.service.ProductService;
 
 @RestController
-@RequestMapping("api/v1/products")
+@RequestMapping("api/v1/products/")
 public class ProductController extends ApiController{
 	@Autowired
 	ProductService productService;
@@ -36,7 +33,7 @@ public class ProductController extends ApiController{
 		return new ResponseEntity<Collection<Product>>(products, HttpStatus.OK);
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("{id}")
 	public ResponseEntity<Product> retrieveOne(@PathVariable("id") Integer id) {
 		Product product = productService.retrieveOne(id);
 		if (product != null) {
@@ -48,6 +45,7 @@ public class ProductController extends ApiController{
 
 	@PostMapping
 	public ResponseEntity<Product> create(@RequestBody @Valid Product product, BindingResult result) {
+		System.out.print(product);
 		if (product == null || result.hasErrors()) {
 			return new ResponseEntity<Product>(HttpStatus.BAD_REQUEST);
 		}
@@ -55,19 +53,21 @@ public class ProductController extends ApiController{
 		return new ResponseEntity<Product>(this.productService.create(product), HttpStatus.CREATED);
 	}
 
-	@PutMapping("/{id}")
-	public ResponseEntity<Product> update(@RequestBody @Valid Product product, Integer id, BindingResult result) {
+	@PutMapping("{id}")
+	public ResponseEntity<Product> update(@RequestBody @Valid Product product,@PathVariable("id") Integer id, BindingResult result) {
 		if (product == null || result.hasErrors()) {
 			return new ResponseEntity<Product>(HttpStatus.BAD_REQUEST);
 		}
+		
+		Product updatedProduct = this.productService.update(product, id);
 
-		return this.productService.update(product, id) != null
-				? new ResponseEntity<Product>(this.productService.create(product), HttpStatus.OK)
+		return updatedProduct != null
+				? new ResponseEntity<Product>(updatedProduct, HttpStatus.OK)
 				: new ResponseEntity<Product>(HttpStatus.BAD_REQUEST);
 	}
 	
-	@DeleteMapping("/products/{id}")
-	public ResponseEntity<Product> delete(Integer id) {
+	@DeleteMapping("{id}")
+	public ResponseEntity<Product> delete(@PathVariable("id") Integer id) {
 		return this.productService.delete(id) ? new ResponseEntity<Product>(HttpStatus.NO_CONTENT) : new ResponseEntity<Product>(HttpStatus.BAD_REQUEST);
 	}
 }
