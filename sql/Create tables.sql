@@ -11,6 +11,12 @@ CREATE TABLE [Brands] (
   PRIMARY KEY ([BrandId])
 );
 
+CREATE TABLE [OrderStatus] (
+  [OrderStatusId] int IDENTITY(1,1),
+  [Description] nvarchar(255) NOT NULL,
+  PRIMARY KEY ([OrderStatusId])
+);
+
 CREATE TABLE [Products] (
   [ProductId] int IDENTITY(1,1),
   [Name] nvarchar(255) NOT NULL,
@@ -18,7 +24,7 @@ CREATE TABLE [Products] (
   [Price] decimal(10,2) NOT NULL,
   [InStock] int NOT NULL,
   [Created] datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  [IsAvailable] bit NOT NULL,
+  [IsAvailable] bit NOT NULL DEFAULT (0),
   [BrandId] int,
   [CategoryId] int,
   PRIMARY KEY ([ProductId]),
@@ -47,7 +53,7 @@ CREATE TABLE [Orders] (
   [UserId] int,
   [OrderStatusId] int,
   PRIMARY KEY ([OrderId]),
-  CONSTRAINT [FK_Orders.UserId] FOREIGN KEY ([UserId]) REFERENCES [Users]([UserId])
+  CONSTRAINT [FK_Orders.UserId] FOREIGN KEY ([UserId]) REFERENCES [Users]([UserId]),
   CONSTRAINT [FK_Orders.OrderStatusId] FOREIGN KEY ([OrderStatusId]) REFERENCES [OrderStatus]([OrderStatusId])
 );
 
@@ -77,10 +83,3 @@ CREATE TABLE [UserRoles] (
   CONSTRAINT [FK_UserRoles.UserId] FOREIGN KEY ([UserId]) REFERENCES [Users]([UserId]),
   CONSTRAINT [FK_UserRoles.RoleId] FOREIGN KEY ([RoleId]) REFERENCES [Roles]([RoleId])
 );
-
-CREATE TABLE [OrderStatus] (
-  [OrderStatusId] int IDENTITY(1,1),
-  [Description] nvarchar(255) NOT NULL,
-  PRIMARY KEY ([OrderStatusId])
-);
-
