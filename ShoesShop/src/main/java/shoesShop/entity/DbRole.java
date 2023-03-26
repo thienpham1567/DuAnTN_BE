@@ -21,12 +21,20 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "Roles")
 public class DbRole {
+	public DbRole(String description, String code) {
+		super();
+		this.description = description;
+		this.code = code;
+//		this.created = created;
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer roleId;
 	
 	public String description;
 	public String code;
+	public LocalDateTime created;
 	
 	@OneToMany(mappedBy = "role")
 	Collection<DbUserRole> userRoles = new ArrayList<DbUserRole>();
