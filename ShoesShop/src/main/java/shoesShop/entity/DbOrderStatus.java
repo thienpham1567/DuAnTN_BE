@@ -21,11 +21,17 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "OrderStatus")
 public class DbOrderStatus {
+	public DbOrderStatus(String description, LocalDateTime created) {
+		super();
+		this.description = description;
+		this.created = created;
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer orderStatusId;
-	
 	public String description;
+	public LocalDateTime created;
 	
 	@OneToMany(mappedBy = "orderStatus")
 	Collection<DbOrder> orders = new ArrayList<>();
