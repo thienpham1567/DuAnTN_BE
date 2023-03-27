@@ -13,19 +13,18 @@ import shoesShop.model.Product;
 import shoesShop.repository.IBrandRepository;
 
 @Service
-public class BrandService extends RecordManager<Brand>{
+public class BrandService extends RecordManager<Brand> {
 	@Autowired
 	private IBrandRepository brandRepo;
-	
+
 	BrandConverter converter = new BrandConverter();
 
 	@Override
 	public Collection<Brand> retrieveAll() throws Exception {
-		Collection<Brand> brands = this.load(null).stream().map(dbBrand -> this.converter.convertDbToModel(dbBrand)).collect(Collectors.toList());
+		Collection<Brand> brands = this.load(null).stream().map(dbBrand -> this.converter.convertDbToModel(dbBrand))
+				.collect(Collectors.toList());
 		return brands;
 	}
-
-	
 
 	@Override
 	public Brand retrieveOne(Integer id) throws Exception {
@@ -42,9 +41,9 @@ public class BrandService extends RecordManager<Brand>{
 
 	@Override
 	public Brand update(Brand brand, Integer id) throws Exception {
-		DbBrand updateBrand  = this.converter.convertModelToDb(brand);
+		DbBrand updateBrand = this.converter.convertModelToDb(brand);
 		DbBrand dbBrand = this.brandRepo.findById(id).get();
-		if(dbBrand != null){
+		if (dbBrand != null) {
 			this.converter.combine(dbBrand, updateBrand);
 			DbBrand updateDbBrand = this.brandRepo.save(dbBrand);
 			return this.converter.convertDbToModel(updateDbBrand);
@@ -54,20 +53,19 @@ public class BrandService extends RecordManager<Brand>{
 
 	@Override
 	public Boolean delete(Integer id) throws Exception {
-		if(this.brandRepo.existsById(id)) {
+		if (this.brandRepo.existsById(id)) {
 			this.brandRepo.deleteById(id);
 			return true;
 		}
 		return false;
 	}
-	
-	private Collection<DbBrand> load(Integer brandId){
+
+	private Collection<DbBrand> load(Integer brandId) {
 		Collection<DbBrand> dbBrands = this.brandRepo.findAll();
-		if(brandId != null) {
+		if (brandId != null) {
 			dbBrands = dbBrands.stream().filter(dbBrand -> dbBrand.brandId == brandId).collect(Collectors.toList());
 		}
 		return dbBrands;
 	}
-	
-	
+
 }

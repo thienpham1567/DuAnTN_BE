@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import shoesShop.model.Brand;
-import shoesShop.model.Product;
 import shoesShop.service.BrandService;
 
 @RestController

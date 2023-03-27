@@ -26,6 +26,7 @@ public class DbUser {
 	public Integer userId;
 	
 	public String password;
+	public String firstName;
 	public String middleName;
 	public String lastName;
 	public String email;

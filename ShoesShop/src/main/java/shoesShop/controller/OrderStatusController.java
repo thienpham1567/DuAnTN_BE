@@ -18,48 +18,48 @@ import shoesShop.model.OrderStatus;
 import shoesShop.service.OrderStatusService;
 
 @RestController
-@RequestMapping("/order-statuses")
+@RequestMapping("api/v1/order-statuses")
 public class OrderStatusController {
 
-    @Autowired
-    private OrderStatusService orderStatusService;
+	@Autowired
+	private OrderStatusService orderStatusService;
 
-    @GetMapping("")
-    public ResponseEntity<Collection<OrderStatus>> retrieveAll() {
-        Collection<OrderStatus> orderStatuses = this.orderStatusService.retrieveAll();
-        return new ResponseEntity<>(orderStatuses, HttpStatus.OK);
-    }
+	@GetMapping
+	public ResponseEntity<Collection<OrderStatus>> retrieveAll() {
+		Collection<OrderStatus> orderStatuses = this.orderStatusService.retrieveAll();
+		return new ResponseEntity<>(orderStatuses, HttpStatus.OK);
+	}
 
-    @GetMapping("/{id}")
-    public ResponseEntity<OrderStatus> retrieveOne(@PathVariable("id") Integer id) {
-        OrderStatus orderStatus = this.orderStatusService.retrieveOne(id);
-        if (orderStatus == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(orderStatus, HttpStatus.OK);
-    }
+	@GetMapping("{id}")
+	public ResponseEntity<OrderStatus> retrieveOne(@PathVariable("id") Integer id) {
+		OrderStatus orderStatus = this.orderStatusService.retrieveOne(id);
+		if (orderStatus == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(orderStatus, HttpStatus.OK);
+	}
 
-    @PostMapping("")
-    public ResponseEntity<OrderStatus> create(@RequestBody OrderStatus orderStatus) {
-        OrderStatus createdOrderStatus = this.orderStatusService.create(orderStatus);
-        return new ResponseEntity<>(createdOrderStatus, HttpStatus.CREATED);
-    }
+	@PostMapping
+	public ResponseEntity<OrderStatus> create(@RequestBody OrderStatus orderStatus) {
+		OrderStatus createdOrderStatus = this.orderStatusService.create(orderStatus);
+		return new ResponseEntity<>(createdOrderStatus, HttpStatus.CREATED);
+	}
 
-    @PutMapping("/{id}")
-    public ResponseEntity<OrderStatus> update(@RequestBody OrderStatus orderStatus, @PathVariable("id") Integer id) {
-        OrderStatus updatedOrderStatus = this.orderStatusService.update(orderStatus, id);
-        if (updatedOrderStatus == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(updatedOrderStatus, HttpStatus.OK);
-    }
+	@PutMapping("{id}")
+	public ResponseEntity<OrderStatus> update(@RequestBody OrderStatus orderStatus, @PathVariable("id") Integer id) {
+		OrderStatus updatedOrderStatus = this.orderStatusService.update(orderStatus, id);
+		if (updatedOrderStatus == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(updatedOrderStatus, HttpStatus.OK);
+	}
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> delete(@PathVariable("id") Integer id) {
-        boolean deleted = this.orderStatusService.delete(id);
-        if (!deleted) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+	@DeleteMapping("{id}")
+	public ResponseEntity<HttpStatus> delete(@PathVariable("id") Integer id) {
+		boolean deleted = this.orderStatusService.delete(id);
+		if (!deleted) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
 }

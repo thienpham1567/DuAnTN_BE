@@ -11,6 +11,7 @@ import shoesShop.entity.DbUser;
 public class User {
 	// Properties
 	public String password;
+	public String firstName;
 	public String middleName;
 	public String lastName;
 	public String email;

@@ -13,47 +13,47 @@ import shoesShop.repository.IRoleRepository;
 
 @Service
 public class RoleService {
+	@Autowired
+	private IRoleRepository roleRepo;
 
-    @Autowired
-    private IRoleRepository roleRepo;
+	RoleConverter converter = new RoleConverter();
 
-    RoleConverter converter = new RoleConverter();
+	public Collection<Role> retrieveAll() {
+		Collection<Role> roles = this.roleRepo.findAll().stream().map(dbRole -> this.converter.convertDbToModel(dbRole))
+				.collect(Collectors.toList());
+		return roles;
+	}
 
-    public Collection<Role> retrieveAll() {
-        Collection<Role> roles = this.roleRepo.findAll().stream().map(dbRole -> this.converter.convertDbToModel(dbRole)).collect(Collectors.toList());
-        return roles;
-    }
+	public Role retrieveOne(Integer id) {
+		Role role = this.roleRepo.findById(id).map(dbRole -> this.converter.convertDbToModel(dbRole)).orElse(null);
+		return role;
+	}
 
-    public Role retrieveOne(Integer id) {
-        Role role = this.roleRepo.findById(id).map(dbRole -> this.converter.convertDbToModel(dbRole)).orElse(null);
-        return role;
-    }
+	public Role create(Role role) {
+		DbRole dbRole = this.converter.convertModelToDb(role);
+		DbRole createdRole = this.roleRepo.save(dbRole);
+		return this.converter.convertDbToModel(createdRole);
+	}
 
-    public Role create(Role role) {
-        DbRole dbRole = this.converter.convertModelToDb(role);
-        DbRole createdRole = this.roleRepo.save(dbRole);
-        return this.converter.convertDbToModel(createdRole);
-    }
+	public Role update(Role role, Integer id) {
+		DbRole updateRole = this.converter.convertModelToDb(role);
 
-    public Role update(Role role, Integer id) {
-        DbRole updateRole = this.converter.convertModelToDb(role);
+		DbRole dbRole = this.roleRepo.findById(id).orElse(null);
+		if (dbRole != null) {
+			this.converter.combine(dbRole, updateRole);
+			DbRole updateDbRole = this.roleRepo.save(dbRole);
+			return this.converter.convertDbToModel(updateDbRole);
+		}
 
-        DbRole dbRole = this.roleRepo.findById(id).orElse(null);
-        if (dbRole != null) {
-            this.converter.combine(dbRole, updateRole);
-            DbRole updateDbRole = this.roleRepo.save(dbRole);
-            return this.converter.convertDbToModel(updateDbRole);
-        }
+		return null;
+	}
 
-        return null;
-    }
+	public Boolean delete(Integer id) {
+		if (this.roleRepo.existsById(id)) {
+			this.roleRepo.deleteById(id);
+			return true;
+		}
 
-    public Boolean delete(Integer id) {
-        if (this.roleRepo.existsById(id)) {
-            this.roleRepo.deleteById(id);
-            return true;
-        }
-
-        return false;
-    }
+		return false;
+	}
 }
