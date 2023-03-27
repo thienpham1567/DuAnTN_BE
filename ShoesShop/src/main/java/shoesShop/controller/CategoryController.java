@@ -21,7 +21,7 @@ import shoesShop.model.Category;
 import shoesShop.service.CategoryService;
 
 @RestController
-@RequestMapping("api/v1/categories/")
+@RequestMapping("api/v1/categories")
 public class CategoryController extends ApiController{
 	@Autowired
 	CategoryService categoryService;

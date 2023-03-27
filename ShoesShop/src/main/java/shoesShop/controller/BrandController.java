@@ -21,7 +21,7 @@ import shoesShop.model.Brand;
 import shoesShop.service.BrandService;
 
 @RestController
-@RequestMapping("api/v1/brand/")
+@RequestMapping("api/v1/brands")
 public class BrandController extends ApiController{
 	@Autowired
 	BrandService brandService;
