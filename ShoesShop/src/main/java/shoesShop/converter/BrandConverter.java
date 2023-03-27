@@ -3,8 +3,12 @@ package shoesShop.converter;
 import shoesShop.entity.DbBrand;
 import shoesShop.model.Brand;
 
-public class BrandConverter implements IConverter<Brand, DbBrand>{
+public class BrandConverter implements ICombiner<DbBrand>,IConverter<Brand, DbBrand>{
 
+	@Override
+	public void combine(DbBrand original, DbBrand update) {
+		original.name = update.name;
+	}
 	@Override
 	public DbBrand convertModelToDb(Brand input) {
 		return input == null ? null : new DbBrand(input.name);
@@ -12,8 +16,12 @@ public class BrandConverter implements IConverter<Brand, DbBrand>{
 
 	@Override
 	public Brand convertDbToModel(DbBrand input) {
-		// TODO Auto-generated method stub
-		return null;
+		return input == null ? null : new Brand(
+				input.name,
+				input.brandId
+				);
 	}
+
+	
 	
 }
