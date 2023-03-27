@@ -21,6 +21,13 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "Categories")
 public class DbCategory {
+	
+	public DbCategory( String description, String code) {
+		super();
+		this.description = description;
+		this.code = code;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer categoryId;
