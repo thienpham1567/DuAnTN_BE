@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -29,7 +30,6 @@ public class DbOrder {
 	
 	public LocalDateTime created;
 	public LocalDateTime updated;
-	public String orderAddress;
 	public Double orderAmount;
 	
 	@ManyToOne
@@ -42,4 +42,8 @@ public class DbOrder {
 	
 	@OneToMany(mappedBy = "order")
 	Collection<DbOrderDetail> orderDetails = new ArrayList<>();
+	
+	@OneToOne
+	@JoinColumn(name = "OrderAddress", referencedColumnName = "OrderAddressId")
+	DbOrderAddress orderAddress;
 }

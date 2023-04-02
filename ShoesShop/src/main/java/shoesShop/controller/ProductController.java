@@ -1,6 +1,8 @@
 package shoesShop.controller;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import shoesShop.model.Product;
@@ -27,9 +30,14 @@ public class ProductController extends ApiController {
 	ProductService productService;
 
 	@GetMapping
-	public ResponseEntity<Collection<Product>> retrieveAll() {
-		Collection<Product> products = productService.retrieveAll();
-
+	public ResponseEntity<Collection<Product>> retrieveAll(@RequestParam(name = "category", required = false) Integer categoryId,
+														   @RequestParam(name = "brand", required = false) Integer brandId) {
+		Collection<Product> products = new ArrayList<>();
+		if (categoryId != null || brandId != null) {
+			products = productService.retrieveAll(brandId, categoryId);
+		} else {
+			products = productService.retrieveAll();
+		}
 		return new ResponseEntity<Collection<Product>>(products, HttpStatus.OK);
 	}
 
@@ -54,20 +62,21 @@ public class ProductController extends ApiController {
 	}
 
 	@PutMapping("{id}")
-	public ResponseEntity<Product> update(@RequestBody @Valid Product product,@PathVariable("id") Integer id, BindingResult result) {
+	public ResponseEntity<Product> update(@RequestBody @Valid Product product, @PathVariable("id") Integer id,
+			BindingResult result) {
 		if (product == null || result.hasErrors()) {
 			return new ResponseEntity<Product>(HttpStatus.BAD_REQUEST);
 		}
-		
+
 		Product updatedProduct = this.productService.update(product, id);
 
-		return updatedProduct != null
-				? new ResponseEntity<Product>(updatedProduct, HttpStatus.OK)
+		return updatedProduct != null ? new ResponseEntity<Product>(updatedProduct, HttpStatus.OK)
 				: new ResponseEntity<Product>(HttpStatus.BAD_REQUEST);
 	}
-	
+
 	@DeleteMapping("{id}")
 	public ResponseEntity<Product> delete(@PathVariable("id") Integer id) {
-		return this.productService.delete(id) ? new ResponseEntity<Product>(HttpStatus.NO_CONTENT) : new ResponseEntity<Product>(HttpStatus.BAD_REQUEST);
+		return this.productService.delete(id) ? new ResponseEntity<Product>(HttpStatus.NO_CONTENT)
+				: new ResponseEntity<Product>(HttpStatus.BAD_REQUEST);
 	}
 }

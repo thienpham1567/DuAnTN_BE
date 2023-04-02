@@ -75,11 +75,23 @@ public class ProductService extends RecordManager<Product> {
 		return false;
 	}
 
+	public Collection<Product> retrieveAll(Integer brandId, Integer categoryId) {
+		Collection<Product> products = this.load(null, brandId, categoryId).stream()
+				.map(dbProduct -> this.converter.convertDbToModel(dbProduct)).collect(Collectors.toList());
+		return products;
+	}
+
 	private Collection<DbProduct> load(Integer productId, Integer brandId, Integer categoryId) {
 		Collection<DbProduct> dbProducts = this.productRepo.findAll();
 
 		if (productId != null) {
 			dbProducts = dbProducts.stream().filter(dbProduct -> dbProduct.productId == productId)
+					.collect(Collectors.toList());
+		}
+
+		if (brandId != null && categoryId != null) {
+			return dbProducts = dbProducts.stream().filter(
+					dbProduct -> dbProduct.brand.brandId == brandId && dbProduct.category.categoryId == categoryId)
 					.collect(Collectors.toList());
 		}
 

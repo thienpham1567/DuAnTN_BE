@@ -29,7 +29,6 @@ public class BrandController extends ApiController{
 	@GetMapping
 	public ResponseEntity<Collection<Brand>> retrieveAll() throws Exception {
 		Collection<Brand> brands = brandService.retrieveAll();
-
 		return new ResponseEntity<Collection<Brand>>(brands, HttpStatus.OK);
 	}
 	

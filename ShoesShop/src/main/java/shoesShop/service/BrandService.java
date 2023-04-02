@@ -20,7 +20,7 @@ public class BrandService extends RecordManager<Brand> {
 	BrandConverter converter = new BrandConverter();
 
 	@Override
-	public Collection<Brand> retrieveAll() throws Exception {
+	public Collection<Brand> retrieveAll() {
 		Collection<Brand> brands = this.load(null).stream().map(dbBrand -> this.converter.convertDbToModel(dbBrand))
 				.collect(Collectors.toList());
 		return brands;
