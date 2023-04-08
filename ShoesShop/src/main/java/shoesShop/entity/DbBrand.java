@@ -1,6 +1,5 @@
 package shoesShop.entity;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -24,7 +23,7 @@ public class DbBrand {
 	public DbBrand(String name) {
 		this.name = name;
 	}
-
+     
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer brandId;

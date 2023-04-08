@@ -25,14 +25,11 @@ import lombok.Setter;
 @Entity
 @Table(name = "Products")
 public class DbProduct {
-	public DbProduct(String name, String imageLink, Double price, Integer inStock, Boolean isAvailable, LocalDateTime created) {
+	public DbProduct(String name, String description, LocalDateTime updateAt) {
 		super();
 		this.name = name;
-		this.imageLink = imageLink;
-		this.price = price;
-		this.inStock = inStock;
-		this.isAvailable = isAvailable;
-		this.created = created;
+		this.description = description;
+		this.updateAt = updateAt;
 	}
 
 	@Id
@@ -40,11 +37,9 @@ public class DbProduct {
 	public Integer productId;
 
 	public String name;
-	public String imageLink;
-	public Double price;
-	public Integer inStock;
-	public LocalDateTime created;
-	public Boolean isAvailable;
+	public String description;
+	public LocalDateTime createdAt;
+	public LocalDateTime updateAt;
 
 	@ManyToOne
 	@JoinColumn(name = "brandId", referencedColumnName = "BrandId")
@@ -55,5 +50,5 @@ public class DbProduct {
 	public DbCategory category;
 
 	@OneToMany(mappedBy = "product")
-	Collection<DbOrderLine> orderDetails = new ArrayList<>();
+	Collection<DbProductItem> productItems = new ArrayList<>();
 }

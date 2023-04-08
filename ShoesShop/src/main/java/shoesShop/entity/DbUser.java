@@ -1,4 +1,4 @@
-package shoesShop.entity;
+  package shoesShop.entity;
 
 import java.util.ArrayList;
 import java.util.Collection;

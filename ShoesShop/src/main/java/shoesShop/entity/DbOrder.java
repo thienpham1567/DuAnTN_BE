@@ -29,16 +29,14 @@ public class DbOrder {
 	
 	public LocalDateTime created;
 	public LocalDateTime updated;
-	public Double orderAmount;
+	public String denormalizedAddress;
+	public Double orderTotalPrice;
+	public String orderStatus;
 	
 	@ManyToOne
-	@JoinColumn(name = "UserId", referencedColumnName = "UserId")
+	@JoinColumn(name = "userId", referencedColumnName = "UserId")
 	public DbUser user;
-	
+	 
 	@OneToMany(mappedBy = "order")
-	Collection<DbOrderLine> orderDetails = new ArrayList<>();
-	
-	@OneToOne
-	@JoinColumn(name = "OrderAddress", referencedColumnName = "OrderAddressId")
-	DbAddress orderAddress;
+	Collection<DbOrderLine> orderLines = new ArrayList<>();
 }

@@ -1,4 +1,4 @@
-package shoesShop.entity;
+ package shoesShop.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,9 +8,11 @@ import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "Addresses")
 public class DbAddress {
@@ -19,5 +21,5 @@ public class DbAddress {
 	public Integer addressId;
 	
 	public String address;
-	public String ward;
+	public Integer wardId;
 }

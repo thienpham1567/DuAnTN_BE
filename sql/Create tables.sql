@@ -77,8 +77,8 @@ CREATE TABLE [Wards] (
 CREATE TABLE [Address] (
   [AddressId] int PRIMARY KEY IDENTITY(1,1),
   [Address] nvarchar(255),
-  [Ward] int,
-  CONSTRAINT [FK_Address.Ward] FOREIGN KEY ([Ward]) REFERENCES [Wards]([WardId])
+  [WardId] int,
+  CONSTRAINT [FK_Address.Ward] FOREIGN KEY ([WardId]) REFERENCES [Wards]([WardId])
 );
 
 CREATE TABLE [UserAddress] (
@@ -102,7 +102,7 @@ CREATE TABLE [Products] (
   CONSTRAINT [FK_Products.CategoryID] FOREIGN KEY ([CategoryID]) REFERENCES [Categories]([CategoryId])
 );
 
-CREATE TABLE [Size] (
+CREATE TABLE [Sizes] (
   [SizeId] int PRIMARY KEY IDENTITY(1,1),
   [CategoryId] int,
   [Value] varchar(10) NOT NULL,
@@ -120,7 +120,7 @@ CREATE TABLE [ProductItems] (
   [ImageUrl] varchar(max),
   [Status] nvarchar(50),
   CONSTRAINT [FK_ProductItems.ProductId] FOREIGN KEY ([ProductId]) REFERENCES [Products]([ProductId]),
-  CONSTRAINT [FK_ProductItems.SizeId] FOREIGN KEY ([SizeId]) REFERENCES [Size]([SizeId]),
+  CONSTRAINT [FK_ProductItems.SizeId] FOREIGN KEY ([SizeId]) REFERENCES [Sizes]([SizeId]),
   CONSTRAINT [FK_ProductItems.ColorId] FOREIGN KEY ([ColorId]) REFERENCES [Colors]([ColorId])
 );
 
@@ -148,7 +148,8 @@ CREATE TABLE [OrderLines] (
   [OrderId] char(255),
   [Price] decimal(11,2),
   [Quantity] int,
-  CONSTRAINT [FK_OrderLines.OrderId] FOREIGN KEY ([OrderId]) REFERENCES [Orders]([OrderId])
+  CONSTRAINT [FK_OrderLines.OrderId] FOREIGN KEY ([OrderId]) REFERENCES [Orders]([OrderId]),
+  CONSTRAINT [FK_OrderLines.ProductItemId] FOREIGN KEY ([ProductItemId]) REFERENCES [ProductItems]([ProductItemId])
 );
 
 CREATE TABLE [Reviews] (

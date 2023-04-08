@@ -1,6 +1,5 @@
 package shoesShop.entity;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -25,7 +24,6 @@ public class DbRole {
 		super();
 		this.description = description;
 		this.code = code;
-//		this.created = created;
 	}
 	
 	@Id
@@ -34,7 +32,6 @@ public class DbRole {
 	
 	public String description;
 	public String code;
-	public LocalDateTime created;
 	
 	@OneToMany(mappedBy = "role")
 	Collection<DbUserRole> userRoles = new ArrayList<DbUserRole>();
