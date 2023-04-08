@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import shoesShop.model.Brand;
-import shoesShop.service.BrandService;
+import shoesShop.common.Brand.Brand;
+import shoesShop.common.Brand.BrandService;
 
 @RestController
 @RequestMapping("api/v1/brands")

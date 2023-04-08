@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import shoesShop.model.Category;
-import shoesShop.service.CategoryService;
+import shoesShop.common.Category.Category;
+import shoesShop.common.Category.CategoryService;
 
 @RestController
 @RequestMapping("api/v1/categories")

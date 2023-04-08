@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import shoesShop.model.Product;
-import shoesShop.service.ProductService;
+import shoesShop.common.Product.Product;
+import shoesShop.common.Product.ProductService;
 
 @RestController
 @RequestMapping("api/v1/products")

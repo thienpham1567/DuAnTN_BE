@@ -1,6 +1,5 @@
-Insert into OrderStatus(Description) values('Cancelled'),('PendingPayment'),('Failed'),('Processing'),('Completed'),('OnHold'),('Refunded');
 insert into [Brands](Name) values('Nike'),('Puma'),('Addidas');
-insert into [Categories](Description,Code) values('For men','Men'),('For women','Women'),('For kid','Kid');
+insert into [Categories](Name) values('Men'),('Women'),('Kid');
 
 insert into Products(Name,ImageLink,Price,InStock,IsAvailable,BrandId,CategoryId)
 values(N'Nike Force 1 Low ASW','https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/1cda356d-09f0-402f-92d7-e41e9a57b0fc/dunk-low-older-shoes-1b2qSK.png',200,2,1,1,3),

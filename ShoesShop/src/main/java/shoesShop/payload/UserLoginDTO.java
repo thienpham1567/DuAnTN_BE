@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import shoesShop.entity.DbRole;
+import shoesShop.common.Role.DbRole;
 
 @Getter
 @AllArgsConstructor
