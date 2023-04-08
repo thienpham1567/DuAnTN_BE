@@ -12,14 +12,9 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Entity
-@Table(name = "OrderAddresses")
-public class DbOrderAddress {
+@Table(name = "ProductItems")
+public class DbProductItem {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Integer orderAddressId;
-	
-	public String address;
-	public String ward;
-	public String district;
-	public String phoneNumber;
+	public Integer productItemId;
 }

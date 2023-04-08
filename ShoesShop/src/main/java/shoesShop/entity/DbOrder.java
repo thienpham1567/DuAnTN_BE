@@ -25,8 +25,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "Orders")
 public class DbOrder {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Integer orderId;
+	public String orderId;
 	
 	public LocalDateTime created;
 	public LocalDateTime updated;
@@ -36,14 +35,10 @@ public class DbOrder {
 	@JoinColumn(name = "UserId", referencedColumnName = "UserId")
 	public DbUser user;
 	
-	@ManyToOne
-	@JoinColumn(name = "OrderStatusId", referencedColumnName = "OrderStatusId")
-	public DbOrderStatus orderStatus;
-	
 	@OneToMany(mappedBy = "order")
-	Collection<DbOrderDetail> orderDetails = new ArrayList<>();
+	Collection<DbOrderLine> orderDetails = new ArrayList<>();
 	
 	@OneToOne
 	@JoinColumn(name = "OrderAddress", referencedColumnName = "OrderAddressId")
-	DbOrderAddress orderAddress;
+	DbAddress orderAddress;
 }

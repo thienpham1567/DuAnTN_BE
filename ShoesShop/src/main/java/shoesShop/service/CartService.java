@@ -6,7 +6,7 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import shoesShop.entity.DbOrderDetail;
+import shoesShop.entity.DbOrderLine;
 import shoesShop.model.OrderDetail;
 import shoesShop.model.Product;
 import shoesShop.repository.IOrderDetailRepository;
@@ -18,7 +18,7 @@ public class CartService implements ICartService{
 	
 	@Autowired IOrderDetailRepository orderDetailRepo;
 	
-	private HashMap<Integer, DbOrderDetail> myOrder = new HashMap<>();
+	private HashMap<Integer, DbOrderLine> myOrder = new HashMap<>();
 
 	@Override
 	public void add(Integer quantity, Product entity) {

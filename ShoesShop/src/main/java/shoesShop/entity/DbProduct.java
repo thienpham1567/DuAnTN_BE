@@ -55,5 +55,5 @@ public class DbProduct {
 	public DbCategory category;
 
 	@OneToMany(mappedBy = "product")
-	Collection<DbOrderDetail> orderDetails = new ArrayList<>();
+	Collection<DbOrderLine> orderDetails = new ArrayList<>();
 }

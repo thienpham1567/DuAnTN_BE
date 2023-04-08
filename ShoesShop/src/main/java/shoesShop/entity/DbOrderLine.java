@@ -1,8 +1,5 @@
 package shoesShop.entity;
 
-import java.time.LocalDateTime;
-import java.util.Collection;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,13 +16,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "OrderDetails")
-public class DbOrderDetail {
+@Table(name = "OrderLines")
+public class DbOrderLine {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Integer orderDetailId;
+	public Integer orderLineId;
 	
-	public Double detailPrice;
+	public Double price;
 	public Integer quantity;
 	
 	@ManyToOne

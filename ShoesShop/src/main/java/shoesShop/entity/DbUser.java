@@ -1,6 +1,5 @@
 package shoesShop.entity;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -27,11 +26,9 @@ public class DbUser {
 	
 	public String password;
 	public String firstName;
-	public String middleName;
 	public String lastName;
-	public String email;
-	public String userAddress;
-	public Boolean isActive;
+	public String emailAddress;
+	public String phoneNumber;
 	
 	@OneToMany(mappedBy = "user")
 	Collection<DbOrder> orders = new ArrayList<DbOrder>();
