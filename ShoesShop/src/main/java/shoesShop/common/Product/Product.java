@@ -8,37 +8,28 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-public class Product {
-	public Product() {
-	}
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-	public Product(Integer productId, String name, String imageLink, Double price, Integer inStock, Boolean isAvailable, Integer brandId, Integer categoryId) {
-		super();
-		this.productId = productId;
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Product {
+	public Product(String name, String desciption, LocalDateTime updatedAt) {
 		this.name = name;
-		this.imageLink = imageLink;
-		this.price = price;
-		this.inStock = inStock;
-		this.created = LocalDateTime.now();
-		this.isAvailable = isAvailable;
-		this.brandId = brandId;
-		this.categoryId = categoryId;
+		this.desciption = desciption;
+		this.updatedAt = updatedAt;
 	}
 
 	// Properties
 	@NotEmpty
 	public String name;
 	@NotEmpty
-	public String imageLink;
-	@NotNull
-	@Min(0)
-	public Double price;
-	@NotNull
-	@Min(0)
-	public Integer inStock;
-	
-	public LocalDateTime created = LocalDateTime.now();
-	public Boolean isAvailable;
+	public String desciption;
+
+	public LocalDateTime createdAt = LocalDateTime.now();
+	public LocalDateTime updatedAt;
 
 	// Ids
 	public Integer productId;
@@ -46,7 +37,4 @@ public class Product {
 	public Integer brandId;
 	@NotNull
 	public Integer categoryId;
-	
-	// Collections
-	public Collection<Integer> orderDetailIds = new ArrayList<>();
 }

@@ -6,32 +6,31 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import shoesShop.common.Order.IOrderRepository;
-import shoesShop.common.OrderLine.DbOrderLine;
-import shoesShop.common.OrderLine.IOrderLineRepository;
+import shoesShop.common.CartItem.DbCartItem;
+import shoesShop.common.CartItem.ICartItemRepository;
 import shoesShop.common.OrderLine.OrderLine;
 import shoesShop.common.Product.Product;
+import shoesShop.common.ProductItem.ProductItem;
 
 @Service
 public class CartService implements ICartService{
-	@Autowired IOrderRepository orderRepo;
+	@Autowired ICartRepository cartRepo;
 	
-	@Autowired IOrderLineRepository orderDetailRepo;
+	@Autowired ICartItemRepository cartItemRepo;
 	
-	private HashMap<Integer, DbOrderLine> myOrder = new HashMap<>();
+	private HashMap<Integer, DbCartItem> myCart = new HashMap<>();
 
 	@Override
-	public void add(Integer quantity, Product entity) {
+	public void add(Integer quantity, ProductItem entity) {
+	}
+
+	@Override
+	public void remove(Integer productItemId) {
 		
 	}
 
 	@Override
-	public void remove(Integer productId) {
-		
-	}
-
-	@Override
-	public void update(Integer productId, Integer quantity) {
+	public void update(Integer productItemId, Integer quantity) {
 		
 	}
 
@@ -51,7 +50,7 @@ public class CartService implements ICartService{
 	}
 
 	@Override
-	public Double getTotalAmount() {
+	public Double getSubTotalPrice() {
 		return null;
 	}
 	

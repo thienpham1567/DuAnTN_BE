@@ -1,17 +1,17 @@
 package shoesShop.common.Category;
 
-public class Category {
-	public Category(String description, String code, Integer categoryId) {
-		super();
-		this.description = description;
-		this.code = code;
-		this.categoryId = categoryId;
-	}
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Category {
 	// Properties
-	public String description;
-	public String code;
+	public String name;
 	
 	// Ids
 	public Integer categoryId;
+	public Integer parentCategoryId;
 }

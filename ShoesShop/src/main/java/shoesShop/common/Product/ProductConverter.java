@@ -1,40 +1,37 @@
 package shoesShop.common.Product;
 
+import shoesShop.common.ICombiner;
+import shoesShop.common.IConverter;
+
 public class ProductConverter implements ICombiner<DbProduct>, IConverter<DbProduct, Product>{	
 	@Override
 	public void combine(DbProduct original, DbProduct update) {
 		original.category = update.category;
 		original.brand = update.brand;
 		original.name = update.name;
-		original.imageLink = update.imageLink;
-		original.price = update.price;
-		original.inStock = update.inStock;
-		original.isAvailable = update.isAvailable;
+		original.description = update.description;
+		original.updateAt = update.updateAt;
 	}
 
 	@Override
 	public DbProduct convertModelToDb(Product input) {
 		return input == null ? null : new DbProduct(
 					input.name,
-					input.imageLink,
-					input.price,
-					input.inStock,
-					input.isAvailable,
-					input.created
+					input.desciption,
+					input.updatedAt
 				);
 	}
 
 	@Override
 	public Product convertDbToModel(DbProduct input) {
 		return input == null ? null : new Product(
-				input.productId,
 				input.name,
-				input.imageLink,
-				input.price,
-				input.inStock,
-				input.isAvailable,
+				input.description,
+				input.createdAt,
+				input.updateAt,
 				input.brand.brandId,
-				input.category.categoryId
+				input.category.categoryId,
+				input.productId
 			);
 	}
 }

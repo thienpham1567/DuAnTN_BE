@@ -1,7 +1,7 @@
 package shoesShop.common.Role;
 
-import shoesShop.common.Product.DbProduct;
-import shoesShop.common.Product.Product;
+import shoesShop.common.ICombiner;
+import shoesShop.common.IConverter;
 
 public class RoleConverter implements ICombiner<DbRole>, IConverter<DbRole, Role> {
 	@Override

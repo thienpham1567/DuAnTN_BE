@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import shoesShop.common.RecordManager;
-import shoesShop.common.Product.Product;
 
 @Service
 public class BrandService extends RecordManager<Brand> {

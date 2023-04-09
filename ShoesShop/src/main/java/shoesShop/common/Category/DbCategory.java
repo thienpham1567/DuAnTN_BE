@@ -38,7 +38,7 @@ public class DbCategory {
 	
 	@ManyToOne(cascade={CascadeType.ALL})
 	@JoinColumn(name="parenCategoryId", referencedColumnName = "ParenCategoryId")
-	private DbCategory parentCategory;
+	public DbCategory parentCategory;
 	
 	@OneToMany(mappedBy = "category")
 	Collection<DbProduct> products = new ArrayList<>();

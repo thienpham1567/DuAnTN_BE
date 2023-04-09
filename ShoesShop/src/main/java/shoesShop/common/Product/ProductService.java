@@ -1,5 +1,6 @@
 package shoesShop.common.Product;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -40,6 +41,7 @@ public class ProductService extends RecordManager<Product> {
 	@Override
 	public Product create(Product product) {
 		DbProduct dbProduct = this.converter.convertModelToDb(product);
+		dbProduct.createdAt = LocalDateTime.now();
 		dbProduct.brand = this.brandRepo.findById(product.brandId).get();
 		dbProduct.category = this.categoryRepo.findById(product.categoryId).get();
 		DbProduct createdProduct = this.productRepo.save(dbProduct);

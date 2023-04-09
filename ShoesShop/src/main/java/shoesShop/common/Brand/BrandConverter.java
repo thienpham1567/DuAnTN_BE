@@ -1,5 +1,8 @@
 package shoesShop.common.Brand;
 
+import shoesShop.common.ICombiner;
+import shoesShop.common.IConverter;
+
 public class BrandConverter implements ICombiner<DbBrand>, IConverter<DbBrand, Brand> {
 	@Override
 	public void combine(DbBrand original, DbBrand update) {

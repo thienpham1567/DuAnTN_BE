@@ -1,7 +1,5 @@
 package shoesShop.common.CartItem;
 
-import java.util.Collection;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,6 +20,12 @@ import shoesShop.common.ProductItem.DbProductItem;
 @Entity
 @Table(name = "CartItems")
 public class DbCartItem {
+	public DbCartItem(Double price, Integer quantity) {
+		super();
+		this.price = price;
+		this.quantity = quantity;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer cartItemId;

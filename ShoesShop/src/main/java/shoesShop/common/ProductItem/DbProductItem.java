@@ -41,5 +41,5 @@ public class DbProductItem {
 	
 	@ManyToOne
 	@JoinColumn(name = "productId", referencedColumnName = "ProductId")
-	public DbProduct Product;
+	public DbProduct product;
 }
