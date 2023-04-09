@@ -34,10 +34,10 @@ public class DbCartItem {
 	public Integer quantity;
 	
 	@ManyToOne
-	@JoinColumn(name = "proudctItemId", referencedColumnName = "ProudctItemId")
+	@JoinColumn(name = "ProudctItemId")
 	public DbProductItem productItem;
 	
 	@ManyToOne
-	@JoinColumn(name = "cartId", referencedColumnName = "CartId")
+	@JoinColumn(name = "cartId")
 	public DbCart cart;
 }

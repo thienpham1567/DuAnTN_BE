@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import shoesShop.common.CartItem.DbCartItem;
 import shoesShop.common.CartItem.ICartItemRepository;
 import shoesShop.common.OrderLine.OrderLine;
-import shoesShop.common.Product.Product;
 import shoesShop.common.ProductItem.ProductItem;
 
 @Service
@@ -18,7 +17,7 @@ public class CartService implements ICartService{
 	
 	@Autowired ICartItemRepository cartItemRepo;
 	
-	private HashMap<Integer, DbCartItem> myCart = new HashMap<>();
+	private HashMap<Integer, DbCartItem> cart = new HashMap<>();
 
 	@Override
 	public void add(Integer quantity, ProductItem entity) {
@@ -46,7 +45,7 @@ public class CartService implements ICartService{
 
 	@Override
 	public Integer getTotalQuantity() {
-		return null;
+		return 0;
 	}
 
 	@Override

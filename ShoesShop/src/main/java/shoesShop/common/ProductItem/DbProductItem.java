@@ -32,14 +32,14 @@ public class DbProductItem {
 	public String status;
 	
 	@ManyToOne
-	@JoinColumn(name = "sizeId", referencedColumnName = "SizeId")
+	@JoinColumn(name = "SizeId")
 	public DbSize size;
 	
 	@ManyToOne
-	@JoinColumn(name = "colorId", referencedColumnName = "ColorId")
+	@JoinColumn(name = "ColorId")
 	public DbColor color;
 	
 	@ManyToOne
-	@JoinColumn(name = "productId", referencedColumnName = "ProductId")
+	@JoinColumn(name = "ProductId")
 	public DbProduct product;
 }

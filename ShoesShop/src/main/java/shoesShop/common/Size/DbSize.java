@@ -26,6 +26,6 @@ public class DbSize {
 	public String value;
 	
 	@ManyToOne
-	@JoinColumn(name = "categoryId", referencedColumnName = "CategoryId")
+	@JoinColumn(name = "CategoryId")
 	public DbCategory category;
 }

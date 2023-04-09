@@ -28,10 +28,10 @@ public class DbReview {
 	public String comment;
 	
 	@ManyToOne
-	@JoinColumn(name = "orderLineId", referencedColumnName = "OrderedProductId")
+	@JoinColumn(name = "OrderLineId")
 	public DbOrderLine orderedProduct;
 	
 	@ManyToOne
-	@JoinColumn(name = "userId", referencedColumnName = "UserId")
+	@JoinColumn(name = "UserId")
 	public DbUser user;
 }

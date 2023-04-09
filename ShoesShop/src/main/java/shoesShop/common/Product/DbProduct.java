@@ -46,11 +46,11 @@ public class DbProduct {
 	public LocalDateTime updateAt;
 
 	@ManyToOne
-	@JoinColumn(name = "brandId", referencedColumnName = "BrandId")
+	@JoinColumn(name = "BrandId")
 	public DbBrand brand;
 
 	@ManyToOne
-	@JoinColumn(name = "categoryId", referencedColumnName = "CategoryId")
+	@JoinColumn(name = "CategoryId")
 	public DbCategory category;
 
 	@OneToMany(mappedBy = "product")

@@ -28,10 +28,10 @@ public class DbUserRole {
 	public Integer userRoleId;
 	
 	@ManyToOne
-	@JoinColumn(name = "UserId", referencedColumnName = "UserId")
+	@JoinColumn(name = "UserId")
 	public DbUser user;
 	
 	@ManyToOne
-	@JoinColumn(name = "RoleId", referencedColumnName = "RoleId")
+	@JoinColumn(name = "RoleId")
 	public DbRole role;
 }

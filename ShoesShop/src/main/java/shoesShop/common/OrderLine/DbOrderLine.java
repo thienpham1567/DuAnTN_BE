@@ -28,10 +28,10 @@ public class DbOrderLine {
 	public Integer quantity;
 	
 	@ManyToOne
-	@JoinColumn(name = "productItemId", referencedColumnName = "ProductItemId")
+	@JoinColumn(name = "ProductItemId")
 	public DbProductItem productItem;
 	
 	@ManyToOne
-	@JoinColumn(name = "orderId", referencedColumnName = "OrderId")
+	@JoinColumn(name = "orderId")
 	public DbOrder order;	
 }

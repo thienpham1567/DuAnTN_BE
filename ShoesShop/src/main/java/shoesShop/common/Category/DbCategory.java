@@ -37,7 +37,7 @@ public class DbCategory {
 	public String name;
 	
 	@ManyToOne(cascade={CascadeType.ALL})
-	@JoinColumn(name="parenCategoryId", referencedColumnName = "ParenCategoryId")
+	@JoinColumn(name="parenCategoryId")
 	public DbCategory parentCategory;
 	
 	@OneToMany(mappedBy = "category")

@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import shoesShop.common.Cart.DbCart;
+import shoesShop.common.Province.DbProvince;
 
 @Data
 @AllArgsConstructor
@@ -27,6 +28,6 @@ public class DbDistrict {
 	public String prefix;
 	
 	@ManyToOne
-	@JoinColumn(name = "provinceId", referencedColumnName = "ProvinceId")
-	public DbCart province;
+	@JoinColumn(name = "ProvinceId")
+	public DbProvince province;
 } 

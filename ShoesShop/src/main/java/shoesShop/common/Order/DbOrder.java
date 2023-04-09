@@ -36,7 +36,7 @@ public class DbOrder {
 	public String orderStatus;
 	
 	@ManyToOne
-	@JoinColumn(name = "userId", referencedColumnName = "UserId")
+	@JoinColumn(name = "UserId")
 	public DbUser user;
 	 
 	@OneToMany(mappedBy = "order")

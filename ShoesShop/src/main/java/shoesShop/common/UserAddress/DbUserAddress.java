@@ -27,10 +27,10 @@ public class DbUserAddress {
 	public Boolean isDefault;
 	
 	@ManyToOne
-	@JoinColumn(name = "addressId", referencedColumnName = "AddressId")
+	@JoinColumn(name = "AddressId")
 	public DbAddress address;
 	
 	@ManyToOne
-	@JoinColumn(name = "userId", referencedColumnName = "UserId")
+	@JoinColumn(name = "UserId")
 	public DbUser user;
 }
