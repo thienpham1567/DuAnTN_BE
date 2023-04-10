@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.lang.Nullable;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -37,7 +39,7 @@ public class DbCategory {
 	public String name;
 	
 	@ManyToOne(cascade={CascadeType.ALL})
-	@JoinColumn(name="parenCategoryId")
+	@JoinColumn(name="ParentCategoryId")
 	public DbCategory parentCategory;
 	
 	@OneToMany(mappedBy = "category")

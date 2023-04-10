@@ -2,8 +2,11 @@ package shoesShop.common.ProductItem;
 
 import shoesShop.common.ICombiner;
 import shoesShop.common.IConverter;
+import shoesShop.common.Product.ProductConverter;
 
 public class ProductItemConverter implements ICombiner<DbProductItem>, IConverter<DbProductItem, ProductItem> {
+	private ProductConverter converterProduct = new ProductConverter();
+	
 	@Override
 	public void combine(DbProductItem original, DbProductItem update) {
 		
@@ -25,7 +28,7 @@ public class ProductItemConverter implements ICombiner<DbProductItem>, IConverte
 					input.status,
 					input.size.sizeId,
 					input.color.colorId,
-					input.product.productId
+					this.converterProduct.convertDbToModel(input.product)
 				);
 	}
 }

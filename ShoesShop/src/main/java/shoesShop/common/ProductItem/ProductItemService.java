@@ -39,12 +39,12 @@ public class ProductItemService extends RecordManager<ProductItem> {
 		return productItems;
 	}
 
-	private Collection<DbProductItem> load(Integer productId, Integer brandId, Integer categoryId) {
+	private Collection<DbProductItem> load(Integer productItemId, Integer brandId, Integer categoryId) {
 		Collection<DbProductItem> dbProductItems = this.productItemRepo.findAll();
 
-		if (productId != null) {
+		if (productItemId != null) {
 			dbProductItems = dbProductItems.stream()
-					.filter(dbProductItem -> dbProductItem.product.productId == productId).collect(Collectors.toList());
+					.filter(dbProductItem -> dbProductItem.productItemId == productItemId).collect(Collectors.toList());
 		}
 
 		if (brandId != null && categoryId != null) {

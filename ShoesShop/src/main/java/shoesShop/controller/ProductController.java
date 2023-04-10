@@ -35,6 +35,7 @@ public class ProductController extends ApiController {
 
 	@GetMapping("{id}")
 	public ResponseEntity<ProductItem> retrieveOne(@PathVariable("id") Integer id) {
+		System.out.print(id);
 		ProductItem productItem = productItemService.retrieveOne(id);
 		if (productItem != null) {
 			return new ResponseEntity<ProductItem>(productItem, HttpStatus.OK);
