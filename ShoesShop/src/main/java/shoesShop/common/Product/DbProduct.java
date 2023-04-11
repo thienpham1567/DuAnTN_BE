@@ -29,11 +29,10 @@ import shoesShop.common.ProductItem.DbProductItem;
 @Entity
 @Table(name = "Products")
 public class DbProduct {
-	public DbProduct(String name, String description, LocalDateTime updateAt) {
+	public DbProduct(String name, String description) {
 		super();
 		this.name = name;
 		this.description = description;
-		this.updateAt = updateAt;
 	}
 
 	@Id
@@ -50,7 +49,7 @@ public class DbProduct {
 	public DbBrand brand;
 
 	@ManyToOne
-	@JoinColumn(name = "CategoryId")
+	@JoinColumn(name = "CategoryID")
 	public DbCategory category;
 
 	@OneToMany(mappedBy = "product")

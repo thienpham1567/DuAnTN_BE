@@ -19,6 +19,9 @@ import shoesShop.common.CartItem.DbCartItem;
 @Entity
 @Table(name = "Carts")
 public class DbCart {
+	public DbCart(String cartId) {
+		this.cartId = cartId;
+	}
 	@Id
 	public String cartId;
 	

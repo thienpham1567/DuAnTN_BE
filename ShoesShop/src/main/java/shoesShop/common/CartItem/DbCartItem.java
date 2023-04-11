@@ -32,12 +32,12 @@ public class DbCartItem {
 	
 	public Double price;
 	public Integer quantity;
-	
+		
 	@ManyToOne
-	@JoinColumn(name = "ProudctItemId")
-	public DbProductItem productItem;
-	
-	@ManyToOne
-	@JoinColumn(name = "cartId")
+	@JoinColumn(name = "CartId")
 	public DbCart cart;
+	
+	@ManyToOne
+	@JoinColumn(name = "ProductItemId")
+	public DbProductItem productItem;
 }

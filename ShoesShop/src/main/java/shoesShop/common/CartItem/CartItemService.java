@@ -4,12 +4,14 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import shoesShop.common.RecordManager;
 import shoesShop.common.Cart.ICartRepository;
 import shoesShop.common.ProductItem.DbProductItem;
 import shoesShop.common.ProductItem.IProductItemRepository;
 
+@Service
 public class CartItemService extends RecordManager<CartItem>{
 	@Autowired
 	ICartItemRepository cartItemRepo;
@@ -22,19 +24,19 @@ public class CartItemService extends RecordManager<CartItem>{
 	
 	private CartItemConverter converter = new CartItemConverter();
 	
-	public Collection<CartItem> retrieveAll() throws Exception {
+	public Collection<CartItem> retrieveAll() {
 		Collection<CartItem> cartItems = this.load(null,null).stream()
 				.map(dbCartItem -> this.converter.convertDbToModel(dbCartItem)).collect(Collectors.toList());
 		return cartItems;
 	}
 
-	public CartItem retrieveOne(Integer id) throws Exception {
+	public CartItem retrieveOne(Integer id) {
 		CartItem cartItem = this.load(id,null).stream()
 				.map(dbCartItem -> this.converter.convertDbToModel(dbCartItem)).findFirst().get();
 		return cartItem;
 	}
 
-	public CartItem create(CartItem record) throws Exception { 
+	public CartItem create(CartItem record) { 
 		DbCartItem dbCartItem = this.converter.convertModelToDb(record);
 		dbCartItem.price = this.calculateTotalPrice(record.productItemId, record.quantity);
 		dbCartItem.productItem = this.productItemRepo.findById(record.productItemId).get();
@@ -43,7 +45,7 @@ public class CartItemService extends RecordManager<CartItem>{
 		return this.converter.convertDbToModel(createdCartItem);
 	}
 
-	public CartItem update(CartItem record, Integer id) throws Exception {
+	public CartItem update(CartItem record, Integer id) {
 		DbCartItem dbCartItem = this.cartItemRepo.findById(id).get();
 		if (dbCartItem != null) {			
 			DbCartItem updateCartItem = this.converter.convertModelToDb(record);
@@ -51,14 +53,14 @@ public class CartItemService extends RecordManager<CartItem>{
 			updateCartItem.cart = this.cartRepo.findById(record.cartId).get();
 			this.converter.combine(dbCartItem, updateCartItem);
 			updateCartItem.price = this.calculateTotalPrice(updateCartItem.productItem.productItemId, updateCartItem.quantity);
-			DbCartItem updateDbCartItem = this.cartItemRepo.save(updateCartItem);
+			DbCartItem updateDbCartItem = this.cartItemRepo.save(dbCartItem);
 			return this.converter.convertDbToModel(updateDbCartItem);
 		}
 		
 		return null;
 	}
 
-	public Boolean delete(Integer id) throws Exception {
+	public Boolean delete(Integer id) {
 		if (this.cartItemRepo.existsById(id)) {
 			this.cartItemRepo.deleteById(id);
 			return true;

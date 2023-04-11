@@ -19,7 +19,6 @@ public class Product {
 	public Product(String name, String desciption, LocalDateTime updatedAt) {
 		this.name = name;
 		this.desciption = desciption;
-		this.updatedAt = updatedAt;
 	}
 
 	// Properties
@@ -27,9 +26,6 @@ public class Product {
 	public String name;
 	@NotEmpty
 	public String desciption;
-
-	public LocalDateTime createdAt = LocalDateTime.now();
-	public LocalDateTime updatedAt;
 
 	// Ids
 	public Integer productId;
