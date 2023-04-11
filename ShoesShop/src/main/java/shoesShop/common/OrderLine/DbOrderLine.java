@@ -32,6 +32,6 @@ public class DbOrderLine {
 	public DbProductItem productItem;
 	
 	@ManyToOne
-	@JoinColumn(name = "orderId")
+	@JoinColumn(name = "OrderId")
 	public DbOrder order;	
 }

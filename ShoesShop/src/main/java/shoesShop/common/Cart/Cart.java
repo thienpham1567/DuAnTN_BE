@@ -6,6 +6,7 @@ import java.util.Collection;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import shoesShop.common.CartItem.CartItem;
 
 @Data
 @AllArgsConstructor
@@ -16,5 +17,5 @@ public class Cart {
 	public Integer itemTotalQuantity;
 	public Double itemSubtotalPrice;
 	
-	Collection<Integer> cartItemIds = new ArrayList<>();
+	Collection<CartItem> cartItem = new ArrayList<>();
 }

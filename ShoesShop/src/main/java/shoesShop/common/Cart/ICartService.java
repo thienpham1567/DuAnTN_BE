@@ -1,16 +1,12 @@
 package shoesShop.common.Cart;
 
-import java.util.Collection;
-
-import shoesShop.common.CartItem.DbCartItem;
 import shoesShop.common.ProductItem.ProductItem;
 
 public interface ICartService {
-	void add(Integer quantity, ProductItem entity);
-	void remove(Integer productId);
-	void update(Integer productId, Integer quantity);
-	void clear();
-	Collection<DbCartItem> getCart();
+	Cart add(String cartId, Integer quantity, ProductItem entity);
+	Cart remove(String cartId, Integer cartItemId);
+	Cart update(String cartId, Integer cartItemId, Integer quantity);
+	Cart clear();
 	Integer getTotalQuantity();
 	Double getSubTotalPrice();
 }
