@@ -58,6 +58,8 @@ public class CartService implements ICartService {
 
 	@Override
 	public Cart remove(String cartId, Integer cartItemId) {
+		DbCartItem item = this.cartItemRepo.findById(cartItemId).get();
+		this.cartItems.remove(item.productItem.productItemId);
 		this.cartItemService.delete(cartItemId);
 		return this.cartConverter.convertDbToModel(this.updateCart(cartId));
 
