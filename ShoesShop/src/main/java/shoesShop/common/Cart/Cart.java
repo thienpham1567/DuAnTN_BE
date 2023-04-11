@@ -17,5 +17,5 @@ public class Cart {
 	public Integer itemTotalQuantity;
 	public Double itemSubtotalPrice;
 	
-	Collection<CartItem> cartItem = new ArrayList<>();
+	Collection<CartItem> cartItems = new ArrayList<>();
 }

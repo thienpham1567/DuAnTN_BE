@@ -7,6 +7,6 @@ public interface ICartService {
 	Cart remove(String cartId, Integer cartItemId);
 	Cart update(String cartId, Integer cartItemId, Integer quantity);
 	Cart clear();
-	Integer getTotalQuantity();
-	Double getSubTotalPrice();
+	Integer getTotalQuantity(String cartId);
+	Double getSubTotalPrice(String cartId);
 }

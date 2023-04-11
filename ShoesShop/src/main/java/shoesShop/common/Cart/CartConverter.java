@@ -2,6 +2,7 @@ package shoesShop.common.Cart;
 
 import shoesShop.common.ICombiner;
 import shoesShop.common.IConverter;
+import shoesShop.common.CartItem.CartItem;
 import shoesShop.common.CartItem.CartItemConverter;
 
 public class CartConverter implements ICombiner<DbCart>, IConverter<DbCart, Cart>{
@@ -21,6 +22,9 @@ public class CartConverter implements ICombiner<DbCart>, IConverter<DbCart, Cart
 
 	@Override
 	public Cart convertDbToModel(DbCart input) {
+		for (CartItem i : input.cartItems.stream().map(cartItem -> this.cartItemConverter.convertDbToModel(cartItem)).toList()) {
+			System.out.print(i.productItemId + "+");
+		}
 		return input == null ? null : new Cart(
 					input.cartId,
 					input.itemTotalQuantity,

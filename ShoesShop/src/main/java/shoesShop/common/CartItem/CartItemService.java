@@ -69,6 +69,12 @@ public class CartItemService extends RecordManager<CartItem>{
 		return false;
 	}
 	
+	public Collection<CartItem> retrieveAll(String cartId) {
+		Collection<CartItem> cartItems = this.load(null,cartId).stream()
+				.map(dbCartItem -> this.converter.convertDbToModel(dbCartItem)).collect(Collectors.toList());
+		return cartItems;
+	}
+	
 	private Collection<DbCartItem> load(Integer cartItemId, String cartId) {
 		Collection<DbCartItem> dbCartItems = this.cartItemRepo.findAll();
 		
