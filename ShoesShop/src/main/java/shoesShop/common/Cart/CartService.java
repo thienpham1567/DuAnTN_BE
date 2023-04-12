@@ -69,7 +69,7 @@ public class CartService implements ICartService {
 	public Cart update(String cartId, Integer cartItemId, Integer quantity) {
 		CartItem cartItem = this.cartItemConverter.convertDbToModel(this.cartItemRepo.findById(cartItemId).get());
 		DbProductItem product = this.productItemRepo.findById(cartItem.productItemId).get();
-		cartItem.quantity += quantity;
+		cartItem.quantity = quantity;
 		cartItem.price = product.price * cartItem.quantity;
 		this.cartItemService.update(cartItem, cartItem.cartItemId);
 		return this.cartConverter.convertDbToModel(this.updateCart(cartId));
