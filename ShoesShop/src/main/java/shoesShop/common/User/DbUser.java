@@ -2,6 +2,7 @@
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,6 +27,15 @@ import shoesShop.common.UserRole.DbUserRole;
 @Entity
 @Table(name = "Users")
 public class DbUser {
+	
+	public DbUser(String password, String firstName, String lastName, String emailAddress) {
+		super();
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.emailAddress = emailAddress;
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer userId;
@@ -37,5 +51,9 @@ public class DbUser {
 	
 	@OneToMany(mappedBy = "user")
 	Collection<DbUserRole> userRoles = new ArrayList<>();
+
+	
+
+	
 }	
 	
