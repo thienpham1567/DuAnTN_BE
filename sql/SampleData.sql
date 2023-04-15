@@ -8,6 +8,8 @@ insert into [Colors](Value) values('Pink'),('White'),('Gray'),('Blue'),('Red'),(
 // Sizes
 insert into [Sizes](CategoryId,Value) values(3,'3'),(3,'3.5'),(3,'4'),(3,'4.5'),(3,'5'),(3,'5.5'),(3,'6'),(3,'6.5');
 insert into [Sizes](CategoryId,Value) values(1,'7'),(1,'7.5'),(1,'8'),(1,'8.5'),(1,'9'),(1,'9.5'),(1,'10'),(1,'10.5'),(1,'11'),(1,'11.5'),(1,'12'),(1,'12.5'),(1,'13');
+// Roles
+insert into Roles(Description,Code) values('Admin','AD'),('User','USER'),('Customer','CUSTOMER');
 
 // Addidas
 insert into Products(BrandId,CategoryId,Name)

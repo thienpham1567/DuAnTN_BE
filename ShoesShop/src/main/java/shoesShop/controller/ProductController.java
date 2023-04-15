@@ -17,7 +17,7 @@ import shoesShop.common.ProductItem.ProductItemService;
 
 @RestController
 @RequestMapping("api/v1/products")
-public class ProductController extends ApiController {
+public class ProductController {
 	@Autowired
 	ProductItemService productItemService;
 

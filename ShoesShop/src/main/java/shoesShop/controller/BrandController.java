@@ -22,7 +22,7 @@ import shoesShop.common.Brand.BrandService;
 
 @RestController
 @RequestMapping("api/v1/brands")
-public class BrandController extends ApiController{
+public class BrandController {
 	@Autowired
 	BrandService brandService;
 	

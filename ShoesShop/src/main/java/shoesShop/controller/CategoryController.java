@@ -22,7 +22,7 @@ import shoesShop.common.Category.CategoryService;
 
 @RestController
 @RequestMapping("api/v1/categories")
-public class CategoryController extends ApiController{
+public class CategoryController {
 	@Autowired
 	CategoryService categoryService;
 	

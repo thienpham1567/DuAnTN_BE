@@ -17,6 +17,6 @@ public class RoleConverter implements ICombiner<DbRole>, IConverter<DbRole, Role
 
 	@Override
 	public Role convertDbToModel(DbRole input) {
-		return input == null ? null : new Role(input.roleId, input.description, input.code);
+		return input == null ? null : new Role(input.code, input.description, input.roleId);
 	}
 }

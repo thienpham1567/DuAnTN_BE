@@ -51,9 +51,5 @@ public class DbUser {
 	
 	@OneToMany(mappedBy = "user")
 	Collection<DbUserRole> userRoles = new ArrayList<>();
-
-	
-
-	
 }	
 	

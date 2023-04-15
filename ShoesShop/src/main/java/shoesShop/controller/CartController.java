@@ -24,7 +24,7 @@ import shoesShop.common.ProductItem.ProductItemService;
 
 @RestController
 @RequestMapping("api/v1/cart")
-public class CartController extends ApiController{
+public class CartController {
 	@Autowired
 	CartService cartService;
 	

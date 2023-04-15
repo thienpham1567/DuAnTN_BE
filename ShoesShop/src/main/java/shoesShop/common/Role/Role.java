@@ -1,25 +1,15 @@
 package shoesShop.common.Role;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
-import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 
-import shoesShop.common.User.DbUser;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Role {
-	public Role() {
-	}
-	
-	public Role(Integer roleId, String description, String code) {
-		super();
-		this.roleId = roleId;
-		this.description = description;
-		this.code = code;
-	}
-	
-	
 	// Properties
 	@NotEmpty
 	public String description;
@@ -28,16 +18,4 @@ public class Role {
 	
 	// Ids
 	private Integer roleId;
-	
-	// Collections
-	Collection<Integer> userIds = new ArrayList();
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-	
 }

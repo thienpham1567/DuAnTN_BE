@@ -74,9 +74,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		@Override
 		public Role mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Role role = new Role(
-			rs.getInt("RoleId"),
+			rs.getString("Description"),
 			rs.getString("Code"),
-			rs.getString("Description"));
+			rs.getInt("RoleId"));
 			return role;
 		}
 	}

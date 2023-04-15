@@ -16,6 +16,6 @@ public class BrandConverter implements ICombiner<DbBrand>, IConverter<DbBrand, B
 
 	@Override
 	public Brand convertDbToModel(DbBrand input) {
-		return input == null ? null : new Brand(input.name, input.brandId);
+		return input == null ? null : new Brand(input.brandId, input.name);
 	}
 }

@@ -30,6 +30,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import shoesShop.common.Brand.Brand;
 import shoesShop.common.ProductItem.ProductItem;
+import shoesShop.common.User.CustomUserDetails;
 import shoesShop.common.User.IUserRepository;
 import shoesShop.common.User.User;
 import shoesShop.common.User.UserConverter;
@@ -37,17 +38,26 @@ import shoesShop.common.User.UserSerivce;
 import shoesShop.myWebConfig.LoginRequest;
 import shoesShop.myWebConfig.UserDetailsServiceImpl;
 
-
 @RestController
 @RequestMapping("api/v1/users")
 public class UserController {
 	@Autowired
 	UserSerivce userService;
+	
 	@Autowired
 	IUserRepository userRepo;
+	
 	@Autowired
 	UserDetailsServiceImpl userDetailService;
+	
+	@Autowired
+    private AuthenticationManager authenticationManager;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	UserConverter userConverter = new UserConverter();
+	
 	@GetMapping
 	public ResponseEntity<Collection<User>> retrieveAll() throws Exception {
 		Collection<User> users = new ArrayList<>();
@@ -74,11 +84,6 @@ public class UserController {
 
 		return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
 	}
-	@Autowired
-    private AuthenticationManager authenticationManager;
-	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
 	
 	@PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) throws Exception {
@@ -87,11 +92,11 @@ public class UserController {
         
 		//final UserDetails user = userDetailService.loadUserByUsername(loginRequest.getEmail());
         // Kiểm tra xem email và mật khẩu có khớp với bản ghi người dùng trong cơ sở dữ liệu hay không
-        UserDetails user = userDetailService.loadUserByUsername(email);
+        CustomUserDetails user = (CustomUserDetails) userDetailService.loadUserByUsername(email);
         User userss = userService.findByEmail(email);
-//        if (!password.equals(user.getPassword())) {
-//        	System.out.println(user);
-//            System.out.println(user.getPassword());
+        boolean isMatch = passwordEncoder.matches(password,userss.password);
+//        if (!isMatch) {
+//
 //            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Sai tên đăng nhập hoặc mật khẩu!");
 //        }
 
@@ -100,27 +105,23 @@ public class UserController {
         return ResponseEntity.ok(token);
     }
 	
-    private String generateToken(UserDetails user) {
+    private String generateToken(CustomUserDetails user) {
         // Lấy thông tin người dùng và tạo chuỗi JSON cho thông tin đó
         Map<String, Object> claims = new HashMap();
         claims.put("email", user.getUsername());
-        //claims.put("fisrtname", user.get);
-        claims.put("role", user.getAuthorities());
+        claims.put("fullName", user.getFullName());
+        claims.put("phoneNumber", user.getPhoneNumber());
+        claims.put("roles", user.getAuthorities());
 
-        // Tạo chuỗi JSON cho JWT payload
-        String payload = new JSONObject(claims).toString();
-
-        // Tạo JWT token bằng thư viện jjwt
+        // Tạo JWT token bằng thư viện jwt
         return Jwts.builder()
                 .setSubject(user.getUsername())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 86400000))
                 .signWith(SignatureAlgorithm.HS256, "secret")
-                .claim("user", payload)
+                .claim("user", claims)
                 .compact();
     }
-    
-    
     
     @PostMapping
 	public ResponseEntity<User> create(@RequestBody @Valid User user, BindingResult result) throws Exception {
