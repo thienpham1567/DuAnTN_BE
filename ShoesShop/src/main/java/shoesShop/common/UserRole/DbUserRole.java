@@ -1,7 +1,5 @@
 package shoesShop.common.UserRole;
 
-import java.time.LocalDateTime;
-import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,20 +16,34 @@ import shoesShop.common.Role.DbRole;
 import shoesShop.common.User.DbUser;
 
 @Data
-@AllArgsConstructor
+//@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "UserRoles")
 public class DbUserRole {
+	
+	public DbUserRole(Integer userRoleId, DbUser user, DbRole role) {
+		this.userRoleId = userRoleId;
+		this.user = user;
+		this.role = role;
+	}
+
+	public DbUserRole(Integer roleId, Integer userId) {
+		// TODO Auto-generated constructor stub
+		
+	}
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Integer userRoleId;
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
+	Integer userRoleId;
+
 	@ManyToOne
-	@JoinColumn(name = "UserId")
-	public DbUser user;
-	
+	@JoinColumn(name = "UserId") 
+	DbUser user;
+
 	@ManyToOne
-	@JoinColumn(name = "RoleId")
-	public DbRole role;
+	@JoinColumn(name = "RoleId") 
+	DbRole role;
+	
+	
 }

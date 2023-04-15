@@ -9,12 +9,30 @@ public class ProductItemConverter implements ICombiner<DbProductItem>, IConverte
 	
 	@Override
 	public void combine(DbProductItem original, DbProductItem update) {
-		
+		original.color = update.color;
+		original.imageUrl = update.imageUrl;
+		original.price = update.price;
+		original.productItemId = update.productItemId;
+		original.quantityInStock = update.quantityInStock;
+		original.sku = update.sku;
+		original.size = update.size;
+		original.product = update.product;
+		original.status = update.status;
 	}
 
 	@Override
 	public DbProductItem convertModelToDb(ProductItem input) {
-		return input == null ? null : new DbProductItem();
+		return input == null ? null : new DbProductItem(
+				input.colorId,
+				input.imageUrl,
+				input.price,
+				input.quantityInStock,
+				input.sku,
+				input.productItemId,
+				input.status,
+				input.sizeId,
+				input.product.productId
+				);
 	}
 
 	@Override

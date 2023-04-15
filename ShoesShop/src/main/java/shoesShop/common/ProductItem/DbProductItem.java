@@ -21,6 +21,20 @@ import shoesShop.common.Size.DbSize;
 @Entity
 @Table(name = "ProductItems")
 public class DbProductItem {
+	
+	public DbProductItem(Integer colorId, String imageUrl, Double price, Integer quantityInStock, String sku,
+			Integer productItemId, String status, Integer sizeId,Integer productId) {
+		this.color.colorId = color.colorId;
+		this.imageUrl = imageUrl;
+		this.price = price;
+		this.quantityInStock = quantityInStock;
+		this.sku = sku;
+		this.productItemId = productItemId;
+		this.status = status;
+		this.size.sizeId = size.sizeId;
+		this.product.productId = product.productId;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer productItemId;

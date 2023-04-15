@@ -1,6 +1,7 @@
 package shoesShop.common.Product;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 import shoesShop.common.RecordManager;
 import shoesShop.common.Brand.IBrandRepository;
 import shoesShop.common.Category.ICategoryRepository;
+import shoesShop.common.ProductItem.DbProductItem;
+import shoesShop.common.ProductItem.ProductItem;
 
 @Service
 public class ProductService extends RecordManager<Product> {
@@ -75,9 +78,20 @@ public class ProductService extends RecordManager<Product> {
 	}
 
 	public Collection<Product> retrieveAll(Integer brandId, Integer categoryId) {
-		Collection<Product> products = this.load(null, brandId, categoryId).stream()
+		Collection<Product> products = this.load(null, null, null).stream()
 				.map(dbProduct -> this.converter.convertDbToModel(dbProduct)).collect(Collectors.toList());
 		return products;
+	}
+	
+	public Collection<Product> findByKeyword(String name) {
+		Collection<DbProduct> dbProducts = productRepo.findByKeyword(name);
+		Collection<Product> Products = new ArrayList<>(); 
+
+	    for (DbProduct dbProduct : dbProducts) {
+	        Product product = this.converter.convertDbToModel(dbProduct);
+	        Products.add(product);
+	    }
+	    return Products;
 	}
 
 	private Collection<DbProduct> load(Integer productId, Integer brandId, Integer categoryId) {

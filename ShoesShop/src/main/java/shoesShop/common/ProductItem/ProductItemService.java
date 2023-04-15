@@ -1,5 +1,6 @@
 package shoesShop.common.ProductItem;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -37,6 +38,17 @@ public class ProductItemService extends RecordManager<ProductItem> {
 		Collection<ProductItem> productItems = this.load(null, brandId, categoryId).stream()
 				.map(dbProductItem -> this.converter.convertDbToModel(dbProductItem)).collect(Collectors.toList());
 		return productItems;
+	}
+	public Collection<ProductItem> getProductItemsByProductName(String name) {
+	    Collection<DbProductItem> dbProductItems = productItemRepo.getProductItemsByProductName(name); 
+	    Collection<ProductItem> productItems = new ArrayList<>(); 
+
+	    for (DbProductItem dbProductItem : dbProductItems) {
+	        ProductItem productItem = this.converter.convertDbToModel(dbProductItem);
+	        productItems.add(productItem);
+	    }
+
+	    return productItems; // Trả về bộ sưu tập các đối tượng ProductItem
 	}
 
 	private Collection<DbProductItem> load(Integer productItemId, Integer brandId, Integer categoryId) {

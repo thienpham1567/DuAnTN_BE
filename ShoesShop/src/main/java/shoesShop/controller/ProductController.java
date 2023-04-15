@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import shoesShop.common.Product.Product;
+import shoesShop.common.Product.ProductService;
 import shoesShop.common.ProductItem.ProductItem;
 import shoesShop.common.ProductItem.ProductItemService;
 
@@ -20,6 +22,9 @@ import shoesShop.common.ProductItem.ProductItemService;
 public class ProductController {
 	@Autowired
 	ProductItemService productItemService;
+	
+	@Autowired
+	ProductService productService;
 
 	@GetMapping
 	public ResponseEntity<Collection<ProductItem>> retrieveAll(@RequestParam(name = "category", required = false) Integer categoryId,
@@ -43,4 +48,26 @@ public class ProductController {
 
 		return new ResponseEntity<ProductItem>(HttpStatus.NOT_FOUND);
 	}
+	
+	@GetMapping("/name/{name}")
+	public ResponseEntity<Collection<ProductItem>> productItemByName(@PathVariable("name") String name) {
+		System.out.print(name);
+		Collection<ProductItem> productItem = productItemService.getProductItemsByProductName(name);
+		if (productItem != null) {
+			return new ResponseEntity<Collection<ProductItem>>(productItem, HttpStatus.OK);
+		}
+
+		return new ResponseEntity<Collection<ProductItem>>(HttpStatus.NOT_FOUND);
+	}
+	
+//	@GetMapping("/nameproduct/{name}")
+//	public ResponseEntity<Collection<Product>> productByName(@PathVariable("name") String name) {
+//		System.out.print(name);
+//		Collection<Product> product = productService.findByKeyword(name);
+//		if (product != null) {
+//			return new ResponseEntity<Collection<Product>>(product, HttpStatus.OK);
+//		}
+//
+//		return new ResponseEntity<Collection<Product>>(HttpStatus.NOT_FOUND);
+//	}
 }
