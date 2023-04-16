@@ -31,8 +31,10 @@ public class CategoryService extends RecordManager<Category> {
 
 	@Override
 	public Category create(Category category) {
-		DbCategory dbCategory = this.converter.convertModelToDb(category);
-		DbCategory createdCategory = this.categoryRepo.save(dbCategory);
+		DbCategory dbNewCategory = this.converter.convertModelToDb(category);
+		DbCategory dbParentCategory = this.categoryRepo.findById(category.parentCategoryId).get();
+		dbNewCategory.parentCategory = dbParentCategory;
+		DbCategory createdCategory = this.categoryRepo.save(dbNewCategory);
 		return this.converter.convertDbToModel(createdCategory);
 	}
 
@@ -43,6 +45,8 @@ public class CategoryService extends RecordManager<Category> {
 		DbCategory dbCategory = this.categoryRepo.findById(id).get();
 		if (dbCategory != null) {
 			this.converter.combine(dbCategory, updateCategory);
+			DbCategory dbParentCategory = this.categoryRepo.findById(category.parentCategory.categoryId).get();
+			dbCategory.parentCategory = dbParentCategory;
 			DbCategory updateDbCategory = this.categoryRepo.save(dbCategory);
 			return this.converter.convertDbToModel(updateDbCategory);
 		}

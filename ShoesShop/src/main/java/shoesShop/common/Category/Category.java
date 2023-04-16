@@ -1,8 +1,5 @@
 package shoesShop.common.Category;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,10 +17,17 @@ public class Category {
 		this.name = name;
 	}
 
+	public Category(String name, Integer categoryId, Category category) {
+		this.name = name;
+		this.categoryId = categoryId;
+		this.parentCategory = category;
+	}
+
 	// Properties
 	public String name;
 	
 	// Ids
 	public Integer categoryId;
+	public Integer parentCategoryId;
 	public Category parentCategory;
 }

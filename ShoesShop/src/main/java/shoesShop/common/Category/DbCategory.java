@@ -26,22 +26,21 @@ import shoesShop.common.Product.DbProduct;
 @Entity
 @Table(name = "Categories")
 public class DbCategory {
-	
-	public DbCategory( String name) {
-		super();
+
+	public DbCategory(String name) {
 		this.name = name;
 	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer categoryId;
-	
+
 	public String name;
-	
-	@ManyToOne(cascade={CascadeType.ALL})
-	@JoinColumn(name="ParentCategoryId")
+
+	@ManyToOne(cascade = { CascadeType.ALL })
+	@JoinColumn(name = "ParentCategoryId")
 	public DbCategory parentCategory;
-	
+
 	@OneToMany(mappedBy = "category")
 	Collection<DbProduct> products = new ArrayList<>();
 }

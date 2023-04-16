@@ -1,7 +1,5 @@
 package shoesShop.common.Category;
 
-import java.util.Collection;
-
 import shoesShop.common.ICombiner;
 import shoesShop.common.IConverter;
 
