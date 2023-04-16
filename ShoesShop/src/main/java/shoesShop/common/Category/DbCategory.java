@@ -37,7 +37,7 @@ public class DbCategory {
 
 	public String name;
 
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "ParentCategoryId")
 	public DbCategory parentCategory;
 
