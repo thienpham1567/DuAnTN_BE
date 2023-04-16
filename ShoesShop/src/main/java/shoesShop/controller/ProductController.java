@@ -58,15 +58,4 @@ public class ProductController {
 
 		return new ResponseEntity<Collection<ProductItem>>(HttpStatus.NOT_FOUND);
 	}
-	
-//	@GetMapping("/nameproduct/{name}")
-//	public ResponseEntity<Collection<Product>> productByName(@PathVariable("name") String name) {
-//		System.out.print(name);
-//		Collection<Product> product = productService.findByKeyword(name);
-//		if (product != null) {
-//			return new ResponseEntity<Collection<Product>>(product, HttpStatus.OK);
-//		}
-//
-//		return new ResponseEntity<Collection<Product>>(HttpStatus.NOT_FOUND);
-//	}
 }

@@ -28,12 +28,13 @@ import shoesShop.common.UserRole.DbUserRole;
 @Table(name = "Users")
 public class DbUser {
 	
-	public DbUser(String password, String firstName, String lastName, String emailAddress) {
+	public DbUser(String password, String firstName, String lastName, String emailAddress, String phoneNumber) {
 		super();
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.emailAddress = emailAddress;
+		this.phoneNumber = phoneNumber;
 	}
 	
 	@Id

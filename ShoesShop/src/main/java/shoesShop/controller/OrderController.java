@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import shoesShop.common.Cart.Cart;
 import shoesShop.common.Cart.CartService;
-import shoesShop.common.CartItem.CartItem;
 import shoesShop.common.CartItem.CartItemService;
 import shoesShop.common.Order.OrderService;
 import shoesShop.common.OrderLine.OrderLine;
@@ -22,10 +20,7 @@ import shoesShop.common.OrderLine.OrderLineService;
 
 @RestController
 @RequestMapping("api/v1/orders")
-public class OrderController extends ApiController {
-//	cart = order
-//	cartitem = orderline
-	
+public class OrderController {	
 	@Autowired
 	OrderService orderService;
 	

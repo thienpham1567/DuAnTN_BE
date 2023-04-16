@@ -12,7 +12,8 @@ public class UserConverter implements ICombiner<DbUser>, IConverter<DbUser, User
 				input.password,
 				input.firstName,
 				input.lastName,
-				input.emailAddress
+				input.emailAddress,
+				input.phoneNumber
 			);
 	}
 
@@ -23,7 +24,8 @@ public class UserConverter implements ICombiner<DbUser>, IConverter<DbUser, User
 				input.userId,
 				input.firstName,
 				input.lastName,
-				input.emailAddress
+				input.emailAddress,
+				input.phoneNumber
 			);
 	}
 
