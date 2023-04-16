@@ -1,12 +1,25 @@
 package shoesShop.common.OrderLine;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import shoesShop.common.Cart.Cart;
+import shoesShop.common.Order.Order;
+import shoesShop.common.ProductItem.ProductItem;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class OrderLine {
+	public OrderLine(Double price, Integer quantity) {
+		this.price = price;
+		this.quantity = quantity;
+	}
 	// Properties
-	public Double detailPrice;
+	public Double price;
 	public Integer quantity;
-	
+	public String orderId;
 	// Ids
-	private Integer orderDetailId;
-	public Integer productId;
-	public Integer orderId;	
+	public Integer orderLineId;
+	public Integer productItemId;
 }

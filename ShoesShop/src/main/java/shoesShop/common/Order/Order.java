@@ -4,18 +4,42 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Order {
+	
+	public Order(String denormalizedAddress, Double orderTotalPrice,
+			String ordersStatus, String orderAddress,  String orderStatus, LocalDateTime updatedAt) {
+		this.denormalizedAddress = denormalizedAddress;
+		this.orderTotalPrice = orderTotalPrice;
+		this.ordersStatus = ordersStatus;
+		this.orderAddress = orderAddress;
+		this.orderStatus = orderStatus;
+	}
+
 	// Properties
-	public LocalDateTime created;
-	public LocalDateTime updated;
+	@NotEmpty
+	public String denormalizedAddress;
+	@NotEmpty
+	public Double orderTotalPrice;
+	@NotEmpty
+	public String ordersStatus;
+	@NotEmpty
 	public String orderAddress;
-	public double orderAmount;
+	@NotEmpty
+	public String orderStatus;
 	
 	// Ids
-	public int orderId;
-	public int userId;
-	public int orderStatusId;
-	
-	// Collections
-	public Collection<Integer> orderDetailIds = new ArrayList();
+	public String orderId;
+	@NotNull
+	public Integer userId;
+
 }
