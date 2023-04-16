@@ -1,5 +1,6 @@
 package shoesShop.common.Brand;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -20,7 +21,7 @@ import shoesShop.common.Product.DbProduct;
 @NoArgsConstructor
 @Entity
 @Table(name = "Brands")
-public class DbBrand {
+public class DbBrand implements Serializable{
 	public DbBrand(String name) {
 		this.name = name;
 	}

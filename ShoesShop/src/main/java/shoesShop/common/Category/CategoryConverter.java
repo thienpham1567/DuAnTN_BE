@@ -18,6 +18,6 @@ public class CategoryConverter implements ICombiner<DbCategory>, IConverter<DbCa
 
 	@Override
 	public Category convertDbToModel(DbCategory input) {
-		return input == null ? null : new Category(input.name, input.categoryId, input.parentCategory == null ? null : new Category(input.parentCategory.name, input.parentCategory.categoryId));
+		return input == null ? null : new Category(input.name, input.categoryId, input.parentCategory == null ? new Category("") : new Category(input.parentCategory.name, input.parentCategory.categoryId));
 	}
 }

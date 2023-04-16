@@ -1,18 +1,21 @@
 package shoesShop.common.Brand;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotEmpty;
 
-public class Brand {
-	public Brand(Integer brandId, String name) {
-		super();
-		this.name = name;
-		this.brandId = brandId;
-	}
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Brand implements Serializable{
+	// Ids
+	public Integer brandId;
+	
 	// Properties
 	@NotEmpty
 	public String name;
-	
-	// Ids
-	public Integer brandId;
 }

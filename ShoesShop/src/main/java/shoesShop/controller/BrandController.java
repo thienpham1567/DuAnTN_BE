@@ -44,7 +44,6 @@ public class BrandController {
 
 	@PostMapping
 	public ResponseEntity<Brand> create(@RequestBody @Valid Brand brand, BindingResult result) throws Exception {
-		System.out.print(brand);
 		if (brand == null || result.hasErrors()) {
 			return new ResponseEntity<Brand>(HttpStatus.BAD_REQUEST);
 		}
