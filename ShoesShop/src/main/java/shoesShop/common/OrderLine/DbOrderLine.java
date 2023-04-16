@@ -20,6 +20,12 @@ import shoesShop.common.ProductItem.DbProductItem;
 @Entity
 @Table(name = "OrderLines")
 public class DbOrderLine {
+	public DbOrderLine(Double price, Integer quantity) {
+		super();
+		this.price = price;
+		this.quantity = quantity;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer orderLineId;

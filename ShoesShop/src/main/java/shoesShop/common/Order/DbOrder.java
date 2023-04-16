@@ -26,14 +26,25 @@ import shoesShop.common.User.DbUser;
 @Entity
 @Table(name = "Orders")
 public class DbOrder {
+	public DbOrder(String denormalizedAddress, Double orderTotalPrice, String orderAddress, String ordersStatus, String orderStatus) {
+		super();
+		this.denormalizedAddress = denormalizedAddress;
+		this.orderTotalPrice = orderTotalPrice;
+		this.orderAddress = orderAddress;
+		this.ordersStatus = ordersStatus;
+		this.orderStatus = orderStatus;
+	}
+
 	@Id
 	public String orderId;
 	
-	public LocalDateTime created;
-	public LocalDateTime updated;
 	public String denormalizedAddress;
 	public Double orderTotalPrice;
+	public String orderAddress;
+	public String ordersStatus;
 	public String orderStatus;
+	public LocalDateTime createdAt;
+	public LocalDateTime updatedAt;
 	
 	@ManyToOne
 	@JoinColumn(name = "UserId")
