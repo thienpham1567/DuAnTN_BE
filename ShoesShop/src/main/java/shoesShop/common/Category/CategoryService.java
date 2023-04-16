@@ -41,11 +41,10 @@ public class CategoryService extends RecordManager<Category> {
 	@Override
 	public Category update(Category category, Integer id) {
 		DbCategory updateCategory = this.converter.convertModelToDb(category);
-
 		DbCategory dbCategory = this.categoryRepo.findById(id).get();
 		if (dbCategory != null) {
 			this.converter.combine(dbCategory, updateCategory);
-			DbCategory dbParentCategory = this.categoryRepo.findById(category.parentCategory.categoryId).get();
+			DbCategory dbParentCategory = this.categoryRepo.findById(category.parentCategory.categoryId).get();			
 			dbCategory.parentCategory = dbParentCategory;
 			DbCategory updateDbCategory = this.categoryRepo.save(dbCategory);
 			return this.converter.convertDbToModel(updateDbCategory);
