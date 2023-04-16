@@ -90,15 +90,13 @@ public class UserController {
         String email = loginRequest.getEmail();
         String password = loginRequest.getPassword();
         
-		//final UserDetails user = userDetailService.loadUserByUsername(loginRequest.getEmail());
         // Kiểm tra xem email và mật khẩu có khớp với bản ghi người dùng trong cơ sở dữ liệu hay không
         CustomUserDetails user = (CustomUserDetails) userDetailService.loadUserByUsername(email);
         User userss = userService.findByEmail(email);
         boolean isMatch = passwordEncoder.matches(password,userss.password);
-//        if (!isMatch) {
-//
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Sai tên đăng nhập hoặc mật khẩu!");
-//        }
+        if (!isMatch) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Sai tên đăng nhập hoặc mật khẩu!");
+        }
 
         // Nếu thông tin đăng nhập hợp lệ, trả về token JWT
         String token = generateToken(user);
