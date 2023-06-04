@@ -27,30 +27,23 @@ import shoesShop.common.ProductVariationSizes.DbProductVariationSize;
 @Entity
 @Table(name = "ProductVariations")
 public class DbProductVariation implements Serializable{
-
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer productVariationId;
 	
-	// ok
-	@OneToMany(mappedBy = "productVariation")
-	Collection<DbProductVariationSize> productVariationSizes = new ArrayList<>();
-	
-	// ok
 	@ManyToOne
 	@JoinColumn(name = "ProductId")
 	public DbProduct product;
 	
-	// ok
 	@ManyToOne
 	@JoinColumn(name = "ColorId")
 	public DbColor color;
 	
-	// ok
+	@OneToMany(mappedBy = "productVariation")
+	Collection<DbProductVariationSize> productVariationSizes = new ArrayList<>();
+
 	@OneToMany(mappedBy = "productVariation")
 	Collection<DbProductImage> productImages = new ArrayList<>();
-
-	// done
 }
