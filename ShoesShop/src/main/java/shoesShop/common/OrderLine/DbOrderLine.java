@@ -12,7 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import shoesShop.common.Order.DbOrder;
-import shoesShop.common.ProductItem.DbProductItem;
+import shoesShop.common.ProductVariationSize.DbProductVariationSize;
 
 @Data
 @AllArgsConstructor
@@ -33,11 +33,15 @@ public class DbOrderLine {
 	public Double price;
 	public Integer quantity;
 	
+	// ok
 	@ManyToOne
-	@JoinColumn(name = "ProductItemId")
-	public DbProductItem productItem;
+	@JoinColumn(name = "ProductVariationSizeId")
+	public DbProductVariationSize ProductVariationSize;
 	
+	// ok
 	@ManyToOne
 	@JoinColumn(name = "OrderId")
-	public DbOrder order;	
+	public DbOrder order;
+	
+	// done
 }

@@ -40,16 +40,18 @@ public class DbOrder {
 	
 	public String denormalizedAddress;
 	public Double orderTotalPrice;
-	public String orderAddress;
 	public String ordersStatus;
-	public String orderStatus;
 	public LocalDateTime createdAt;
 	public LocalDateTime updatedAt;
 	
+	// ok
 	@ManyToOne
 	@JoinColumn(name = "UserId")
 	public DbUser user;
 	 
+	// ok
 	@OneToMany(mappedBy = "order")
 	Collection<DbOrderLine> orderLines = new ArrayList<>();
+
+	// done
 }

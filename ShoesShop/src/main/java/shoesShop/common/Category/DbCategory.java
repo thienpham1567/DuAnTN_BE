@@ -19,6 +19,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import shoesShop.common.Product.DbProduct;
+import shoesShop.common.Size.DbSize;
 
 @Data
 @AllArgsConstructor
@@ -41,6 +42,7 @@ public class DbCategory {
 	@JoinColumn(name = "ParentCategoryId")
 	public DbCategory parentCategory;
 
+	// ok
 	@OneToMany(mappedBy = "category")
-	Collection<DbProduct> products = new ArrayList<>();
+	Collection<DbSize> sizes = new ArrayList<>();
 }

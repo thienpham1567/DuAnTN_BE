@@ -1,8 +1,6 @@
-package shoesShop.common.Size;
+package shoesShop.common.ProductImage;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,38 +8,40 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import shoesShop.common.Category.DbCategory;
-import shoesShop.common.ProductVariationSize.DbProductVariationSize;
+import shoesShop.common.ProductVariations.DbProductVariation;
+
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Sizes")
-public class DbSize implements Serializable{
-
+@Table(name = "ProductVariations")
+public class DbProductImage implements Serializable{
 	private static final long serialVersionUID = 1L;
+	
+	public DbProductImage(String imageUrl, Boolean isPrimary) {
+		super();
+		this.imageUrl = imageUrl;
+		this.isPrimary = isPrimary;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Integer sizeId;
-	
-	public String value;
-	
-	// ok
-	@OneToMany(mappedBy = "size")
-	Collection<DbProductVariationSize> productVariationSizes = new ArrayList<>();
+	public Integer productImageld;
 	
 	// ok
 	@ManyToOne
-	@JoinColumn(name = "CategoryId")
-	public DbCategory category;
-
+	@JoinColumn(name = "ProductVariationId")
+	public DbProductVariation productVariation;
+	
+	public String imageUrl;
+	
+	public Boolean isPrimary;
+	
 	// done
 }

@@ -13,6 +13,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import shoesShop.common.Cart.DbCart;
 import shoesShop.common.ProductItem.DbProductItem;
+import shoesShop.common.ProductVariationSize.DbProductVariationSize;
 
 @Data
 @AllArgsConstructor
@@ -33,11 +34,15 @@ public class DbCartItem {
 	public Double price;
 	public Integer quantity;
 		
+	// ok
 	@ManyToOne
 	@JoinColumn(name = "CartId")
 	public DbCart cart;
 	
+	// ok
 	@ManyToOne
-	@JoinColumn(name = "ProductItemId")
-	public DbProductItem productItem;
+	@JoinColumn(name = "ProductVariationSizeId")
+	public DbProductVariationSize productVariationSize;
+
+	// done
 }

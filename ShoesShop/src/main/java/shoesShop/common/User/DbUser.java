@@ -18,7 +18,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import shoesShop.common.Cart.DbCart;
 import shoesShop.common.Order.DbOrder;
+import shoesShop.common.UserAddress.DbUserAddress;
 import shoesShop.common.UserRole.DbUserRole;
 
 @Data
@@ -47,10 +49,22 @@ public class DbUser {
 	public String emailAddress;
 	public String phoneNumber;
 	
+	// ok
+	@OneToMany(mappedBy = "user") 
+	Collection<DbCart> carts = new ArrayList<>();
+	
+	// ok
+	@OneToMany(mappedBy = "user")
+	Collection<DbUserAddress> userAddress = new ArrayList<>();
+	
+	// ok
 	@OneToMany(mappedBy = "user")
 	Collection<DbOrder> orders = new ArrayList<DbOrder>();
 	
+	// ok
 	@OneToMany(mappedBy = "user")
 	Collection<DbUserRole> userRoles = new ArrayList<>();
+
+	// done
 }	
 	

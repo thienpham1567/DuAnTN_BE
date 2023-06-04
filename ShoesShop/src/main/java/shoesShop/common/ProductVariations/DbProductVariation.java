@@ -1,4 +1,4 @@
-package shoesShop.common.Size;
+package shoesShop.common.ProductVariations;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,32 +16,41 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import shoesShop.common.Category.DbCategory;
+import shoesShop.common.Color.DbColor;
+import shoesShop.common.Product.DbProduct;
+import shoesShop.common.ProductImage.DbProductImage;
 import shoesShop.common.ProductVariationSize.DbProductVariationSize;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Sizes")
-public class DbSize implements Serializable{
+@Table(name = "ProductVariations")
+public class DbProductVariation implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Integer sizeId;
-	
-	public String value;
+	public Integer productVariationId;
 	
 	// ok
-	@OneToMany(mappedBy = "size")
+	@OneToMany(mappedBy = "productVariation")
 	Collection<DbProductVariationSize> productVariationSizes = new ArrayList<>();
 	
 	// ok
 	@ManyToOne
-	@JoinColumn(name = "CategoryId")
-	public DbCategory category;
+	@JoinColumn(name = "ProductId")
+	public DbProduct product;
+	
+	// ok
+	@ManyToOne
+	@JoinColumn(name = "ColorId")
+	public DbColor color;
+	
+	// ok
+	@OneToMany(mappedBy = "productVariation")
+	Collection<DbProductImage> productImages = new ArrayList<>();
 
 	// done
 }
