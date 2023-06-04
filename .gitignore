@@ -11,3 +11,5 @@
 *.dat
 .metadata/.plugins/org.eclipse.jdt.core/variablesAndContainers.dat
 *.log
+*.xmi
+*.resources

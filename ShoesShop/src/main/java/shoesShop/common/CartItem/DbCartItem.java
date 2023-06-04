@@ -13,7 +13,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import shoesShop.common.Cart.DbCart;
 import shoesShop.common.ProductItem.DbProductItem;
-import shoesShop.common.ProductVariationSize.DbProductVariationSize;
+import shoesShop.common.ProductVariationSizes.DbProductVariationSize;
 
 @Data
 @AllArgsConstructor

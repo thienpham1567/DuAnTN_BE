@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 import shoesShop.common.Color.DbColor;
 import shoesShop.common.Product.DbProduct;
 import shoesShop.common.ProductImage.DbProductImage;
-import shoesShop.common.ProductVariationSize.DbProductVariationSize;
+import shoesShop.common.ProductVariationSizes.DbProductVariationSize;
 
 @Data
 @AllArgsConstructor

@@ -1,4 +1,4 @@
-package shoesShop.common.ProductVariationSize;
+package shoesShop.common.ProductVariationSizes;
 
 import java.io.Serializable;
 import java.util.ArrayList;
