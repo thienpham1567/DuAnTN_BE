@@ -25,7 +25,7 @@ import shoesShop.common.Size.DbSize;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "DbProductVariationSizes")
+@Table(name = "ProductVariationSizes")
 public class DbProductVariationSize implements Serializable{
  
 	private static final long serialVersionUID = 1L;
@@ -40,7 +40,7 @@ public class DbProductVariationSize implements Serializable{
 	
 	// ok
 	@ManyToOne
-	@JoinColumn(name = "ProductvariationId")
+	@JoinColumn(name = "ProductVariationId")
 	public DbProductVariation productVariation;
 	
 	// ok

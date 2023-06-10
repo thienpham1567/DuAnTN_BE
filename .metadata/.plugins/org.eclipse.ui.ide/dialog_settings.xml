@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<list key="installedFeatures">
+		<item value="io.emmet.eclipse:1.0.0.201401132323"/>
 		<item value="org.eclipse.buildship:3.1.6.v20220511-1359"/>
 		<item value="org.eclipse.eclemma.feature:3.1.6.202206011447"/>
 		<item value="org.eclipse.egit.gitflow.feature:6.4.0.202211300538-r"/>

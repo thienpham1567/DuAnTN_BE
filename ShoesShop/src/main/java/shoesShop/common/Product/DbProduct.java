@@ -52,7 +52,7 @@ public class DbProduct {
 	public DbBrand brand;
 
 	@ManyToOne
-	@JoinColumn(name = "CategoryID")
+	@JoinColumn(name = "CategoryId")
 	public DbCategory category;
 
 	// ok

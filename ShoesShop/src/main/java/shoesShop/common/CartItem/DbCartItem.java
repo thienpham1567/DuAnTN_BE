@@ -36,12 +36,12 @@ public class DbCartItem {
 		
 	// ok
 	@ManyToOne
-	@JoinColumn(name = "Cartid")
+	@JoinColumn(name = "CartId")
 	public DbCart cart;
 	
 	// ok
 	@ManyToOne
-	@JoinColumn(name = "Productvariationsizeid")
+	@JoinColumn(name = "ProductVariationSizeId")
 	public DbProductVariationSize productVariationSize;
 
 	// done

@@ -38,7 +38,7 @@ public class DbProductVariation implements Serializable{
 	public DbProduct product;
 	
 	@ManyToOne
-	@JoinColumn(name = "colorId")
+	@JoinColumn(name = "ColorId")
 	public DbColor color;
 	
 	@OneToMany(mappedBy = "productVariation")
