@@ -22,6 +22,7 @@ import lombok.Setter;
 import shoesShop.common.Brand.DbBrand;
 import shoesShop.common.Category.DbCategory;
 import shoesShop.common.ProductItem.DbProductItem;
+import shoesShop.common.ProductVariations.DbProductVariation;
 
 @Data
 @AllArgsConstructor
@@ -40,6 +41,8 @@ public class DbProduct {
 	public Integer productId;
 
 	public String name;
+	public Double price;
+	public String sku;
 	public String description;
 	public LocalDateTime createdAt;
 	public LocalDateTime updateAt;
@@ -52,6 +55,7 @@ public class DbProduct {
 	@JoinColumn(name = "CategoryID")
 	public DbCategory category;
 
+	// ok
 	@OneToMany(mappedBy = "product")
-	Collection<DbProductItem> productItems = new ArrayList<>();
+	Collection<DbProductVariation> productVariations = new ArrayList<>();
 }

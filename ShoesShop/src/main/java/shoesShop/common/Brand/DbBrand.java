@@ -22,6 +22,9 @@ import shoesShop.common.Product.DbProduct;
 @Entity
 @Table(name = "Brands")
 public class DbBrand implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+
 	public DbBrand(String name) {
 		this.name = name;
 	}

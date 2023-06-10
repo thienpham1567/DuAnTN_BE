@@ -37,13 +37,15 @@ public class DbUserRole {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	Integer userRoleId;
 
+	// ok
 	@ManyToOne
 	@JoinColumn(name = "UserId") 
-	DbUser user;
+	public DbUser user;
 
+	// ok
 	@ManyToOne
 	@JoinColumn(name = "RoleId") 
-	DbRole role;
+	public DbRole role;
 	
-	
+	// done
 }

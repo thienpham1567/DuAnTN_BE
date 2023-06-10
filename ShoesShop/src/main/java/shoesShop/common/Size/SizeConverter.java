@@ -11,6 +11,6 @@ public class SizeConverter implements IConverter<DbSize, Size> {
 
 	@Override
 	public Size convertDbToModel(DbSize input) {
-		return input == null ? null : new Size(input.sizeId, input.value, input.category.categoryId);
+		return input == null ? null : new Size(input.sizeId, input.value, input.);
 	}
 }

@@ -20,10 +20,10 @@ public class CartItemConverter implements ICombiner<DbCartItem>, IConverter<DbCa
 	public CartItem convertDbToModel(DbCartItem input) {
 		return input == null ? null : new CartItem(
 				input.cartItemId,
+				input.productVariationSize.productVariationSizeId,
+				input.cart.cartId,
 				input.price,
-				input.quantity,
-				input.productItem.productItemId,
-				input.cart.cartId
+				input.quantity
 			);
 	}
 }
