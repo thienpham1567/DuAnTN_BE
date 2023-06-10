@@ -36,7 +36,7 @@ public class DbOrderLine {
 	// ok
 	@ManyToOne
 	@JoinColumn(name = "ProductVariationSizeId")
-	public DbProductVariationSize ProductVariationSize;
+	public DbProductVariationSize productVariationSize;
 	
 	// ok
 	@ManyToOne

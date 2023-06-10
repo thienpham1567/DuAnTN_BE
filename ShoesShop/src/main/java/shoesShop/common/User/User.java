@@ -45,7 +45,7 @@ public class User {
 	public String phoneNumber;
 	
 	// Ids
-	private Integer userId;
+	public Integer userId;
 		
 	// Collections
 	Collection<Integer> orderIds = new ArrayList();

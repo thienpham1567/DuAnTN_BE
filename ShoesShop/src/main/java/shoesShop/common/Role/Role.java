@@ -17,5 +17,5 @@ public class Role {
 	public String code;
 	
 	// Ids
-	private Integer roleId;
+	public Integer roleId;
 }

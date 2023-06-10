@@ -35,16 +35,16 @@ public class DbProductVariationSize implements Serializable{
 	public Integer productVariationSizeId;
 	
 	// ok
-	@OneToMany(mappedBy = "ProductVariationSize")
+	@OneToMany(mappedBy = "productVariationSize")
 	Collection<DbOrderLine> orderLines = new ArrayList<>();
 	
 	// ok
 	@ManyToOne
-	@JoinColumn(name = "ProductVariationId")
+	@JoinColumn(name = "ProductvariationId")
 	public DbProductVariation productVariation;
 	
 	// ok
-	@OneToMany(mappedBy = "ProductVariationSize")
+	@OneToMany(mappedBy = "productVariationSize")
 	Collection<DbCartItem> cartItems = new ArrayList<>();
 	
 	// ok
