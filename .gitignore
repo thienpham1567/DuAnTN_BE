@@ -10,3 +10,4 @@
 *.index
 *.dat
 .metadata/.plugins/org.eclipse.jdt.core/variablesAndContainers.dat
+*.component
