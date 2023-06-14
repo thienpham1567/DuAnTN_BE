@@ -37,6 +37,8 @@ public class DbCategory {
 	public Integer categoryId;
 
 	public String name;
+	
+	public String code;
 
 	@ManyToOne
 	@JoinColumn(name = "ParentCategoryId")

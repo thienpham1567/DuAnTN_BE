@@ -52,7 +52,7 @@ public class DbProductVariationSize implements Serializable{
 	@JoinColumn(name = "SizeId")
 	public DbSize size;
 	
-	public Integer qunatity;
+	public Integer quantity;
 	
 	// done
 }

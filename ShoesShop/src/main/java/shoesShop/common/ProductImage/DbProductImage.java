@@ -20,7 +20,7 @@ import shoesShop.common.ProductVariations.DbProductVariation;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "ProductImage")
+@Table(name = "ProductImages")
 public class DbProductImage implements Serializable{
 	private static final long serialVersionUID = 1L;
 	

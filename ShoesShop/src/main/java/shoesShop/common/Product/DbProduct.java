@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -43,9 +44,10 @@ public class DbProduct {
 	public String name;
 	public Double price;
 	public String sku;
+	@Column(name = "description", columnDefinition = "LONGTEXT")
 	public String description;
 	public LocalDateTime createdAt;
-	public LocalDateTime updateAt;
+	public LocalDateTime updatedAt;
 
 	@ManyToOne
 	@JoinColumn(name = "BrandId")
