@@ -31,7 +31,7 @@ public class BrandController {
 		Collection<Brand> brands = brandService.retrieveAll();
 		return new ResponseEntity<Collection<Brand>>(brands, HttpStatus.OK);
 	}
-	
+	// test Postman oke - 14/6
 	@GetMapping("{id}")
 	public ResponseEntity<Brand> retrieveOne(@PathVariable("id") Integer id) throws Exception {
 		Brand brand = brandService.retrieveOne(id);
@@ -41,7 +41,7 @@ public class BrandController {
 
 		return new ResponseEntity<Brand>(HttpStatus.NOT_FOUND);
 	}
-
+	// test Postman oke - 14/6
 	@PostMapping
 	public ResponseEntity<Brand> create(@RequestBody @Valid Brand brand, BindingResult result) throws Exception {
 		if (brand == null || result.hasErrors()) {
@@ -50,7 +50,7 @@ public class BrandController {
 
 		return new ResponseEntity<Brand>(this.brandService.create(brand), HttpStatus.CREATED);
 	}
-
+	// test Postman oke - 14/6
 	@PutMapping("{id}")
 	public ResponseEntity<Brand> update(@RequestBody @Valid Brand brand,@PathVariable("id") Integer id, BindingResult result) throws Exception {
 		if (brand == null || result.hasErrors()) {
@@ -64,6 +64,7 @@ public class BrandController {
 				: new ResponseEntity<Brand>(HttpStatus.BAD_REQUEST);
 	}
 	
+	// test Postman oke - 14/6
 	@DeleteMapping("{id}")
 	public ResponseEntity<Brand> delete(@PathVariable("id") Integer id) throws Exception {
 		return this.brandService.delete(id) ? new ResponseEntity<Brand>(HttpStatus.NO_CONTENT) : new ResponseEntity<Brand>(HttpStatus.BAD_REQUEST);

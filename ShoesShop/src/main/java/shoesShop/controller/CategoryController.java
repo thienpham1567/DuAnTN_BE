@@ -26,6 +26,7 @@ public class CategoryController {
 	@Autowired
 	CategoryService categoryService;
 	
+	// test Postman oke 14/6
 	@GetMapping
 	public ResponseEntity<Collection<Category>> retrieveAll() {
 		Collection<Category> categories = categoryService.retrieveAll();
@@ -33,6 +34,7 @@ public class CategoryController {
 		return new ResponseEntity<Collection<Category>>(categories, HttpStatus.OK);
 	}
 
+	// test Postman oke 14/6
 	@GetMapping("{id}")
 	public ResponseEntity<Category> retrieveOne(@PathVariable("id") Integer id) {
 		Category category = categoryService.retrieveOne(id);

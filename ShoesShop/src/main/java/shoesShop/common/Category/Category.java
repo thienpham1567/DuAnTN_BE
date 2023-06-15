@@ -17,15 +17,16 @@ public class Category {
 		this.name = name;
 	}
 
-	public Category(String name, Integer categoryId, Category category) {
+	public Category(String name, Integer categoryId, String code, Category category ) {
 		this.name = name;
 		this.categoryId = categoryId;
+		this.code = code;
 		this.parentCategory = category;
 	}
 
 	// Properties
 	public String name;
-	
+	public String code;
 	// Ids
 	public Integer categoryId;
 	public Integer parentCategoryId;

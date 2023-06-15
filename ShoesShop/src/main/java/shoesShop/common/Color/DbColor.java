@@ -1,5 +1,6 @@
 package shoesShop.common.Color;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -21,7 +22,13 @@ import shoesShop.common.ProductVariations.DbProductVariation;
 @NoArgsConstructor
 @Entity
 @Table(name = "Colors")
-public class DbColor {
+public class DbColor implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
+	public DbColor(String value) {
+		this.value = value;
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer colorId;

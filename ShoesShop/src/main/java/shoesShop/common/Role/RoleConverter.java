@@ -7,12 +7,12 @@ public class RoleConverter implements ICombiner<DbRole>, IConverter<DbRole, Role
 	@Override
 	public void combine(DbRole original, DbRole update) {
 		original.description = update.description;
-		original.description = update.code;
+		original.code = update.code;
 	}
 
 	@Override
 	public DbRole convertModelToDb(Role input) {
-		return input == null ? null : new DbRole(input.description, input.code);
+		return input == null ? null : new DbRole(input.code, input.description);
 	}
 
 	@Override
