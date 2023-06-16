@@ -24,7 +24,16 @@ public class ProductService extends RecordManager<Product> {
 	private ICategoryRepository categoryRepo;
 
 	ProductConverter converter = new ProductConverter();
+	
+	/*--Filter: get all products by brand id--*/
+	@Override
+	public Collection<Product> retrieveAll(Integer id){
+		Collection<Product> products = this.load(null, id, null).stream()
+				.map(dbProduct -> this.converter.convertDbToModel(dbProduct)).collect(Collectors.toList());
+		return products;
+	}
 
+	/*--Get all products--*/
 	@Override
 	public Collection<Product> retrieveAll() {
 		Collection<Product> products = this.load(null, null, null).stream()

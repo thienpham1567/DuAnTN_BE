@@ -6,6 +6,10 @@ public abstract class RecordManager<T> implements IRecordManager<T> {
 	public Collection<T> retrieveAll() throws Exception {
 		throw new Exception();
 	}
+	
+	public Collection<T> retrieveAll(Integer id) throws Exception {
+		throw new Exception();
+	}
 
 	public T retrieveOne(Integer id) throws Exception {
 		throw new Exception();

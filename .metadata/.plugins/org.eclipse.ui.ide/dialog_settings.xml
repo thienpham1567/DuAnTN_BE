@@ -44,6 +44,7 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="D:\workspace_be\ShoesShop"/>
 			<item value="D:\ASM_Java6\asm_java6_be\ShoesShop"/>
 			<item value="D:\java6_asm\asm_java6_be"/>
 			<item value="D:\ASM_Java6\asm_java6_be"/>

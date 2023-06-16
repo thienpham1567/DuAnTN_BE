@@ -4,6 +4,9 @@ import java.util.Collection;
 
 public interface IRecordManager<T> {
 	Collection<T> retrieveAll() throws Exception;
+	
+	/*--Filter: get all products by brand id--*/
+	Collection<T> retrieveAll(Integer id) throws Exception;
 
 	T retrieveOne(Integer id) throws Exception;
 
