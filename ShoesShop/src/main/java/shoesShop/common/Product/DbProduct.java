@@ -13,16 +13,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import shoesShop.common.Brand.DbBrand;
 import shoesShop.common.Category.DbCategory;
-import shoesShop.common.ProductItem.DbProductItem;
 import shoesShop.common.ProductVariations.DbProductVariation;
 
 @Data
@@ -31,10 +27,14 @@ import shoesShop.common.ProductVariations.DbProductVariation;
 @Entity
 @Table(name = "Products")
 public class DbProduct {
-	public DbProduct(String name, String description) {
+	public DbProduct(String name, Double price, String sku, String description, LocalDateTime createdAt, LocalDateTime updatedAt) {
 		super();
 		this.name = name;
+		this.price = price;
+		this.sku = sku;
 		this.description = description;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
 	}
 
 	@Id

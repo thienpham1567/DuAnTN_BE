@@ -10,14 +10,18 @@ public class ProductConverter implements ICombiner<DbProduct>, IConverter<DbProd
 		original.brand = update.brand;
 		original.name = update.name;
 		original.description = update.description;
-		original.updateAt = update.updateAt;
+		original.createdAt = update.updatedAt;
 	}
 
 	@Override
 	public DbProduct convertModelToDb(Product input) {
 		return input == null ? null : new DbProduct(
 					input.name,
-					input.desciption
+					input.price,
+					input.sku,
+					input.description,
+					input.createdAt,
+					input.updatedAt
 				);
 	}
 
@@ -25,7 +29,11 @@ public class ProductConverter implements ICombiner<DbProduct>, IConverter<DbProd
 	public Product convertDbToModel(DbProduct input) {
 		return input == null ? null : new Product(
 				input.name,
+				input.price,
+				input.sku,
 				input.description,
+				input.createdAt,
+				input.updatedAt,
 				input.productId,
 				input.brand.brandId,
 				input.category.categoryId

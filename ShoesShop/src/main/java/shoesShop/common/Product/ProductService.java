@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 import shoesShop.common.RecordManager;
 import shoesShop.common.Brand.IBrandRepository;
 import shoesShop.common.Category.ICategoryRepository;
-import shoesShop.common.ProductItem.DbProductItem;
-import shoesShop.common.ProductItem.ProductItem;
 
 @Service
 public class ProductService extends RecordManager<Product> {
