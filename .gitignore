@@ -11,3 +11,4 @@
 *.dat
 .metadata/.plugins/org.eclipse.jdt.core/variablesAndContainers.dat
 *.component
+.metadata/.plugins/org.eclipse.m2e.logback/0.log
