@@ -6,11 +6,14 @@ import shoesShop.common.IConverter;
 public class ProductConverter implements ICombiner<DbProduct>, IConverter<DbProduct, Product>{	
 	@Override
 	public void combine(DbProduct original, DbProduct update) {
+		original.name = update.name;
+		original.price = update.price;
+		original.sku = update.sku;
+		original.description = update.description;
 		original.category = update.category;
 		original.brand = update.brand;
-		original.name = update.name;
 		original.description = update.description;
-		original.createdAt = update.updatedAt;
+		original.updatedAt = update.updatedAt;
 	}
 
 	@Override

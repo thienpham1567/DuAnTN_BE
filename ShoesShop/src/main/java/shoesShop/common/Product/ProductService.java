@@ -27,8 +27,16 @@ public class ProductService extends RecordManager<Product> {
 	
 	/*--Filter: get all products by brand id--*/
 	@Override
-	public Collection<Product> retrieveAll(Integer id){
+	public Collection<Product> retrieveAllProductsByBrandId(Integer id){
 		Collection<Product> products = this.load(null, id, null).stream()
+				.map(dbProduct -> this.converter.convertDbToModel(dbProduct)).collect(Collectors.toList());
+		return products;
+	}
+	
+	/*--Filter: get all products by category id--*/
+	@Override
+	public Collection<Product> retrieveAllProductsByCategoryId(Integer id){
+		Collection<Product> products = this.load(null, null, id).stream()
 				.map(dbProduct -> this.converter.convertDbToModel(dbProduct)).collect(Collectors.toList());
 		return products;
 	}
@@ -84,14 +92,15 @@ public class ProductService extends RecordManager<Product> {
 		return false;
 	}
 
-	public Collection<Product> retrieveAll(Integer brandId, Integer categoryId) {
-		Collection<Product> products = this.load(null, null, null).stream()
-				.map(dbProduct -> this.converter.convertDbToModel(dbProduct)).collect(Collectors.toList());
-		return products;
-	}
+//	public Collection<Product> retrieveAll(Integer brandId, Integer categoryId) {
+//		Collection<Product> products = this.load(null, null, null).stream()
+//				.map(dbProduct -> this.converter.convertDbToModel(dbProduct)).collect(Collectors.toList());
+//		return products;
+//	}
 	
-	public Collection<Product> findByKeyword(String name) {
-		Collection<DbProduct> dbProducts = productRepo.findByKeyword(name);
+	/*--Search product by product name--*/
+	public Collection<Product> searchProductsByName(String name) {
+		Collection<DbProduct> dbProducts = productRepo.searchProductsByName(name);
 		Collection<Product> Products = new ArrayList<>(); 
 
 	    for (DbProduct dbProduct : dbProducts) {
@@ -127,4 +136,12 @@ public class ProductService extends RecordManager<Product> {
 
 		return dbProducts;
 	}
+
+//	@Override
+//	public Collection<Product> retrieveAll(Integer id) throws Exception {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
+	
 }

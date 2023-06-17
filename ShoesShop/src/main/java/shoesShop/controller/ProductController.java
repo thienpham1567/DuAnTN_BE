@@ -31,9 +31,20 @@ public class ProductController {
 	}
 	
 	/*--Filter: get all products by brand id--*/
-	@GetMapping("{id}")
-	public ResponseEntity<Collection<Product>> retrieveAll(@PathVariable("id") Integer id){
-		Collection<Product> products = productService.retrieveAll();
+	@GetMapping("/products-by-brand/{id}")
+	public ResponseEntity<Collection<Product>> retrieveAllProductsByBrandId(@PathVariable("id") Integer id){
+		System.out.println("Load products by brand id");
+		Collection<Product> products = productService.retrieveAllProductsByBrandId(id);
+		if(products != null)
+			return new ResponseEntity<Collection<Product>>(products, HttpStatus.OK);
+		return new ResponseEntity<Collection<Product>>(HttpStatus.NOT_FOUND);
+	}
+	
+	/*--Filter: get all products by category id--*/
+	@GetMapping("/products-by-category/{id}")
+	public ResponseEntity<Collection<Product>> retrieveAllProductsByCategoryId(@PathVariable("id") Integer id) {
+		System.out.println("Load products by category id");
+		Collection<Product> products = productService.retrieveAllProductsByCategoryId(id);
 		if(products != null)
 			return new ResponseEntity<Collection<Product>>(products, HttpStatus.OK);
 		return new ResponseEntity<Collection<Product>>(HttpStatus.NOT_FOUND);
@@ -50,16 +61,17 @@ public class ProductController {
 //		return new ResponseEntity<ProductItem>(HttpStatus.NOT_FOUND);
 //	}
 	
-//	@GetMapping("/name/{name}")
-//	public ResponseEntity<Collection<ProductItem>> productItemByName(@PathVariable("name") String name) {
-//		System.out.print(name);
-//		Collection<ProductItem> productItem = productItemService.getProductItemsByProductName(name);
-//		if (productItem != null) {
-//			return new ResponseEntity<Collection<ProductItem>>(productItem, HttpStatus.OK);
-//		}
-//
-//		return new ResponseEntity<Collection<ProductItem>>(HttpStatus.NOT_FOUND);
-//	}
+	/*--Search product by product name--*/
+	@GetMapping("/products-by-name/{name}")
+	public ResponseEntity<Collection<Product>> searchProductsByName(@PathVariable("name") String name) {
+		System.out.print(name);
+		Collection<Product> products = productService.searchProductsByName(name);
+		if (products != null) {
+			return new ResponseEntity<Collection<Product>>(products, HttpStatus.OK);
+		}
+
+		return new ResponseEntity<Collection<Product>>(HttpStatus.NOT_FOUND);
+	}
 	
 //	@GetMapping
 //	public ResponseEntity<Collection<ProductItem>> retrieveAll(@RequestParam(name = "category", required = false) Integer categoryId,
