@@ -27,6 +27,7 @@ public class ProductItemService extends RecordManager<ProductItem> {
 		return productItems;
 	}
 
+	
 	@Override
 	public ProductItem retrieveOne(Integer id) {
 		ProductItem productItem = this.load(id, null, null).stream()

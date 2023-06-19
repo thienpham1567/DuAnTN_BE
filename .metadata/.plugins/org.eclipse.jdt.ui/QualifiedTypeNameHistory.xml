@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="shoesShop.common.UserAddress.DbUserAddress"/>
-    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
-    <fullyQualifiedTypeName name="java.lang.Record"/>
-    <fullyQualifiedTypeName name="shoesShop.common.Product.IProductRepository"/>
     <fullyQualifiedTypeName name="shoesShop.common.Product.ProductService"/>
     <fullyQualifiedTypeName name="javax.validation.constraints.Size"/>
     <fullyQualifiedTypeName name="shoesShop.common.Size.SizeConverter"/>
@@ -60,4 +56,8 @@
     <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
     <fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JsonIgnore"/>
     <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
+    <fullyQualifiedTypeName name="java.util.stream.Collectors"/>
+    <fullyQualifiedTypeName name="shoesShop.common.ProductDetails.ProductDetail"/>
+    <fullyQualifiedTypeName name="java.util.Map"/>
+    <fullyQualifiedTypeName name="shoesShop.common.Product.DbProduct"/>
 </qualifiedTypeNameHistroy>

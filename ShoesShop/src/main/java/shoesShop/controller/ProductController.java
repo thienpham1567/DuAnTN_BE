@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import shoesShop.common.Product.Product;
 import shoesShop.common.Product.ProductService;
+import shoesShop.common.ProductDetails.ProductDTO;
 import shoesShop.common.ProductItem.ProductItemService;
 
 @RestController
@@ -50,16 +51,20 @@ public class ProductController {
 		return new ResponseEntity<Collection<Product>>(HttpStatus.NOT_FOUND);
 	}
 	
-//	@GetMapping("{id}")
-//	public ResponseEntity<ProductItem> retrieveOne(@PathVariable("id") Integer id) {
-//		System.out.print(id);
-//		ProductItem productItem = productItemService.retrieveOne(id);
-//		if (productItem != null) {
-//			return new ResponseEntity<ProductItem>(productItem, HttpStatus.OK);
-//		}
-//
-//		return new ResponseEntity<ProductItem>(HttpStatus.NOT_FOUND);
-//	}
+	/*--
+	 * Get product details
+	 * 		1 sản phẩm
+	 * 			3 màu => 1 màu 5 tấm hình - nhiều size
+	 * 
+	 * --*/
+	@GetMapping("{id}")
+	public ResponseEntity<Collection<ProductDTO>> retrieveOne(@PathVariable("id") Integer id) {
+		Collection<ProductDTO> productDetail = productService.getProductDetails(id);
+		if (productDetail != null && !productDetail.isEmpty()) {
+			return new ResponseEntity<Collection<ProductDTO>>(productDetail, HttpStatus.OK);
+		}
+		return new ResponseEntity<Collection<ProductDTO>>(HttpStatus.NOT_FOUND);
+	}
 	
 	/*--Search product by product name--*/
 	@GetMapping("/products-by-name/{name}")

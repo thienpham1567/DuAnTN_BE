@@ -3,14 +3,20 @@ package shoesShop.common.Product;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import shoesShop.common.RecordManager;
 import shoesShop.common.Brand.IBrandRepository;
 import shoesShop.common.Category.ICategoryRepository;
+import shoesShop.common.ProductDetails.ProductDTO;
+
 
 @Service
 public class ProductService extends RecordManager<Product> {
@@ -23,7 +29,34 @@ public class ProductService extends RecordManager<Product> {
 	@Autowired
 	private ICategoryRepository categoryRepo;
 
+
 	ProductConverter converter = new ProductConverter();
+	
+	/*--Get all products--*/
+	@Override
+	public Collection<Product> retrieveAll() {
+		Collection<Product> products = this.load(null, null, null).stream()
+				.map(dbProduct -> this.converter.convertDbToModel(dbProduct)).collect(Collectors.toList());
+		return products;
+	}
+	
+	/*--Get product detail--*/
+	public Collection<ProductDTO> getProductDetails(Integer id) {
+        return productRepo.getProductDetails(id);
+    }
+	
+	
+	/*--Search product by product name--*/
+	public Collection<Product> searchProductsByName(String name) {
+		Collection<DbProduct> dbProducts = productRepo.searchProductsByName(name);
+		Collection<Product> products = new ArrayList<>(); 
+		
+		for (DbProduct dbProduct : dbProducts) {
+			Product product = this.converter.convertDbToModel(dbProduct);
+			products.add(product);
+		}
+		return products;
+	}
 	
 	/*--Filter: get all products by brand id--*/
 	@Override
@@ -41,20 +74,11 @@ public class ProductService extends RecordManager<Product> {
 		return products;
 	}
 
-	/*--Get all products--*/
-	@Override
-	public Collection<Product> retrieveAll() {
-		Collection<Product> products = this.load(null, null, null).stream()
-				.map(dbProduct -> this.converter.convertDbToModel(dbProduct)).collect(Collectors.toList());
-		return products;
-	}
-
-	@Override
-	public Product retrieveOne(Integer id) {
-		Product product = this.load(id, null, null).stream()
-				.map(dbProduct -> this.converter.convertDbToModel(dbProduct)).findFirst().get();
-		return product;
-	}
+//	public DbProduct getProductDetails(Integer id) {
+//		Product product = this.load(id, null, null).stream()
+//				.map(dbProduct -> this.converter.convertDbToModel(dbProduct)).findFirst().get();
+//		return product;
+//	}
 
 	@Override
 	public Product create(Product product) {
@@ -98,17 +122,6 @@ public class ProductService extends RecordManager<Product> {
 //		return products;
 //	}
 	
-	/*--Search product by product name--*/
-	public Collection<Product> searchProductsByName(String name) {
-		Collection<DbProduct> dbProducts = productRepo.searchProductsByName(name);
-		Collection<Product> Products = new ArrayList<>(); 
-
-	    for (DbProduct dbProduct : dbProducts) {
-	        Product product = this.converter.convertDbToModel(dbProduct);
-	        Products.add(product);
-	    }
-	    return Products;
-	}
 
 	private Collection<DbProduct> load(Integer productId, Integer brandId, Integer categoryId) {
 		Collection<DbProduct> dbProducts = this.productRepo.findAll();

@@ -2,6 +2,8 @@ package shoesShop.common;
 
 import java.util.Collection;
 
+import shoesShop.common.ProductDetails.ProductDTO;
+
 public abstract class RecordManager<T> implements IRecordManager<T> {
 	
 	public Collection<T> retrieveAll() throws Exception {
@@ -36,4 +38,5 @@ public abstract class RecordManager<T> implements IRecordManager<T> {
 	public Boolean delete(Integer id) throws Exception {
 		throw new Exception();
 	}
+
 }

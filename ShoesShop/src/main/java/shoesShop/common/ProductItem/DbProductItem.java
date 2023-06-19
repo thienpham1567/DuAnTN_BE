@@ -22,6 +22,7 @@ import shoesShop.common.Size.DbSize;
 @Table(name = "ProductItems")
 public class DbProductItem {
 	
+	
 	public DbProductItem(Integer colorId, String imageUrl, Double price, Integer quantityInStock, String sku,
 			Integer productItemId, String status, Integer sizeId,Integer productId) {
 		this.color.colorId = color.colorId;

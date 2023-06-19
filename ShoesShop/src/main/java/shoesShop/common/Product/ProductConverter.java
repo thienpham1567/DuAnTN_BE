@@ -2,6 +2,7 @@ package shoesShop.common.Product;
 
 import shoesShop.common.ICombiner;
 import shoesShop.common.IConverter;
+import shoesShop.common.ProductDetails.ProductDTO;
 
 public class ProductConverter implements ICombiner<DbProduct>, IConverter<DbProduct, Product>{	
 	@Override
@@ -42,4 +43,5 @@ public class ProductConverter implements ICombiner<DbProduct>, IConverter<DbProd
 				input.category.categoryId
 			);
 	}
+
 }
