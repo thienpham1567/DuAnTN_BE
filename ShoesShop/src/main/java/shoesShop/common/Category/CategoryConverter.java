@@ -7,11 +7,12 @@ public class CategoryConverter implements ICombiner<DbCategory>, IConverter<DbCa
 	@Override
 	public void combine(DbCategory original, DbCategory update) {
 		original.name = update.name;
+//		original.code = update.code;
 	}
 
 	@Override
 	public DbCategory convertModelToDb(Category input) {
-		return input == null ? null : new DbCategory(input.name);
+		return input == null ? null : new DbCategory(input.name, input.code);
 	}
 
 	@Override

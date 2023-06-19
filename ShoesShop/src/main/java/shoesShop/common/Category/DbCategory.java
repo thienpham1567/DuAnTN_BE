@@ -28,6 +28,10 @@ public class DbCategory {
 	public DbCategory(String name) {
 		this.name = name;
 	}
+	public DbCategory(String name, String code) {
+		this.name = name;
+		this.code = code;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
