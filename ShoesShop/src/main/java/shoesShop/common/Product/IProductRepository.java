@@ -39,4 +39,15 @@ public interface IProductRepository extends JpaRepository<DbProduct, Integer> {
 			+ "inner join product_variation_sizes pvs on pvs.product_variation_id = pv.product_variation_id "
 			+ "inner join sizes s on s.size_id = pvs.size_id where p.product_id = ?1", nativeQuery = true)
 	Collection<ProductDTO> getProductDetails(Integer id);
+	
+	/*--Get all product--*/
+	@Query(value = "select p.product_id, p.created_at, p.description, p.name, p.price, p.sku, p.updated_at, p.brand_id, p.category_id, pv.color_id, "
+			+ "pi.product_imageld, pvs.quantity, pi.image_url, pvs.size_id, pi.is_primary, s.value "
+			+ "from products p "
+			+ "inner join product_variations pv on p.product_id = pv.product_id "
+			+ "inner join product_images pi on pv.product_variation_id = pi.product_variation_id "
+			+ "inner join colors col on col.color_id = pv.color_id "
+			+ "inner join product_variation_sizes pvs on pvs.product_variation_id = pv.product_variation_id "
+			+ "inner join sizes s on s.size_id = pvs.size_id", nativeQuery = true)
+	Collection<ProductDTO> getAll();
 }

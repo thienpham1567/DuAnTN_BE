@@ -3,14 +3,10 @@ package shoesShop.common.Product;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import shoesShop.common.RecordManager;
 import shoesShop.common.Brand.IBrandRepository;
@@ -33,11 +29,8 @@ public class ProductService extends RecordManager<Product> {
 	ProductConverter converter = new ProductConverter();
 	
 	/*--Get all products--*/
-	@Override
-	public Collection<Product> retrieveAll() {
-		Collection<Product> products = this.load(null, null, null).stream()
-				.map(dbProduct -> this.converter.convertDbToModel(dbProduct)).collect(Collectors.toList());
-		return products;
+	public Collection<ProductDTO> getAll() {
+		return productRepo.getAll();
 	}
 	
 	/*--Get product detail--*/

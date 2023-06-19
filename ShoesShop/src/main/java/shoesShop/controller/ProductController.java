@@ -26,9 +26,9 @@ public class ProductController {
 
 	/*--Get all products--*/
 	@GetMapping
-	public ResponseEntity<Collection<Product>> retrieveAll(){
-		Collection<Product> products = productService.retrieveAll();
-		return new ResponseEntity<Collection<Product>>(products, HttpStatus.OK); 
+	public ResponseEntity<Collection<ProductDTO>> retrieveAll(){
+		Collection<ProductDTO> products = productService.getAll();
+		return new ResponseEntity<Collection<ProductDTO>>(products, HttpStatus.OK); 
 	}
 	
 	/*--Filter: get all products by brand id--*/
