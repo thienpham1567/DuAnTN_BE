@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import shoesShop.common.Brand.Brand;
-import shoesShop.common.ProductItem.ProductItem;
 import shoesShop.common.Role.Role;
 import shoesShop.common.Role.RoleService;
 import shoesShop.common.UserRole.UserRole;

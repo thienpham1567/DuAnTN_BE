@@ -34,25 +34,20 @@ public class DbProductVariationSize implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer productVariationSizeId;
 	
-	// ok
 	@OneToMany(mappedBy = "productVariationSize")
 	Collection<DbOrderLine> orderLines = new ArrayList<>();
 	
-	// ok
 	@ManyToOne
 	@JoinColumn(name = "ProductVariationId")
 	public DbProductVariation productVariation;
 	
-	// ok
 	@OneToMany(mappedBy = "productVariationSize")
 	Collection<DbCartItem> cartItems = new ArrayList<>();
 	
-	// ok
 	@ManyToOne
 	@JoinColumn(name = "SizeId")
 	public DbSize size;
 	
 	public Integer quantity;
-	
-	// done
+
 }
