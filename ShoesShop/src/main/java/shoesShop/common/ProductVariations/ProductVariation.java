@@ -1,6 +1,5 @@
 package shoesShop.common.ProductVariations;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import lombok.AllArgsConstructor;

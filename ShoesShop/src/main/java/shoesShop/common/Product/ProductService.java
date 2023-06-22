@@ -43,8 +43,8 @@ public class ProductService extends RecordManager<Product> {
 	public Product create(Product product) {
 		DbProduct dbProduct = this.converter.convertModelToDb(product);
 		dbProduct.createdAt = LocalDateTime.now();
-		dbProduct.brand = this.brandRepo.findById(product.brandId).get();
-		dbProduct.category = this.categoryRepo.findById(product.categoryId).get();
+		dbProduct.brand = this.brandRepo.findById(product.brand.brandId).get();
+		dbProduct.category = this.categoryRepo.findById(product.category.categoryId).get();
 		DbProduct createdProduct = this.productRepo.save(dbProduct);
 		return this.converter.convertDbToModel(createdProduct);
 	}
@@ -52,8 +52,8 @@ public class ProductService extends RecordManager<Product> {
 	@Override
 	public Product update(Product product, Integer id) {
 		DbProduct updateProduct = this.converter.convertModelToDb(product);
-		updateProduct.brand = this.brandRepo.findById(product.brandId).get();
-		updateProduct.category = this.categoryRepo.findById(product.categoryId).get();
+		updateProduct.brand = this.brandRepo.findById(product.brand.brandId).get();
+		updateProduct.category = this.categoryRepo.findById(product.category.categoryId).get();
 
 		DbProduct dbProduct = this.productRepo.findById(id).get();
 		if (dbProduct != null) {

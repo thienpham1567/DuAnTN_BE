@@ -2,8 +2,13 @@ package shoesShop.common.Product;
 
 import shoesShop.common.ICombiner;
 import shoesShop.common.IConverter;
+import shoesShop.common.Brand.BrandConverter;
+import shoesShop.common.Category.CategoryConverter;
 
 public class ProductConverter implements ICombiner<DbProduct>, IConverter<DbProduct, Product>{	
+	private BrandConverter brandConverter = new BrandConverter();
+	private CategoryConverter categoryConverter = new CategoryConverter();
+	
 	@Override
 	public void combine(DbProduct original, DbProduct update) {
 		original.category = update.category;
@@ -35,8 +40,8 @@ public class ProductConverter implements ICombiner<DbProduct>, IConverter<DbProd
 				input.createdAt,
 				input.updatedAt,
 				input.productId,
-				input.brand.brandId,
-				input.category.categoryId
+				this.brandConverter.convertDbToModel(input.brand),
+				this.categoryConverter.convertDbToModel(input.category)
 			);
 	}
 }

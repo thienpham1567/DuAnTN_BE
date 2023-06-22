@@ -12,8 +12,5 @@ import shoesShop.common.Size.Size;
 public class ProductVariationSize {
 	public Integer productVariationSizeId;
 	public Integer quantity;
-//	public ProductVariation productVariation;
 	public Size size;
-//	public Collection<OrderLine> orderLines = new ArrayList<>();
-//	public Collection<CartItem> cartItems = new ArrayList<>();
 }
