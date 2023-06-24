@@ -26,9 +26,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import shoesShop.common.Brand.Brand;
+import shoesShop.common.JWT.JwtTokenProvider;
 import shoesShop.common.ProductItem.ProductItem;
 import shoesShop.common.User.CustomUserDetails;
 import shoesShop.common.User.IUserRepository;
@@ -49,6 +51,9 @@ public class UserController {
 	
 	@Autowired
 	UserDetailsServiceImpl userDetailService;
+	
+	@Autowired
+	private JwtTokenProvider jwtTokenProvider;
 	
 	@Autowired
     private AuthenticationManager authenticationManager;
@@ -99,27 +104,38 @@ public class UserController {
         }
 
         // Nếu thông tin đăng nhập hợp lệ, trả về token JWT
-        String token = generateToken(user);
+        String token = jwtTokenProvider.generateToken(user);
+        
+        
+        String id = jwtTokenProvider.getEmailFromJWT(token);
+        Date date = jwtTokenProvider.getExpirationDateFromToken(token);
+        Claims claims = jwtTokenProvider.getAllClaimsFromToken(token);
+        boolean ckeckTKExp = jwtTokenProvider.isTokenExpired(token);
+        
+        System.out.println(ckeckTKExp);
+        System.out.println(claims);
+        System.out.println(date.toString());
+        System.out.println(id);
         return ResponseEntity.ok(token);
     }
 	
-    private String generateToken(CustomUserDetails user) {
-        // Lấy thông tin người dùng và tạo chuỗi JSON cho thông tin đó
-        Map<String, Object> claims = new HashMap();
-        claims.put("email", user.getUsername());
-        claims.put("fullName", user.getFullName());
-        claims.put("phoneNumber", user.getPhoneNumber());
-        claims.put("roles", user.getAuthorities());
-
-        // Tạo JWT token bằng thư viện jwt
-        return Jwts.builder()
-                .setSubject(user.getUsername())
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 86400000))
-                .signWith(SignatureAlgorithm.HS256, "secret")
-                .claim("user", claims)
-                .compact();
-    }
+//    private String generateToken(CustomUserDetails user) {
+//        // Lấy thông tin người dùng và tạo chuỗi JSON cho thông tin đó
+//        Map<String, Object> claims = new HashMap();
+//        claims.put("email", user.getUsername());
+//        claims.put("fullName", user.getFullName());
+//        claims.put("phoneNumber", user.getPhoneNumber());
+//        claims.put("roles", user.getAuthorities());
+//
+//        // Tạo JWT token bằng thư viện jwt
+//        return Jwts.builder()
+//                .setSubject(user.getUsername())
+//                .setIssuedAt(new Date())
+//                .setExpiration(new Date(System.currentTimeMillis() + 86400000))
+//                .signWith(SignatureAlgorithm.HS256, "secret")
+//                .claim("user", claims)
+//                .compact();
+//    }
     
     @PostMapping
 	public ResponseEntity<User> create(@RequestBody @Valid User user, BindingResult result) throws Exception {
