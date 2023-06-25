@@ -1,5 +1,6 @@
 package shoesShop.controller;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import shoesShop.common.ProductVariations.ProductVariation;
@@ -18,23 +20,15 @@ import shoesShop.common.ProductVariations.ProductVariationService;
 public class ProductController {
 	@Autowired
 	ProductVariationService productVariationService;
-	
-
-//	@GetMapping
-//	public ResponseEntity<Collection<ProductItem>> retrieveAll(@RequestParam(name = "category", required = false) Integer categoryId,
-//														   @RequestParam(name = "brand", required = false) Integer brandId) {
-//		Collection<ProductItem> productItems = new ArrayList<>();
-//		if (categoryId != null || brandId != null) {
-//			productItems = productItemService.retrieveAll(brandId, categoryId);
-//		} else {
-//			productItems = productItemService.retrieveAll();
-//		}
-//		return new ResponseEntity<Collection<ProductItem>>(productItems, HttpStatus.OK);
-//	}
 
 	@GetMapping
-	public ResponseEntity<Collection<ProductVariation>> retrieveAll(){
-		Collection<ProductVariation> products = productVariationService.retrieveAll();
+	public ResponseEntity<Collection<ProductVariation>> retrieveAll(@RequestParam(name = "category", required = false) Integer categoryId, @RequestParam(name = "brand", required = false) Integer brandId){
+		Collection<ProductVariation> products = new ArrayList<>();
+		if (categoryId != null || brandId != null) {
+			products = this.productVariationService.retrieveAll(brandId, categoryId);
+		} else {
+			products = this.productVariationService.retrieveAll();
+		}
 		return new ResponseEntity<Collection<ProductVariation>>(products, HttpStatus.OK); 
 	}
 	
