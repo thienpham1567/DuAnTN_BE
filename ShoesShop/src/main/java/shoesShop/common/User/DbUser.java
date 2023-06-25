@@ -20,6 +20,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import shoesShop.common.Cart.DbCart;
 import shoesShop.common.Order.DbOrder;
+import shoesShop.common.Review.DbReview;
 import shoesShop.common.UserAddress.DbUserAddress;
 import shoesShop.common.UserRole.DbUserRole;
 
@@ -64,6 +65,9 @@ public class DbUser {
 	// ok
 	@OneToMany(mappedBy = "user")
 	Collection<DbUserRole> userRoles = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "user")
+	Collection<DbReview> reviews = new ArrayList<>();
 
 	// done
 }	
