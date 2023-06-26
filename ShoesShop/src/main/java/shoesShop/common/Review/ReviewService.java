@@ -33,10 +33,12 @@ public class ReviewService extends RecordManager<Review> {
 	
 	@Override
 	public Review create(Review review) throws Exception {
+		System.out.println(review.userId);
 		DbReview dbReview = this.converter.convertModelToDb(review);
-		System.out.println("User id: " + this.userRepo.findById(review.userId).get());
-		dbReview.user = this.userRepo.findById(review.userId).get();
-		dbReview.productVariation = this.productVariationRepo.findById(review.productVariationId).get();
+		//dbReview = this.converter.convertModelToDb(review);
+		dbReview.user = this.userRepo.findById(review.getUserId()).get();
+		dbReview.productVariation = this.productVariationRepo.findById(review.getProductVariationId()).get();
+		// dòng này lỗi
 		DbReview createdReview = this.reviewRepo.save(dbReview);
 		return this.converter.convertDbToModel(createdReview);
 	}

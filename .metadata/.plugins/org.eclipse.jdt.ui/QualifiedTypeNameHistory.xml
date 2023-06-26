@@ -1,16 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="shoesShop.common.UserAddress.DbUserAddress"/>
-    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
-    <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
-    <fullyQualifiedTypeName name="java.lang.Record"/>
-    <fullyQualifiedTypeName name="shoesShop.common.Product.IProductRepository"/>
-    <fullyQualifiedTypeName name="shoesShop.common.Product.ProductService"/>
-    <fullyQualifiedTypeName name="javax.validation.constraints.Size"/>
-    <fullyQualifiedTypeName name="shoesShop.common.Size.SizeConverter"/>
-    <fullyQualifiedTypeName name="shoesShop.common.Size.DbSize"/>
-    <fullyQualifiedTypeName name="shoesShop.common.Size.SizeService"/>
-    <fullyQualifiedTypeName name="shoesShop.common.Color.ColorConverter"/>
     <fullyQualifiedTypeName name="shoesShop.common.Color.IColorRepository"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RestController"/>
     <fullyQualifiedTypeName name="shoesShop.common.Color.ColorService"/>
@@ -49,7 +38,6 @@
     <fullyQualifiedTypeName name="shoesShop.common.CartItem.DbCartItem"/>
     <fullyQualifiedTypeName name="shoesShop.common.ProductItem.DbProductItem"/>
     <fullyQualifiedTypeName name="shoesShop.common.CartItem.CartItem"/>
-    <fullyQualifiedTypeName name="java.util.Collection"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PutMapping"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.DeleteMapping"/>
     <fullyQualifiedTypeName name="org.springframework.security.config.annotation.web.configuration.EnableWebSecurity"/>
@@ -60,4 +48,16 @@
     <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
     <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
     <fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JsonIgnore"/>
+    <fullyQualifiedTypeName name="shoesShop.common.User.UserConverter"/>
+    <fullyQualifiedTypeName name="shoesShop.common.Review.IReviewRepository"/>
+    <fullyQualifiedTypeName name="java.util.stream.Collectors"/>
+    <fullyQualifiedTypeName name="shoesShop.common.User.IUserRepository"/>
+    <fullyQualifiedTypeName name="shoesShop.common.ProductVariations.IProductVariationRepository"/>
+    <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
+    <fullyQualifiedTypeName name="java.util.Collection"/>
+    <fullyQualifiedTypeName name="com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer"/>
+    <fullyQualifiedTypeName name="org.springframework.security.core.Authentication"/>
+    <fullyQualifiedTypeName name="shoesShop.common.Review.DbReview"/>
+    <fullyQualifiedTypeName name="java.util.Optional"/>
+    <fullyQualifiedTypeName name="shoesShop.common.User.User"/>
 </qualifiedTypeNameHistroy>

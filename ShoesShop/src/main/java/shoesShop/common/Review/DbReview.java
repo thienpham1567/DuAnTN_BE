@@ -11,11 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import shoesShop.common.ProductVariations.DbProductVariation;
 import shoesShop.common.User.DbUser;
 
@@ -46,15 +45,15 @@ public class DbReview implements Serializable{
 	
 	public LocalDateTime createdAt;
 
+	
+
 	public DbReview(Integer userId, Integer productVariationId, String content, Integer rateStar,
 			LocalDateTime createdAt) {
-		super();
-		this.user.userId = userId;
-		this.productVariation.productVariationId = productVariationId;
 		this.content = content;
 		this.rateStar = rateStar;
-		this.createdAt = createdAt;
 	}
+	
+	
 	
 //	@ManyToOne
 //	@JoinColumn(name = "OrderLineId")
