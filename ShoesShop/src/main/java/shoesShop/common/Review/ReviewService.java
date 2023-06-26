@@ -1,5 +1,6 @@
 package shoesShop.common.Review;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -33,12 +34,10 @@ public class ReviewService extends RecordManager<Review> {
 	
 	@Override
 	public Review create(Review review) throws Exception {
-		System.out.println(review.userId);
 		DbReview dbReview = this.converter.convertModelToDb(review);
-		//dbReview = this.converter.convertModelToDb(review);
 		dbReview.user = this.userRepo.findById(review.getUserId()).get();
 		dbReview.productVariation = this.productVariationRepo.findById(review.getProductVariationId()).get();
-		// dòng này lỗi
+		dbReview.createdAt = LocalDateTime.now();
 		DbReview createdReview = this.reviewRepo.save(dbReview);
 		return this.converter.convertDbToModel(createdReview);
 	}
@@ -48,5 +47,14 @@ public class ReviewService extends RecordManager<Review> {
 		if(reviewId != null)
 			dbReviews = dbReviews.stream().filter(dbReview -> dbReview.reviewId == reviewId).collect(Collectors.toList());
 		return dbReviews;
+	}
+	
+	@Override
+	public Boolean delete(Integer id) throws Exception {
+		if(this.reviewRepo.existsById(id)) {
+			this.reviewRepo.deleteById(id);
+			return true;
+		}
+		return false;
 	}
 }

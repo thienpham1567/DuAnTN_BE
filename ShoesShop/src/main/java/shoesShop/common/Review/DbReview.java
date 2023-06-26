@@ -51,6 +51,7 @@ public class DbReview implements Serializable{
 			LocalDateTime createdAt) {
 		this.content = content;
 		this.rateStar = rateStar;
+		this.createdAt = createdAt;
 	}
 	
 	
