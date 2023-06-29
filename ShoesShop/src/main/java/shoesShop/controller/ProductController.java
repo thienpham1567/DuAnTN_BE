@@ -5,11 +5,16 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import shoesShop.common.Product.Product;
+import shoesShop.common.Product.ProductService;
 import shoesShop.common.ProductVariations.ProductVariation;
 import shoesShop.common.ProductVariations.ProductVariationService;
 
@@ -19,6 +24,16 @@ public class ProductController {
 	@Autowired
 	ProductVariationService productVariationService;
 	
+	@Autowired
+	ProductService productService;
+	
+	/*--Insert product--*/
+	@PostMapping
+	public ResponseEntity<Product> create(@RequestBody Product product, BindingResult result) throws Exception {
+		if(product == null || result.hasErrors())
+			return new ResponseEntity<Product>(HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<Product>(this.productService.create(product), HttpStatus.CREATED);
+	}
 
 //	@GetMapping
 //	public ResponseEntity<Collection<ProductItem>> retrieveAll(@RequestParam(name = "category", required = false) Integer categoryId,

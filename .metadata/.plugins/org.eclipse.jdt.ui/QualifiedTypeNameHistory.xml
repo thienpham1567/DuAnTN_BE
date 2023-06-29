@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="shoesShop.common.Color.IColorRepository"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RestController"/>
     <fullyQualifiedTypeName name="shoesShop.common.Color.ColorService"/>
     <fullyQualifiedTypeName name="java.awt.Color"/>
     <fullyQualifiedTypeName name="shoesShop.common.Color.Color"/>
@@ -60,4 +58,6 @@
     <fullyQualifiedTypeName name="shoesShop.common.Review.DbReview"/>
     <fullyQualifiedTypeName name="java.util.Optional"/>
     <fullyQualifiedTypeName name="shoesShop.common.User.User"/>
+    <fullyQualifiedTypeName name="shoesShop.common.Product.ProductService"/>
+    <fullyQualifiedTypeName name="java.time.format.DateTimeFormatter"/>
 </qualifiedTypeNameHistroy>

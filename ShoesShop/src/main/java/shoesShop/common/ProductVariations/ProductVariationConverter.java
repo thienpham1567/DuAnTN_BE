@@ -19,7 +19,9 @@ public class ProductVariationConverter implements IConverter<DbProductVariation,
 
 	@Override
 	public DbProductVariation convertModelToDb(ProductVariation input) {
-		return null;
+		return input == null ? null : new DbProductVariation(
+					input.productVariationId
+				);
 	}
 
 	@Override
