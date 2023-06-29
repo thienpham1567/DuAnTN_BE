@@ -12,7 +12,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import shoesShop.common.Cart.DbCart;
-import shoesShop.common.ProductItem.DbProductItem;
 import shoesShop.common.ProductVariationSizes.DbProductVariationSize;
 
 @Data
@@ -34,15 +33,11 @@ public class DbCartItem {
 	public Double price;
 	public Integer quantity;
 		
-	// ok
 	@ManyToOne
 	@JoinColumn(name = "CartId")
 	public DbCart cart;
 	
-	// ok
 	@ManyToOne
 	@JoinColumn(name = "ProductVariationSizeId")
 	public DbProductVariationSize productVariationSize;
-
-	// done
 }

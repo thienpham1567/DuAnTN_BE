@@ -8,20 +8,13 @@ import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import shoesShop.common.Brand.Brand;
+import shoesShop.common.Category.Category;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Product {
-	public Product(String name, Double price, String sku, String description, LocalDateTime createdAt, LocalDateTime updatedAt) {
-		this.name = name;
-		this.price = price;
-		this.sku = sku;
-		this.description = description;
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
-	}
-
 	// Properties
 	@NotEmpty
 	public String name;
@@ -35,7 +28,7 @@ public class Product {
 	// Ids
 	public Integer productId;
 	@NotNull
-	public Integer brandId;
+	public Brand brand;
 	@NotNull
-	public Integer categoryId;
+	public Category category;
 }

@@ -44,6 +44,7 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="D:\workspace_be\ShoesShop"/>
 			<item value="D:\ASM_Java6\asm_java6_be\ShoesShop"/>
 			<item value="D:\java6_asm\asm_java6_be"/>
 			<item value="D:\ASM_Java6\asm_java6_be"/>
@@ -62,5 +63,7 @@
 			<item key="DIALOG_Y_ORIGIN" value="190"/>
 			<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
 		</section>
+	</section>
+	<section name="NewWizardAction">
 	</section>
 </section>
