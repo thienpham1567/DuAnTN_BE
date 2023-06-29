@@ -38,21 +38,42 @@ public class CategoryService extends RecordManager<Category> {
 		return this.converter.convertDbToModel(createdCategory);
 	}
 
+//	@Override
+//	public Category update(Category category, Integer id) {
+//		DbCategory updateCategory = this.converter.convertModelToDb(category);
+//
+//		DbCategory dbCategory = this.categoryRepo.findById(id).get();
+//		if (dbCategory != null) {
+//			this.converter.combine(dbCategory, updateCategory);
+//			DbCategory dbParentCategory = this.categoryRepo.findById(category.parentCategory.categoryId).get();
+//			dbCategory.parentCategory = dbParentCategory;
+//			DbCategory updateDbCategory = this.categoryRepo.save(dbCategory);
+//			return this.converter.convertDbToModel(updateDbCategory);
+//		}
+//
+//		return null;
+//	}
+	
 	@Override
 	public Category update(Category category, Integer id) {
-		DbCategory updateCategory = this.converter.convertModelToDb(category);
+	    DbCategory updateCategory = this.converter.convertModelToDb(category);
 
-		DbCategory dbCategory = this.categoryRepo.findById(id).get();
-		if (dbCategory != null) {
-			this.converter.combine(dbCategory, updateCategory);
-			DbCategory dbParentCategory = this.categoryRepo.findById(category.parentCategory.categoryId).get();
-			dbCategory.parentCategory = dbParentCategory;
-			DbCategory updateDbCategory = this.categoryRepo.save(dbCategory);
-			return this.converter.convertDbToModel(updateDbCategory);
-		}
+	    DbCategory dbCategory = this.categoryRepo.findById(id).orElse(null);
+	    if (dbCategory != null) {
+	        this.converter.combine(dbCategory, updateCategory);
+	        
+	        if (category.getParentCategory() != null) {
+	            DbCategory dbParentCategory = this.categoryRepo.findById(category.getParentCategory().getCategoryId()).orElse(null);
+	            dbCategory.setParentCategory(dbParentCategory);
+	        }
+	        
+	        DbCategory updateDbCategory = this.categoryRepo.save(dbCategory);
+	        return this.converter.convertDbToModel(updateDbCategory);
+	    }
 
-		return null;
+	    return null;
 	}
+
 
 	@Override
 	public Boolean delete(Integer id) {
