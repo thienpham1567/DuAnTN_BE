@@ -26,14 +26,6 @@ public class ProductController {
 	
 	@Autowired
 	ProductService productService;
-	
-	/*--Insert product--*/
-	@PostMapping
-	public ResponseEntity<Product> create(@RequestBody Product product, BindingResult result) throws Exception {
-		if(product == null || result.hasErrors())
-			return new ResponseEntity<Product>(HttpStatus.BAD_REQUEST);
-		return new ResponseEntity<Product>(this.productService.create(product), HttpStatus.CREATED);
-	}
 
 //	@GetMapping
 //	public ResponseEntity<Collection<ProductItem>> retrieveAll(@RequestParam(name = "category", required = false) Integer categoryId,
