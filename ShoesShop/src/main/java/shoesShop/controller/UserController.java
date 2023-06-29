@@ -19,9 +19,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,6 +32,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import shoesShop.common.Brand.Brand;
+import shoesShop.common.Category.Category;
 import shoesShop.common.JWT.JwtTokenProvider;
 import shoesShop.common.ProductItem.ProductItem;
 import shoesShop.common.User.CustomUserDetails;
@@ -119,23 +122,7 @@ public class UserController {
         return ResponseEntity.ok(token);
     }
 	
-//    private String generateToken(CustomUserDetails user) {
-//        // Lấy thông tin người dùng và tạo chuỗi JSON cho thông tin đó
-//        Map<String, Object> claims = new HashMap();
-//        claims.put("email", user.getUsername());
-//        claims.put("fullName", user.getFullName());
-//        claims.put("phoneNumber", user.getPhoneNumber());
-//        claims.put("roles", user.getAuthorities());
-//
-//        // Tạo JWT token bằng thư viện jwt
-//        return Jwts.builder()
-//                .setSubject(user.getUsername())
-//                .setIssuedAt(new Date())
-//                .setExpiration(new Date(System.currentTimeMillis() + 86400000))
-//                .signWith(SignatureAlgorithm.HS256, "secret")
-//                .claim("user", claims)
-//                .compact();
-//    }
+		
     
     @PostMapping
 	public ResponseEntity<User> create(@RequestBody @Valid User user, BindingResult result) throws Exception {
@@ -144,5 +131,23 @@ public class UserController {
 		}
 
 		return new ResponseEntity<User>(this.userService.create(user), HttpStatus.CREATED);
+	}
+    
+    @PutMapping("{id}")
+	public ResponseEntity<User> update(@RequestBody @Valid User user,@PathVariable("id") Integer id, BindingResult result) throws Exception {
+		if (user == null || result.hasErrors()) {
+			return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
+		}
+		
+		User updatedUser = this.userService.update(user, id);
+
+		return updatedUser != null
+				? new ResponseEntity<User>(updatedUser, HttpStatus.OK)
+				: new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
+	}
+	
+	@DeleteMapping("{id}")
+	public ResponseEntity<User> delete(@PathVariable("id") Integer id) throws Exception {
+		return this.userService.delete(id) ? new ResponseEntity<User>(HttpStatus.NO_CONTENT) : new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
 	}
 }

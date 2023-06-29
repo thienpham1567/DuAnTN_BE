@@ -34,7 +34,8 @@ public class UserConverter implements ICombiner<DbUser>, IConverter<DbUser, User
 		original.emailAddress = update.emailAddress;
 		original.firstName = update.firstName;
 		original.lastName = update.lastName;
-		
+		original.password = update.password;
+		original.phoneNumber = update.phoneNumber;
 		
 	}
 

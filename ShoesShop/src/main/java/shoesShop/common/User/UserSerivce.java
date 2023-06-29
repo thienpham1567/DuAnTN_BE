@@ -11,8 +11,10 @@ import shoesShop.common.RecordManager;
 import shoesShop.common.Product.DbProduct;
 import shoesShop.common.Product.Product;
 import shoesShop.common.Role.DbRole;
+
 import shoesShop.common.UserRole.DbUserRole;
 import shoesShop.common.UserRole.IUserRoleRepository;
+import shoesShop.common.UserRole.UserRoleService;
 
 
 @Service
@@ -24,6 +26,9 @@ public class UserSerivce extends RecordManager<User>{
 	
 	@Autowired
 	private IUserRoleRepository userRoleRepo;
+	
+	@Autowired
+	private UserRoleService userRoleService;
 
 	@Override
 	public Collection<User> retrieveAll() throws Exception {
@@ -61,15 +66,25 @@ public class UserSerivce extends RecordManager<User>{
 	}
 
 	@Override
-	public User update(User record, Integer id) throws Exception {
-		// TODO Auto-generated method stub
-		return super.update(record, id);
+	public User update(User user, Integer id) throws Exception {
+		DbUser updateUser = this.converter.convertModelToDb(user);
+		DbUser dbUser = this.userRepo.findById(id).get();
+		if(dbUser != null) {
+			this.converter.combine(dbUser, updateUser);
+			DbUser updateDbUser = this.userRepo.save(dbUser);
+			return this.converter.convertDbToModel(updateDbUser);
+		}
+		return null;
 	}
 
 	@Override
 	public Boolean delete(Integer id) throws Exception {
-		// TODO Auto-generated method stub
-		return super.delete(id);
+		if(this.userRepo.existsById(id)) {
+			this.userRoleService.deleteByIdUser(id);
+			this.userRepo.deleteById(id);
+			return true;
+		}
+		return false;
 	}
 	
 	private Collection<DbUser> load(Integer userId) {

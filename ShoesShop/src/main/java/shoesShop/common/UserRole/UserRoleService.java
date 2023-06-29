@@ -74,6 +74,16 @@ public class UserRoleService extends RecordManager<UserRole>{
 		return false;
 	}
 	
+	public Boolean deleteByIdUser(Integer id){
+		if(this.userRoleRepo.findByUserId(id) != null) {
+			Collection<DbUserRole> dbuserRole = this.userRoleRepo.findByUserId(id);
+			this.userRoleRepo.deleteAll(dbuserRole);
+			return true;
+			
+		}
+		return false;
+	}
+	
 	private Collection<DbUserRole> load(Integer userRoleId, Integer roleId, Integer userId) {
 		Collection<DbUserRole> dbUserRoles = this.userRoleRepo.findAll();
 
