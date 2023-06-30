@@ -54,6 +54,7 @@ public class ProductService extends RecordManager<Product> {
 		DbProduct updateProduct = this.converter.convertModelToDb(product);
 		updateProduct.brand = this.brandRepo.findById(product.brand.brandId).get();
 		updateProduct.category = this.categoryRepo.findById(product.category.categoryId).get();
+		updateProduct.updatedAt = LocalDateTime.now();
 
 		DbProduct dbProduct = this.productRepo.findById(id).get();
 		if (dbProduct != null) {
@@ -67,7 +68,7 @@ public class ProductService extends RecordManager<Product> {
 
 	@Override
 	public Boolean delete(Integer id) {
-		if (this.productRepo.existsById(id)) {
+		if (productRepo.existsById(id)) {
 			this.productRepo.deleteById(id);
 			return true;
 		}
