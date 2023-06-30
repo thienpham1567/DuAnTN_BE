@@ -48,10 +48,7 @@ public class ProductAdminController {
 	/*--Update product--*/
 	@PutMapping("{id}")
 	public ResponseEntity<Product> update(@RequestBody Product product, @PathVariable("id") Integer id, BindingResult result) {
-		System.out.println(product.getSku());
-		System.out.println(product.getPrice());
-		System.out.println(product.getBrand().brandId);
-		
+
 		if (product == null || result.hasErrors())
 			return new ResponseEntity<Product>(HttpStatus.BAD_REQUEST);
 		

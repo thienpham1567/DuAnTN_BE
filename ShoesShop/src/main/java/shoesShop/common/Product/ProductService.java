@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 import shoesShop.common.RecordManager;
 import shoesShop.common.Brand.IBrandRepository;
 import shoesShop.common.Category.ICategoryRepository;
+import shoesShop.common.ProductVariations.DbProductVariation;
+import shoesShop.common.ProductVariations.IProductVariationRepository;
+import shoesShop.common.ProductVariations.ProductVariation;
 
 @Service
 public class ProductService extends RecordManager<Product> {
@@ -22,6 +25,9 @@ public class ProductService extends RecordManager<Product> {
 
 	@Autowired
 	private ICategoryRepository categoryRepo;
+	
+	@Autowired
+	private IProductVariationRepository productVariationRepo;
 
 	ProductConverter converter = new ProductConverter();
 
@@ -39,6 +45,7 @@ public class ProductService extends RecordManager<Product> {
 		return product;
 	}
 
+	/*--Insert product--*/
 	@Override
 	public Product create(Product product) {
 		DbProduct dbProduct = this.converter.convertModelToDb(product);

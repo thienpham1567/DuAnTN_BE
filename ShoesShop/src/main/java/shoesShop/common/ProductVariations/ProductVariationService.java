@@ -7,11 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import shoesShop.common.RecordManager;
+import shoesShop.common.Color.IColorRepository;
+import shoesShop.common.Product.DbProduct;
+import shoesShop.common.Product.IProductRepository;
+import shoesShop.common.Product.Product;
 
 @Service
 public class ProductVariationService extends RecordManager<ProductVariation> {
 	@Autowired
 	private IProductVariationRepository productVariationRepo;
+	
+	@Autowired
+	private IColorRepository colorRepo;
+	
+	@Autowired
+	private IProductRepository productRepo;
 	
 	private ProductVariationConverter converter = new ProductVariationConverter();
 	
@@ -19,6 +29,21 @@ public class ProductVariationService extends RecordManager<ProductVariation> {
 	public Collection<ProductVariation> retrieveAll() {
 		Collection<ProductVariation> products = this.load(null).stream().map(dbProduct -> this.converter.convertDbToModel(dbProduct)).toList();
 		return products;
+	}
+	
+	/*--Get productVariation in Admin page--*/
+	public Collection<DbProductVariation> findAll(){
+		return this.productVariationRepo.findAll();
+	}
+	
+	/*--Insert productVariation in Admin page--*/
+	@Override
+	public ProductVariation create(ProductVariation productVariation) {
+		DbProductVariation dbProductVariation = this.converter.convertModelToDb(productVariation);
+		dbProductVariation.color = this.colorRepo.findById(productVariation.color.colorId).get();
+		dbProductVariation.product = this.productRepo.findById(productVariation.product.productId).get();
+		DbProductVariation createdProductVariation = this.productVariationRepo.save(dbProductVariation);
+		return this.converter.convertDbToModel(createdProductVariation);
 	}
 
 	@Override
