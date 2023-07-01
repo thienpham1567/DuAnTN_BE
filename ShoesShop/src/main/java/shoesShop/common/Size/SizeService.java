@@ -31,39 +31,39 @@ public class SizeService extends RecordManager<Size> {
 		return size;
 	}
 	
-	@Override
-	public Size create(Size size) throws Exception {
-		System.out.println(size.getValue());
-		System.out.println(size.getCategoryId());
-		
-		DbSize dbSize = this.converter.convertModelToDb(size);
-		
-		dbSize.category = this.categoryRepo.findById(size.categoryId).get();
-		DbSize createdSize = this.sizeRepo.save(dbSize);
-		
-		return this.converter.convertDbToModel(createdSize);
-	}
-
-	@Override
-	public Size update(Size size, Integer id) throws Exception {
-		DbSize updateSize = this.converter.convertModelToDb(size);
-		DbSize dbSize = this.sizeRepo.findById(id).get();
-		if (dbSize != null) {
-			this.converter.combine(dbSize, updateSize);
-			DbSize updateDbSize = this.sizeRepo.save(dbSize);
-			return this.converter.convertDbToModel(updateDbSize);
-		}
-		return size;
-	}
-	
-	@Override
-	public Boolean delete(Integer id) throws Exception {
-		if (this.sizeRepo.existsById(id)) {
-			this.sizeRepo.deleteById(id);
-			return true;
-		}
-		return false;
-	}
+//	@Override
+//	public Size create(Size size) throws Exception {
+//		System.out.println(size.getValue());
+//		System.out.println(size.getCategoryId());
+//		
+//		DbSize dbSize = this.converter.convertModelToDb(size);
+//		
+//		dbSize.category = this.categoryRepo.findById(size.categoryId).get();
+//		DbSize createdSize = this.sizeRepo.save(dbSize);
+//		
+//		return this.converter.convertDbToModel(createdSize);
+//	}
+//
+//	@Override
+//	public Size update(Size size, Integer id) throws Exception {
+//		DbSize updateSize = this.converter.convertModelToDb(size);
+//		DbSize dbSize = this.sizeRepo.findById(id).get();
+//		if (dbSize != null) {
+//			this.converter.combine(dbSize, updateSize);
+//			DbSize updateDbSize = this.sizeRepo.save(dbSize);
+//			return this.converter.convertDbToModel(updateDbSize);
+//		}
+//		return size;
+//	}
+//	
+//	@Override
+//	public Boolean delete(Integer id) throws Exception {
+//		if (this.sizeRepo.existsById(id)) {
+//			this.sizeRepo.deleteById(id);
+//			return true;
+//		}
+//		return false;
+//	}
 
 	private Collection<DbSize> load(Integer sizeId) {
 		Collection<DbSize> dbSizes = this.sizeRepo.findAll();

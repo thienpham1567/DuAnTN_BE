@@ -25,16 +25,12 @@ public class DbUserAddress {
 	public Integer userAddressId;
 	
 	public Boolean isDefault;
-	
-	// ok
+
 	@ManyToOne
 	@JoinColumn(name = "AddressId")
 	public DbAddress address;
 	
-	// ok
 	@ManyToOne
 	@JoinColumn(name = "UserId")
 	public DbUser user;
-	
-	// done
 }

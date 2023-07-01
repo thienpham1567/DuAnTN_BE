@@ -57,7 +57,6 @@ public class DbProduct {
 	@JoinColumn(name = "CategoryId")
 	public DbCategory category;
 
-	// ok
 	@OneToMany(mappedBy = "product")
 	Collection<DbProductVariation> productVariations = new ArrayList<>();
 }

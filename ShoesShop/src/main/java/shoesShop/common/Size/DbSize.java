@@ -25,20 +25,15 @@ import shoesShop.common.ProductVariationSizes.DbProductVariationSize;
 @Entity
 @Table(name = "Sizes")
 public class DbSize implements Serializable{
-
-	private static final long serialVersionUID = 1L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer sizeId;
 	
 	public String value;
 	
-	// ok
 	@OneToMany(mappedBy = "size")
 	Collection<DbProductVariationSize> productVariationSizes = new ArrayList<>();
 	
-	// ok
 	@ManyToOne
 	@JoinColumn(name = "CategoryId")
 	public DbCategory category;
@@ -48,8 +43,4 @@ public class DbSize implements Serializable{
 		this.value = value;
 		this.category.categoryId = categoryId;
 	}
-
-	// done
-	
-	
 }

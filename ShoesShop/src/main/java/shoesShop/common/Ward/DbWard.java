@@ -30,22 +30,16 @@ public class DbWard {
 	public Integer wardId;
 	
 	public String name;
-	
 	public String prefix;
 	
-	// ok
 	@OneToMany(mappedBy = "ward") 
 	Collection<DbAddress> addresses = new ArrayList<>();
 	
-	// ok
 	@ManyToOne
 	@JoinColumn(name = "ProvinceId")
 	public DbProvince province;
 	
-	// ok
 	@ManyToOne
 	@JoinColumn(name = "DistrictId")
 	public DbDistrict district;
-	
-	// done
 }

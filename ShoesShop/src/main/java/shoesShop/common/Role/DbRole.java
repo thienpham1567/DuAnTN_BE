@@ -38,9 +38,6 @@ public class DbRole {
 	public String description;
 	public String code;
 	
-	// ok
 	@OneToMany(mappedBy = "role") 
 	Collection<DbUserRole> userRoles = new ArrayList<>();
-	
-	// done
 }
