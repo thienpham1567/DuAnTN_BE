@@ -30,6 +30,7 @@ public class DbSize implements Serializable{
 	public Integer sizeId;
 	
 	public String value;
+	public String code;
 	
 	@OneToMany(mappedBy = "size")
 	Collection<DbProductVariationSize> productVariationSizes = new ArrayList<>();

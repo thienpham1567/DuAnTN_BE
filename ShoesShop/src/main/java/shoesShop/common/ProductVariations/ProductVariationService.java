@@ -17,30 +17,42 @@ public class ProductVariationService extends RecordManager<ProductVariation> {
 
 	@Override
 	public Collection<ProductVariation> retrieveAll() {
-		Collection<ProductVariation> products = this.load(null, null, null).stream()
+		Collection<ProductVariation> products = this.load(null, null, null, null).stream()
 				.map(dbProduct -> this.converter.convertDbToModel(dbProduct)).collect(Collectors.toList());
 		return products;
 	}
 
 	public Collection<ProductVariation> retrieveAll(Integer brandId, Integer categoryId) {
-		Collection<ProductVariation> products = this.load(null, brandId, categoryId).stream()
+		Collection<ProductVariation> products = this.load(null, null, brandId, categoryId).stream()
 				.map(dbProduct -> this.converter.convertDbToModel(dbProduct)).collect(Collectors.toList());
 		return products;
 	}
 
 	@Override
 	public ProductVariation retrieveOne(Integer id) {
-		ProductVariation product = this.load(id, null, null).stream()
+		ProductVariation product = this.load(id, null, null, null).stream()
 				.map(dbProduct -> this.converter.convertDbToModel(dbProduct)).findFirst().get();
 		return product;
 	}
+	
+	public Collection<ProductVariation> retrieveProduct(Integer id) {
+		Collection<ProductVariation> products = this.load(null, id, null, null).stream()
+				.map(dbProduct -> this.converter.convertDbToModel(dbProduct)).collect(Collectors.toList());;
+		return products;
+	}
 
-	private Collection<DbProductVariation> load(Integer productVariationId, Integer brandId, Integer categoryId) {
+	private Collection<DbProductVariation> load(Integer productVariationId, Integer productId, Integer brandId, Integer categoryId) {
 		Collection<DbProductVariation> dbProductVariations = this.productVariationRepo.findAll();
 
 		if (productVariationId != null) {
 			dbProductVariations = dbProductVariations.stream()
 					.filter(dbProductVariation -> dbProductVariation.productVariationId == productVariationId)
+					.collect(Collectors.toList());
+		}
+		
+		if (productId != null) {
+			dbProductVariations = dbProductVariations.stream()
+					.filter(dbProductVariation -> dbProductVariation.product.productId == productId)
 					.collect(Collectors.toList());
 		}
 

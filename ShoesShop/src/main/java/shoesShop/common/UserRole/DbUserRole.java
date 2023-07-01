@@ -27,6 +27,11 @@ public class DbUserRole {
 		this.role = role;
 	}
 
+	public DbUserRole(Integer roleId, Integer userId) {
+		this.user.userId = userId;
+		this.role.roleId = roleId;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	public Integer userRoleId;

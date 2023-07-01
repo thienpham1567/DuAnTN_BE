@@ -14,7 +14,7 @@ public class ProductVariationSizeConverter implements IConverter<DbProductVariat
 
 	@Override
 	public ProductVariationSize convertDbToModel(DbProductVariationSize input) {
-		Size size = new Size(input.size.sizeId, input.size.value, categoryConverter.convertDbToModel(input.size.category));
+		Size size = new Size(input.size.sizeId, input.size.value, input.size.code, categoryConverter.convertDbToModel(input.size.category));
 		return input == null ? null : new ProductVariationSize(
 					input.productVariationSizeId,
 					input.quantity,

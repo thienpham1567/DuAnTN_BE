@@ -10,10 +10,7 @@ public abstract class RecordManager<T> implements IRecordManager<T> {
 	public T retrieveOne(Integer id) throws Exception {
 		throw new Exception();
 	}
-
-	public T retrieveOne(String id) throws Exception {
-		throw new Exception();
-	}
+	
 	public T create(T record) throws Exception {
 		throw new Exception();
 	}

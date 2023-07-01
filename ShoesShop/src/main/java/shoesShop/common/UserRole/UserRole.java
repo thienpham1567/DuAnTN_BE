@@ -15,6 +15,4 @@ public class UserRole {
 	Integer userRoleId;	
 	Integer userId;
 	Integer roleId;
-	
-	
 }

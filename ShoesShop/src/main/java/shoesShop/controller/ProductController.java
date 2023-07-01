@@ -22,11 +22,13 @@ public class ProductController {
 	ProductVariationService productVariationService;
 
 	@GetMapping
-	public ResponseEntity<Collection<ProductVariation>> retrieveAll(@RequestParam(name = "category", required = false) Integer categoryId, @RequestParam(name = "brand", required = false) Integer brandId){
+	public ResponseEntity<Collection<ProductVariation>> retrieveAll(@RequestParam(name = "category", required = false) Integer categoryId, @RequestParam(name = "brand", required = false) Integer brandId, @RequestParam(name = "productId", required = false) Integer productId){
 		Collection<ProductVariation> products = new ArrayList<>();
 		if (categoryId != null || brandId != null) {
 			products = this.productVariationService.retrieveAll(brandId, categoryId);
-		} else {
+		} else if (productId != null) {
+			products = this.productVariationService.retrieveProduct(productId);
+		} else {			
 			products = this.productVariationService.retrieveAll();
 		}
 		return new ResponseEntity<Collection<ProductVariation>>(products, HttpStatus.OK); 

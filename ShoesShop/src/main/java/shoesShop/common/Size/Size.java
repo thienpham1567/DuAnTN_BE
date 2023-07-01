@@ -10,5 +10,6 @@ import shoesShop.common.Category.Category;
 public class Size {
 	public Integer sizeId;
 	public String value;
+	public String code;
 	public Category category;
 }
