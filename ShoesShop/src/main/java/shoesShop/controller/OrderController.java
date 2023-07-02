@@ -1,31 +1,29 @@
-package shoesShop.controller;
-
-import java.util.ArrayList;
-import java.util.Collection;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import shoesShop.common.Order.Order;
+//package shoesShop.controller;
+//
+//import java.util.ArrayList;
+//import java.util.Collection;
+//
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.http.HttpStatus;
+//import org.springframework.http.ResponseEntity;
+//import org.springframework.web.bind.annotation.GetMapping;
+//import org.springframework.web.bind.annotation.PathVariable;
+//import org.springframework.web.bind.annotation.RequestMapping;
+//import org.springframework.web.bind.annotation.RequestParam;
+//import org.springframework.web.bind.annotation.RestController;
+//
 //import shoesShop.common.Cart.CartService;
 //import shoesShop.common.CartItem.CartItemService;
-import shoesShop.common.Order.OrderService;
-import shoesShop.common.OrderLine.OrderLine;
+//import shoesShop.common.Order.OrderService;
+//import shoesShop.common.OrderLine.OrderLine;
 //import shoesShop.common.OrderLine.OrderLineService;
-import shoesShop.common.ProductVariations.ProductVariation;
-
-@RestController
-@RequestMapping("api/v1/orders")
-public class OrderController {	
-	@Autowired
-	OrderService orderService;
-	
+//
+//@RestController
+//@RequestMapping("api/v1/orders")
+//public class OrderController {	
+//	@Autowired
+//	OrderService orderService;
+//	
 //	@Autowired
 //	OrderLineService orderLineService;
 //	 
@@ -34,7 +32,7 @@ public class OrderController {
 //	
 //	@Autowired
 //	CartItemService cartItemService ;
-
+//
 //	@GetMapping
 //	public ResponseEntity<Collection<OrderLine>> retrieveAll(@RequestParam(name = "productItem", required = false) Integer productItemId,
 //			   @RequestParam(name = "order", required = false) String orderId){
@@ -46,23 +44,17 @@ public class OrderController {
 //		}
 //		return new ResponseEntity<Collection<OrderLine>>(orders, HttpStatus.OK);
 //	}
-	
-	@GetMapping
-	public ResponseEntity<Collection<Order>> retrieveAll(){
-		Collection<Order> products = orderService.retrieveAll();
-		return new ResponseEntity<Collection<Order>>(products, HttpStatus.OK); 
-	}
-	
-	@GetMapping("{id}")
-	public ResponseEntity<Order> retrieveOne(@PathVariable("id") Integer id) throws Exception {
-		System.out.print(id);
-		Order order = orderService.retrieveOne(id);
-		if (order != null) {
-			return new ResponseEntity<Order>(order, HttpStatus.OK);
-		}
-
-		return new ResponseEntity<Order>(HttpStatus.NOT_FOUND);
-	}
-	
-
-}
+//	
+//	@GetMapping("{id}")
+//	public ResponseEntity<OrderLine> retrieveOne(@PathVariable("id") Integer id) {
+//		System.out.print(id);
+//		OrderLine order = orderLineService.retrieveOne(id);
+//		if (order != null) {
+//			return new ResponseEntity<OrderLine>(order, HttpStatus.OK);
+//		}
+//
+//		return new ResponseEntity<OrderLine>(HttpStatus.NOT_FOUND);
+//	}
+//	
+//
+//}
