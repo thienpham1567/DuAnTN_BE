@@ -5,9 +5,7 @@ import shoesShop.common.IConverter;
 import shoesShop.common.Role.RoleConverter;
 import shoesShop.common.User.UserConverter;
 
-
-
-public class UserRoleConverter implements ICombiner<DbUserRole>, IConverter<DbUserRole, UserRole>{
+public class UserRoleConverter implements ICombiner<DbUserRole>, IConverter<DbUserRole, UserRole> {
 
 	
 	UserConverter userConverter = new UserConverter();
@@ -15,10 +13,7 @@ public class UserRoleConverter implements ICombiner<DbUserRole>, IConverter<DbUs
 	
 	@Override
 	public DbUserRole convertModelToDb(UserRole input) {
-		return input == null ? null : new DbUserRole(
-				input.roleId,
-				input.userId
-				);
+		return input == null ? null : new DbUserRole(input.roleId, input.userId);
 	}
 
 	@Override
@@ -34,15 +29,11 @@ public class UserRoleConverter implements ICombiner<DbUserRole>, IConverter<DbUs
 
 	@Override
 	public void combine(DbUserRole original, DbUserRole update) {
-		
+
 //		original.userRoleId = update.userRoleId;
 //		original.user.userId = update.user.userId;
 //		original.role.roleId = update.role.roleId;
-		
-		
-		
-	}
 
-	
+	}
 
 }

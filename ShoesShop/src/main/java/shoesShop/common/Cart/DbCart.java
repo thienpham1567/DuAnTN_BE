@@ -25,20 +25,17 @@ public class DbCart {
 	public DbCart(String cartId) {
 		this.cartId = cartId;
 	}
+	
 	@Id
 	public String cartId;
 	
 	public Integer itemTotalQuantity;
 	public Double itemSubtotalPrice;
 	
-	// ok
 	@OneToMany(mappedBy = "cart")
 	Collection<DbCartItem> cartItems = new ArrayList<>();
 	
-	// ok
 	@ManyToOne
 	@JoinColumn(name = "UserId")
 	public DbUser user;
-	
-	// done
 }

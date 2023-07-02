@@ -21,7 +21,6 @@ import shoesShop.common.User.DbUser;
 @Entity
 @Table(name = "UserRoles")
 public class DbUserRole {
-	
 	public DbUserRole(Integer userRoleId, DbUser user, DbRole role) {
 		this.userRoleId = userRoleId;
 		this.user = user;
@@ -29,23 +28,19 @@ public class DbUserRole {
 	}
 
 	public DbUserRole(Integer roleId, Integer userId) {
-		// TODO Auto-generated constructor stub
-		
+		this.user.userId = userId;
+		this.role.roleId = roleId;
 	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
-	Integer userRoleId;
+	public Integer userRoleId;
 
-	// ok
 	@ManyToOne
 	@JoinColumn(name = "UserId") 
 	public DbUser user;
 
-	// ok
 	@ManyToOne
 	@JoinColumn(name = "RoleId") 
 	public DbRole role;
-	
-	// done
 }

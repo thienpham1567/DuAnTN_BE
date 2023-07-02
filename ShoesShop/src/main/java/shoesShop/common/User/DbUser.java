@@ -30,7 +30,6 @@ import shoesShop.common.UserRole.DbUserRole;
 @Entity
 @Table(name = "Users")
 public class DbUser {
-	
 	public DbUser(String password, String firstName, String lastName, String emailAddress, String phoneNumber) {
 		super();
 		this.password = password;
@@ -50,19 +49,15 @@ public class DbUser {
 	public String emailAddress;
 	public String phoneNumber;
 	
-	// ok
 	@OneToMany(mappedBy = "user") 
 	Collection<DbCart> carts = new ArrayList<>();
 	
-	// ok
 	@OneToMany(mappedBy = "user")
 	Collection<DbUserAddress> userAddress = new ArrayList<>();
 	
-	// ok
 	@OneToMany(mappedBy = "user")
 	Collection<DbOrder> orders = new ArrayList<DbOrder>();
 	
-	// ok
 	@OneToMany(mappedBy = "user")
 	Collection<DbUserRole> userRoles = new ArrayList<>();
 	

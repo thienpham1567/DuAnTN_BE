@@ -29,6 +29,4 @@ public class UserRole {
 		this.role = role;
 		this.roleId = roleId;
 	}
-	
-	
 }

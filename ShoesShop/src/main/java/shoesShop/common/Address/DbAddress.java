@@ -29,15 +29,11 @@ public class DbAddress {
 	public Integer addressId;
 	
 	public String address;
-	
-	// ok
+
 	@ManyToOne
 	@JoinColumn(name = "WardId")
 	public DbWard ward;
 	
-	// ok
 	@OneToMany(mappedBy = "address") 
 	Collection<DbUserAddress> addresses = new ArrayList<>(); 
-
-	// done
 }
