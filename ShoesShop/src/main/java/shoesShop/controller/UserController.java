@@ -73,6 +73,14 @@ public class UserController {
 		
 		return new ResponseEntity<Collection<User>>(users, HttpStatus.OK);
 	}
+//	@GetMapping
+//	public ResponseEntity<Collection<User>> getUserWithAdmin() throws Exception {
+//		Collection<User> users = new ArrayList<>();
+//		users = userService.retrieveUserAdmin(2);
+//		
+//		return new ResponseEntity<Collection<User>>(users, HttpStatus.OK);
+//	}
+
 	@GetMapping("email/{email}")
 	public ResponseEntity<User> findBy(@PathVariable("email") String email){
 		User user = userService.findByEmail(email);
@@ -80,6 +88,15 @@ public class UserController {
 			return new ResponseEntity<User>(user, HttpStatus.OK);
 		}
 		return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+	}
+	
+	@GetMapping("key/{key}")
+	public ResponseEntity<Collection<User>> findByKey(@PathVariable("key") String key){
+		Collection<User> users = userService.findKey(key);
+		if (users != null ) {
+			return new ResponseEntity<Collection<User>>(users, HttpStatus.OK);
+		}
+		return new ResponseEntity<Collection<User>>(users, HttpStatus.OK);
 	}
 	
 	@GetMapping("userid/{id}")

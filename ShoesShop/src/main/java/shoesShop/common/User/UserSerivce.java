@@ -1,6 +1,8 @@
 package shoesShop.common.User;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +13,12 @@ import shoesShop.common.RecordManager;
 import shoesShop.common.Product.DbProduct;
 import shoesShop.common.Product.Product;
 import shoesShop.common.Role.DbRole;
-
+import shoesShop.common.Role.IRoleRepository;
+import shoesShop.common.Role.Role;
+import shoesShop.common.Role.RoleConverter;
 import shoesShop.common.UserRole.DbUserRole;
 import shoesShop.common.UserRole.IUserRoleRepository;
+import shoesShop.common.UserRole.UserRoleConverter;
 import shoesShop.common.UserRole.UserRoleService;
 
 
@@ -23,19 +28,31 @@ public class UserSerivce extends RecordManager<User>{
 	private IUserRepository userRepo;
 	
 	UserConverter converter = new UserConverter();
-	
+	RoleConverter converterRole = new RoleConverter();
+	UserRoleConverter converterUserRole = new UserRoleConverter();
 	@Autowired
 	private IUserRoleRepository userRoleRepo;
-	
+	@Autowired
+	private IRoleRepository roleRepo;
 	@Autowired
 	private UserRoleService userRoleService;
-
+	
+	
 	@Override
 	public Collection<User> retrieveAll() throws Exception {
 		Collection<User> users = this.load(null).stream()
 				.map(dbUser -> this.converter.convertDbToModel(dbUser)).collect(Collectors.toList());
 		return users;
 	}
+	
+	
+	 public Collection<User> findKey(String key) {
+	        //Collection<DbUser> dbusers = userRepo.searchUsers(key);
+	        Collection<User> users = this.userRepo.searchUsers(key).stream().map(dbUser -> this.converter.convertDbToModel(dbUser)).collect(Collectors.toList());
+	    return users;
+	 }
+	
+	
 	public User findByEmail(String email){
 		User user = converter.convertDbToModel(userRepo.findByEmailAddress(email));
 		return user;

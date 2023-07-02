@@ -43,6 +43,8 @@ public class UserRoleController {
 		return new ResponseEntity<Collection<UserRole>>(userRoles, HttpStatus.OK);
 	}
 	
+	
+	
 	@GetMapping("{id}")
 	public ResponseEntity<UserRole> retrieveOne(@PathVariable("id") Integer id) throws Exception {
 		System.out.print(id+"");
