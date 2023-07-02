@@ -3,6 +3,7 @@ package shoesShop.common;
 import java.util.Collection;
 
 public abstract class RecordManager<T> implements IRecordManager<T> {
+	
 	public Collection<T> retrieveAll() throws Exception {
 		throw new Exception();
 	}

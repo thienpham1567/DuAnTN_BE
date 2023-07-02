@@ -1,5 +1,7 @@
 package shoesShop.common.ProductVariations;
 
-public interface IProductVariationRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface IProductVariationRepository extends JpaRepository<DbProductVariation, Integer>{
 
 }

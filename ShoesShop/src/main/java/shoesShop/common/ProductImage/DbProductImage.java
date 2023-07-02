@@ -30,18 +30,14 @@ public class DbProductImage implements Serializable{
 		this.isPrimary = isPrimary;
 	}
 
+	public String imageUrl;
+	public Boolean isPrimary;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer productImageld;
 	
-	// ok
 	@ManyToOne
 	@JoinColumn(name = "ProductVariationId")
 	public DbProductVariation productVariation;
-	
-	public String imageUrl;
-	
-	public Boolean isPrimary;
-	
-	// done
 }
