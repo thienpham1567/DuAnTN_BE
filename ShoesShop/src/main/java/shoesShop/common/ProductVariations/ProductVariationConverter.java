@@ -1,6 +1,7 @@
 package shoesShop.common.ProductVariations;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 import shoesShop.common.IConverter;
 import shoesShop.common.Color.ColorConverter;
@@ -28,10 +29,10 @@ public class ProductVariationConverter implements IConverter<DbProductVariation,
 	public ProductVariation convertDbToModel(DbProductVariation input) {
 		Collection<ProductVariationSize> pvss = input.productVariationSizes
 				.stream()
-				.map(pvs -> this.pvsConverter.convertDbToModel(pvs)).toList();
+				.map(pvs -> this.pvsConverter.convertDbToModel(pvs)).collect(Collectors.toList());
 		Collection<ProductImage> pis = input.productImages
 				.stream()
-				.map(pi -> this.piConverter.convertDbToModel(pi)).toList();
+				.map(pi -> this.piConverter.convertDbToModel(pi)).collect(Collectors.toList());
 		return input == null ? null : new ProductVariation(
 					input.productVariationId,
 					this.productConverter.convertDbToModel(input.product),

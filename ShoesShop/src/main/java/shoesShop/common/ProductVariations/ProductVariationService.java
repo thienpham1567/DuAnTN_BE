@@ -2,18 +2,20 @@ package shoesShop.common.ProductVariations;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import shoesShop.common.RecordManager;
 import shoesShop.common.Color.IColorRepository;
-import shoesShop.common.Product.DbProduct;
 import shoesShop.common.Product.IProductRepository;
-import shoesShop.common.Product.Product;
 
 @Service
 public class ProductVariationService extends RecordManager<ProductVariation> {
+	@Autowired
+	private IColorRepository colorRepo;
+	
+	@Autowired
+	private IProductRepository productRepo;
+	
 	@Autowired
 	private IProductVariationRepository productVariationRepo;
 
@@ -62,7 +64,7 @@ public class ProductVariationService extends RecordManager<ProductVariation> {
 	
 	public Collection<ProductVariation> retrieveProduct(Integer id) {
 		Collection<ProductVariation> products = this.load(null, id, null, null).stream()
-				.map(dbProduct -> this.converter.convertDbToModel(dbProduct)).collect(Collectors.toList());;
+				.map(dbProduct -> this.converter.convertDbToModel(dbProduct)).collect(Collectors.toList());
 		return products;
 	}
 
