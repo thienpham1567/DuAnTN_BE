@@ -11,9 +11,7 @@ import org.springframework.stereotype.Service;
 import shoesShop.common.RecordManager;
 import shoesShop.common.Brand.IBrandRepository;
 import shoesShop.common.Category.ICategoryRepository;
-import shoesShop.common.ProductVariations.DbProductVariation;
 import shoesShop.common.ProductVariations.IProductVariationRepository;
-import shoesShop.common.ProductVariations.ProductVariation;
 
 @Service
 public class ProductService extends RecordManager<Product> {
@@ -73,6 +71,7 @@ public class ProductService extends RecordManager<Product> {
 		return null;
 	}
 
+	/*--Delete product in Admin page--*/
 	@Override
 	public Boolean delete(Integer id) {
 		if (productRepo.existsById(id)) {

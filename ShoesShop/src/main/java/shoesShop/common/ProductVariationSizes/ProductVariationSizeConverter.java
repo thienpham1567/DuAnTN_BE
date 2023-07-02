@@ -1,15 +1,14 @@
 package shoesShop.common.ProductVariationSizes;
 
 import shoesShop.common.IConverter;
-import shoesShop.common.Color.Color;
-import shoesShop.common.ProductVariations.ProductVariation;
 import shoesShop.common.Size.Size;
 
 public class ProductVariationSizeConverter implements IConverter<DbProductVariationSize, ProductVariationSize>{
-	
 	@Override
 	public DbProductVariationSize convertModelToDb(ProductVariationSize input) {
-		return null;
+		return input == null ? null : new DbProductVariationSize(
+					input.productVariationSizeId
+				);
 	}
 
 	@Override

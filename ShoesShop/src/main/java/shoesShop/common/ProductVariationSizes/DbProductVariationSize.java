@@ -30,6 +30,11 @@ public class DbProductVariationSize implements Serializable{
  
 	private static final long serialVersionUID = 1L;
 
+	public DbProductVariationSize(Integer productVariationSizeId) {
+		super();
+		this.productVariationSizeId = productVariationSizeId;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer productVariationSizeId;

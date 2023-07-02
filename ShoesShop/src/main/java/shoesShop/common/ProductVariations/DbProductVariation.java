@@ -16,10 +16,8 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import shoesShop.common.Color.Color;
 import shoesShop.common.Color.DbColor;
 import shoesShop.common.Product.DbProduct;
-import shoesShop.common.Product.Product;
 import shoesShop.common.ProductImage.DbProductImage;
 import shoesShop.common.ProductVariationSizes.DbProductVariationSize;
 

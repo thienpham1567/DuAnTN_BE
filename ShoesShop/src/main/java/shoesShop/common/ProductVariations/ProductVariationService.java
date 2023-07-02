@@ -25,15 +25,11 @@ public class ProductVariationService extends RecordManager<ProductVariation> {
 	
 	private ProductVariationConverter converter = new ProductVariationConverter();
 	
+	/*--Get productVariation in Admin page--*/
 	@Override
 	public Collection<ProductVariation> retrieveAll() {
 		Collection<ProductVariation> products = this.load(null).stream().map(dbProduct -> this.converter.convertDbToModel(dbProduct)).toList();
 		return products;
-	}
-	
-	/*--Get productVariation in Admin page--*/
-	public Collection<DbProductVariation> findAll(){
-		return this.productVariationRepo.findAll();
 	}
 	
 	/*--Insert productVariation in Admin page--*/
@@ -44,6 +40,17 @@ public class ProductVariationService extends RecordManager<ProductVariation> {
 		dbProductVariation.product = this.productRepo.findById(productVariation.product.productId).get();
 		DbProductVariation createdProductVariation = this.productVariationRepo.save(dbProductVariation);
 		return this.converter.convertDbToModel(createdProductVariation);
+	}
+	
+	/*--Delete productVariation in Admin page--*/
+	@Override
+	public Boolean delete(Integer id) {
+		if (productVariationRepo.existsById(id)) {
+			this.productVariationRepo.deleteById(id);
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override

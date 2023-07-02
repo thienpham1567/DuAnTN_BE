@@ -6,12 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import shoesShop.common.Product.Product;
 import shoesShop.common.ProductVariations.ProductVariation;
 import shoesShop.common.ProductVariations.ProductVariationService;
 
@@ -34,5 +37,11 @@ public class ProductVariationAdminController {
 		if(productVariation == null || result.hasErrors())
 			return new ResponseEntity<ProductVariation>(HttpStatus.BAD_REQUEST);
 		return new ResponseEntity<ProductVariation>(this.productVariationService.create(productVariation), HttpStatus.CREATED);
+	}
+	
+	/*--Delete productVariation--*/
+	@DeleteMapping("{id}")
+	public ResponseEntity<ProductVariation> delete(@PathVariable("id") Integer id) throws Exception{
+		return this.productVariationService.delete(id) ? new ResponseEntity<ProductVariation>(HttpStatus.NO_CONTENT) : new ResponseEntity<ProductVariation>(HttpStatus.BAD_REQUEST);
 	}
 }
