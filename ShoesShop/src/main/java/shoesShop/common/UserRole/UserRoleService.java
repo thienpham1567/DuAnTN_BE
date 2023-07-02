@@ -37,6 +37,7 @@ public class UserRoleService extends RecordManager<UserRole>{
 		return userRole;
 	}
 
+
 	@Override
 	public UserRole create(UserRole userRole) throws Exception {
 		DbUserRole dbUserRole = this.converter.convertModelToDb(userRole);
@@ -71,6 +72,16 @@ public class UserRoleService extends RecordManager<UserRole>{
 			return true;
 		}
 
+		return false;
+	}
+	
+	public Boolean deleteByIdUser(Integer id){
+		if(this.userRoleRepo.findByUserId(id) != null) {
+			Collection<DbUserRole> dbuserRole = this.userRoleRepo.findByUserId(id);
+			this.userRoleRepo.deleteAll(dbuserRole);
+			return true;
+			
+		}
 		return false;
 	}
 	
