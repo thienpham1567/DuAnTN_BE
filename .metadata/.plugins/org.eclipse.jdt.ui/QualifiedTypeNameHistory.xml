@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="shoesShop.common.Color.ColorService"/>
+    <fullyQualifiedTypeName name="java.awt.Color"/>
+    <fullyQualifiedTypeName name="shoesShop.common.Color.Color"/>
+    <fullyQualifiedTypeName name="shoesShop.common.RecordManager"/>
+    <fullyQualifiedTypeName name="shoesShop.common.CartItem.ICartItemRepository"/>
+    <fullyQualifiedTypeName name="shoesShop.common.District.DbDistrict"/>
+    <fullyQualifiedTypeName name="shoesShop.common.Province.DbProvince"/>
+    <fullyQualifiedTypeName name="shoesShop.common.ICombiner"/>
+    <fullyQualifiedTypeName name="java.awt.image.ImageConsumer"/>
+    <fullyQualifiedTypeName name="shoesShop.common.IConverter"/>
+    <fullyQualifiedTypeName name="shoesShop.common.Cart.CartConverter"/>
+    <fullyQualifiedTypeName name="java.util.UUID"/>
+    <fullyQualifiedTypeName name="shoesShop.common.ProductItem.IProductItemRepository"/>
     <fullyQualifiedTypeName name="shoesShop.common.Product.Product"/>
     <fullyQualifiedTypeName name="shoesShop.common.Product.ProductConverter"/>
     <fullyQualifiedTypeName name="org.springframework.lang.Nullable"/>
@@ -37,7 +50,9 @@
     <fullyQualifiedTypeName name="shoesShop.common.Review.IReviewRepository"/>
     <fullyQualifiedTypeName name="java.util.stream.Collectors"/>
     <fullyQualifiedTypeName name="shoesShop.common.User.IUserRepository"/>
+    <fullyQualifiedTypeName name="shoesShop.common.ProductVariations.IProductVariationRepository"/>
     <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
+    <fullyQualifiedTypeName name="java.util.Collection"/>
     <fullyQualifiedTypeName name="com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer"/>
     <fullyQualifiedTypeName name="org.springframework.security.core.Authentication"/>
     <fullyQualifiedTypeName name="shoesShop.common.Review.DbReview"/>
@@ -45,19 +60,4 @@
     <fullyQualifiedTypeName name="shoesShop.common.User.User"/>
     <fullyQualifiedTypeName name="shoesShop.common.Product.ProductService"/>
     <fullyQualifiedTypeName name="java.time.format.DateTimeFormatter"/>
-    <fullyQualifiedTypeName name="shoesShop.common.ProductVariations.DbProductVariation"/>
-    <fullyQualifiedTypeName name="shoesShop.common.ProductVariations.IProductVariationRepository"/>
-    <fullyQualifiedTypeName name="shoesShop.common.ProductVariations.ProductVariationService"/>
-    <fullyQualifiedTypeName name="shoesShop.common.Color.IColorRepository"/>
-    <fullyQualifiedTypeName name="shoesShop.common.Product.IProductRepository"/>
-    <fullyQualifiedTypeName name="shoesShop.common.ProductVariationSizes.IProductVariationSizeRepository"/>
-    <fullyQualifiedTypeName name="shoesShop.common.ProductVariations.ProductVariation"/>
-    <fullyQualifiedTypeName name="shoesShop.common.ProductVariationSizes.ProductVariationSizeService"/>
-    <fullyQualifiedTypeName name="shoesShop.common.ProductVariationSizes.ProductVariationSize"/>
-    <fullyQualifiedTypeName name="java.util.Collection"/>
-    <fullyQualifiedTypeName name="shoesShop.common.RecordManager"/>
-    <fullyQualifiedTypeName name="shoesShop.common.ProductVariationSizes.ProductVariationSizeConverter"/>
-    <fullyQualifiedTypeName name="shoesShop.common.Size.SizeConverter"/>
-    <fullyQualifiedTypeName name="shoesShop.common.ProductVariations.ProductVariationConverter"/>
-    <fullyQualifiedTypeName name="shoesShop.common.Size.Size"/>
 </qualifiedTypeNameHistroy>
