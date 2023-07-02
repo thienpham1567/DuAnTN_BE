@@ -29,7 +29,6 @@ import org.springframework.web.bind.annotation.RestController;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import shoesShop.common.Brand.Brand;
-import shoesShop.common.ProductItem.ProductItem;
 import shoesShop.common.User.CustomUserDetails;
 import shoesShop.common.User.IUserRepository;
 import shoesShop.common.User.User;

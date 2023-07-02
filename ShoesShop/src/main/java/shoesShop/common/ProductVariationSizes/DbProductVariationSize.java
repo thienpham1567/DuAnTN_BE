@@ -25,34 +25,34 @@ import shoesShop.common.Size.DbSize;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "DbProductVariationSizes")
+@Table(name = "ProductVariationSizes")
 public class DbProductVariationSize implements Serializable{
  
 	private static final long serialVersionUID = 1L;
+
+	public DbProductVariationSize(Integer productVariationSizeId) {
+		super();
+		this.productVariationSizeId = productVariationSizeId;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer productVariationSizeId;
 	
-	// ok
-	@OneToMany(mappedBy = "ProductVariationSize")
+	@OneToMany(mappedBy = "productVariationSize")
 	Collection<DbOrderLine> orderLines = new ArrayList<>();
 	
-	// ok
 	@ManyToOne
 	@JoinColumn(name = "ProductVariationId")
 	public DbProductVariation productVariation;
 	
-	// ok
-	@OneToMany(mappedBy = "ProductVariationSize")
+	@OneToMany(mappedBy = "productVariationSize")
 	Collection<DbCartItem> cartItems = new ArrayList<>();
 	
-	// ok
 	@ManyToOne
 	@JoinColumn(name = "SizeId")
 	public DbSize size;
 	
-	public Integer qunatity;
-	
-	// done
+	public Integer quantity;
+
 }

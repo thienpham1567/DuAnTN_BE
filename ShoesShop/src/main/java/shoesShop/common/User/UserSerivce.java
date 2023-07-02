@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import shoesShop.common.RecordManager;
 import shoesShop.common.Product.DbProduct;
 import shoesShop.common.Product.Product;
+import shoesShop.common.Role.DbRole;
+import shoesShop.common.UserRole.DbUserRole;
+import shoesShop.common.UserRole.IUserRoleRepository;
 
 
 @Service
@@ -18,6 +21,9 @@ public class UserSerivce extends RecordManager<User>{
 	private IUserRepository userRepo;
 	
 	UserConverter converter = new UserConverter();
+	
+	@Autowired
+	private IUserRoleRepository userRoleRepo;
 
 	@Override
 	public Collection<User> retrieveAll() throws Exception {
@@ -46,6 +52,11 @@ public class UserSerivce extends RecordManager<User>{
 	    
 	    DbUser dbUser = this.converter.convertModelToDb(user);
 	    DbUser createdUser = this.userRepo.save(dbUser);
+	    DbUserRole dbUserRole = new DbUserRole();
+	    dbUserRole.setUser(createdUser); // Gán createdUser cho trường user trong dbUserRole
+	    dbUserRole.setRole(new DbRole()); // Khởi tạo đối tượng DbRole
+	    dbUserRole.getRole().setRoleId(1);
+	    DbUserRole createdUserRole = this.userRoleRepo.save(dbUserRole);
 	    return this.converter.convertDbToModel(createdUser);
 	}
 

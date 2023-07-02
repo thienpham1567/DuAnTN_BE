@@ -32,8 +32,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	RoleConverter roleConverter = new RoleConverter();
 	@Autowired
 	private IRoleRepository roleRepo;
+	
+	//Mã hoá mật 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userConverter.convertDbToModel(userRepo.findByEmailAddress(username));

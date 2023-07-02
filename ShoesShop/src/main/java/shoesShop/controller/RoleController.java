@@ -22,7 +22,7 @@ public class RoleController {
 		Collection<Role> roles = this.roleService.retrieveAll();
 		return new ResponseEntity<>(roles, HttpStatus.OK);
 	}
-
+	// test Postman oke 15/6
 	@GetMapping("{id}")
 	public ResponseEntity<Role> retrieveRole(@PathVariable Integer id) {
 		Role role = this.roleService.retrieveOne(id);
@@ -32,13 +32,13 @@ public class RoleController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-
+	// test Postman oke 15/6
 	@PostMapping
 	public ResponseEntity<Role> createRole(@RequestBody Role role) {
 		Role createdRole = this.roleService.create(role);
 		return new ResponseEntity<>(createdRole, HttpStatus.CREATED);
 	}
-
+	// test Postman oke 15/6
 	@PutMapping("{id}")
 	public ResponseEntity<Role> updateRole(@RequestBody Role role, @PathVariable Integer id) {
 		Role updatedRole = this.roleService.update(role, id);
@@ -48,7 +48,7 @@ public class RoleController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-
+	// test Postman oke 15/6
 	@DeleteMapping("{id}")
 	public ResponseEntity<Void> deleteRole(@PathVariable Integer id) {
 		Boolean deleted = this.roleService.delete(id);

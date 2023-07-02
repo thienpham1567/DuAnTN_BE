@@ -11,8 +11,7 @@ import org.springframework.stereotype.Service;
 import shoesShop.common.RecordManager;
 import shoesShop.common.Brand.IBrandRepository;
 import shoesShop.common.Category.ICategoryRepository;
-import shoesShop.common.ProductItem.DbProductItem;
-import shoesShop.common.ProductItem.ProductItem;
+import shoesShop.common.ProductVariations.IProductVariationRepository;
 
 @Service
 public class ProductService extends RecordManager<Product> {
@@ -24,6 +23,9 @@ public class ProductService extends RecordManager<Product> {
 
 	@Autowired
 	private ICategoryRepository categoryRepo;
+	
+	@Autowired
+	private IProductVariationRepository productVariationRepo;
 
 	ProductConverter converter = new ProductConverter();
 
@@ -41,12 +43,13 @@ public class ProductService extends RecordManager<Product> {
 		return product;
 	}
 
+	/*--Insert product--*/
 	@Override
 	public Product create(Product product) {
 		DbProduct dbProduct = this.converter.convertModelToDb(product);
 		dbProduct.createdAt = LocalDateTime.now();
-		dbProduct.brand = this.brandRepo.findById(product.brandId).get();
-		dbProduct.category = this.categoryRepo.findById(product.categoryId).get();
+		dbProduct.brand = this.brandRepo.findById(product.brand.brandId).get();
+		dbProduct.category = this.categoryRepo.findById(product.category.categoryId).get();
 		DbProduct createdProduct = this.productRepo.save(dbProduct);
 		return this.converter.convertDbToModel(createdProduct);
 	}
@@ -54,8 +57,9 @@ public class ProductService extends RecordManager<Product> {
 	@Override
 	public Product update(Product product, Integer id) {
 		DbProduct updateProduct = this.converter.convertModelToDb(product);
-		updateProduct.brand = this.brandRepo.findById(product.brandId).get();
-		updateProduct.category = this.categoryRepo.findById(product.categoryId).get();
+		updateProduct.brand = this.brandRepo.findById(product.brand.brandId).get();
+		updateProduct.category = this.categoryRepo.findById(product.category.categoryId).get();
+		updateProduct.updatedAt = LocalDateTime.now();
 
 		DbProduct dbProduct = this.productRepo.findById(id).get();
 		if (dbProduct != null) {
@@ -67,9 +71,10 @@ public class ProductService extends RecordManager<Product> {
 		return null;
 	}
 
+	/*--Delete product in Admin page--*/
 	@Override
 	public Boolean delete(Integer id) {
-		if (this.productRepo.existsById(id)) {
+		if (productRepo.existsById(id)) {
 			this.productRepo.deleteById(id);
 			return true;
 		}

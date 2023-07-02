@@ -29,6 +29,13 @@ import shoesShop.common.ProductVariationSizes.DbProductVariationSize;
 public class DbProductVariation implements Serializable{
 	private static final long serialVersionUID = 1L;
 
+	
+
+	public DbProductVariation(Integer productVariationId) {
+		super();
+		this.productVariationId = productVariationId;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer productVariationId;

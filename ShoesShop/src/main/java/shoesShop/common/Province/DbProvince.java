@@ -31,7 +31,7 @@ public class DbProvince {
 	
 	// ok
 	@OneToMany(mappedBy = "province")  
-	Collection<DbWard> wards = new ArrayList<>();  
+	Collection<DbWard> wards = new ArrayList<>();
 	
 	// ok
 	@OneToMany(mappedBy = "province")    

@@ -43,5 +43,13 @@ public class DbSize implements Serializable{
 	@JoinColumn(name = "CategoryId")
 	public DbCategory category;
 
+	public DbSize(String value, Integer categoryId) {
+		super();
+		this.value = value;
+		this.category.categoryId = categoryId;
+	}
+
 	// done
+	
+	
 }

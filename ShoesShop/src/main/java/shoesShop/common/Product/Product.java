@@ -1,36 +1,34 @@
 package shoesShop.common.Product;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import shoesShop.common.Brand.Brand;
+import shoesShop.common.Category.Category;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Product {
-	public Product(String name, String desciption, LocalDateTime updatedAt) {
-		this.name = name;
-		this.desciption = desciption;
-	}
-
 	// Properties
 	@NotEmpty
 	public String name;
+	public Double price;
+	public String sku;
 	@NotEmpty
-	public String desciption;
+	public String description;
+	public LocalDateTime createdAt;
+	public LocalDateTime updatedAt;
 
 	// Ids
 	public Integer productId;
 	@NotNull
-	public Integer brandId;
+	public Brand brand;
 	@NotNull
-	public Integer categoryId;
+	public Category category;
 }

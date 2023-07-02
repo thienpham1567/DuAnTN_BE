@@ -26,14 +26,14 @@ import shoesShop.common.User.DbUser;
 @Entity
 @Table(name = "Orders")
 public class DbOrder {
-	public DbOrder(String denormalizedAddress, Double orderTotalPrice, String orderAddress, String ordersStatus, String orderStatus) {
-		super();
-		this.denormalizedAddress = denormalizedAddress;
-		this.orderTotalPrice = orderTotalPrice;
-		this.orderAddress = orderAddress;
-		this.ordersStatus = ordersStatus;
-		this.orderStatus = orderStatus;
-	}
+//	public DbOrder(String denormalizedAddress, Double orderTotalPrice, String orderAddress, String ordersStatus, String orderStatus) {
+//		super();
+//		this.denormalizedAddress = denormalizedAddress;
+//		this.orderTotalPrice = orderTotalPrice;
+//		this.orderAddress = orderAddress;
+//		this.ordersStatus = ordersStatus;
+//		this.orderStatus = orderStatus;
+//	}
 
 	@Id
 	public String orderId;

@@ -20,7 +20,7 @@ import shoesShop.common.ProductVariations.DbProductVariation;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "ProductVariations")
+@Table(name = "ProductImages")
 public class DbProductImage implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -30,18 +30,14 @@ public class DbProductImage implements Serializable{
 		this.isPrimary = isPrimary;
 	}
 
+	public String imageUrl;
+	public Boolean isPrimary;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer productImageld;
 	
-	// ok
 	@ManyToOne
 	@JoinColumn(name = "ProductVariationId")
 	public DbProductVariation productVariation;
-	
-	public String imageUrl;
-	
-	public Boolean isPrimary;
-	
-	// done
 }
