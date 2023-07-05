@@ -34,7 +34,6 @@ public class OrderService extends RecordManager<Order>{
 	}
 
 
-
 	public Collection<Order> retrieveAll(Integer orderId, Integer userId) {
 		Collection<Order> products = this.load(null,userId).stream()
 				.map(dbProduct -> this.converter.convertDbToModel(dbProduct)).collect(Collectors.toList());
@@ -48,23 +47,10 @@ public class OrderService extends RecordManager<Order>{
 			dbOrders = dbOrders.stream().filter(dbOrder -> dbOrder.orderId == orderId)
 					.collect(Collectors.toList());
 		}
-
-//		if (brandId != null && categoryId != null) {
-//			return dbProducts = dbProducts.stream().filter(
-//					dbProduct -> dbProduct.brand.brandId == brandId && dbProduct.category.categoryId == categoryId)
-//					.collect(Collectors.toList());
-//		}
-
 		if (userId != null) {
 			dbOrders = dbOrders.stream().filter(dbOrder -> dbOrder.user.userId == userId)
 					.collect(Collectors.toList());
 		}
-
-//		if (categoryId != null) {
-//			dbProducts = dbProducts.stream().filter(dbProduct -> dbProduct.category.categoryId == categoryId)
-//					.collect(Collectors.toList());
-//		}
-
 		return dbOrders;
 	}
 }
