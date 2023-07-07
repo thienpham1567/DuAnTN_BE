@@ -10,13 +10,15 @@ import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import shoesShop.common.OrderLine.DbOrderLine;
+import shoesShop.common.OrderLine.OrderLine;
+//import shoesShop.common.OrderLine.OrderLine;
 import shoesShop.common.User.User;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Order {
-
 
 	// Properties
 	@NotEmpty
@@ -33,5 +35,5 @@ public class Order {
 	public String orderId;
 	@NotNull
 	public User user;
-
+	public Collection<OrderLine> orderLines;
 }

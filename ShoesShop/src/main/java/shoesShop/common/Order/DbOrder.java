@@ -34,6 +34,8 @@ public class DbOrder {
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 	}
+	
+	
 
 	@Id
 	public String orderId;
