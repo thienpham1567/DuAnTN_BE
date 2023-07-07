@@ -8,9 +8,13 @@ import org.springframework.stereotype.Service;
 
 import shoesShop.common.RecordManager;
 import shoesShop.common.Cart.ICartRepository;
+import shoesShop.common.Product.IProductRepository;
 import shoesShop.common.Product.ProductConverter;
+import shoesShop.common.ProductVariationSizes.IProductVariationSizeRepository;
 import shoesShop.common.ProductVariationSizes.ProductVariationSizeConverter;
+import shoesShop.common.Size.ISizeRepository;
 import shoesShop.common.Color.ColorConverter;
+import shoesShop.common.Color.IColorRepository;
 
 @Service
 public class CartItemService extends RecordManager<CartItem>{
@@ -20,10 +24,19 @@ public class CartItemService extends RecordManager<CartItem>{
 	@Autowired
 	ICartRepository cartRepo;
 	
+	@Autowired
+	IColorRepository colorRepo;
+	
+	@Autowired
+	IProductRepository productRepo;
+	
+	@Autowired
+	IProductVariationSizeRepository pvsRepo;
+	
+	@Autowired
+	ISizeRepository sizeRepo;
+	
 	private CartItemConverter converter = new CartItemConverter();
-	private ProductConverter productConverter = new ProductConverter();
-	private ColorConverter colorConverter = new ColorConverter();
-	private ProductVariationSizeConverter pvsConverter = new ProductVariationSizeConverter();
 	
 	public Collection<CartItem> retrieveAll() {
 		Collection<CartItem> cartItems = this.load(null,null).stream()
@@ -39,11 +52,13 @@ public class CartItemService extends RecordManager<CartItem>{
 
 	public CartItem create(CartItem record) { 
 		DbCartItem dbCartItem = this.converter.convertModelToDb(record);
+		dbCartItem.imageUrl = record.imageUrl;
+		dbCartItem.quantity = record.quantity;
 		dbCartItem.price = record.product.price * record.quantity;
-		dbCartItem.product = this.productConverter.convertModelToDb(record.product);
-		dbCartItem.color = this.colorConverter.convertModelToDb(record.color);
+		dbCartItem.product = this.productRepo.findById(record.product.productId).get();
+		dbCartItem.color = this.colorRepo.findById(record.color.colorId).get();
 		dbCartItem.cart = this.cartRepo.findById(record.cartId).get();
-		dbCartItem.productVariationSize = this.pvsConverter.convertModelToDb(record.productVariationSize);
+		dbCartItem.productVariationSize = this.pvsRepo.findById(record.productVariationSize.productVariationSizeId).get();
 		DbCartItem createdCartItem = this.cartItemRepo.save(dbCartItem);
 		return this.converter.convertDbToModel(createdCartItem);
 	}
@@ -53,7 +68,10 @@ public class CartItemService extends RecordManager<CartItem>{
 		if (dbCartItem != null) {			
 			DbCartItem updateCartItem = this.converter.convertModelToDb(record);
 			this.converter.combine(dbCartItem, updateCartItem);
-			updateCartItem.price = updateCartItem.product.price * updateCartItem.quantity;
+			dbCartItem.product = this.productRepo.findById(record.product.productId).get();
+			dbCartItem.color = this.colorRepo.findById(record.color.colorId).get();
+			dbCartItem.cart = this.cartRepo.findById(record.cartId).get();
+			dbCartItem.productVariationSize = this.pvsRepo.findById(record.productVariationSize.productVariationSizeId).get();
 			DbCartItem updateDbCartItem = this.cartItemRepo.save(dbCartItem);
 			return this.converter.convertDbToModel(updateDbCartItem);
 		}

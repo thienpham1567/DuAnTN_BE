@@ -22,9 +22,8 @@ import shoesShop.common.ProductVariationSizes.DbProductVariationSize;
 @Entity
 @Table(name = "CartItems")
 public class DbCartItem {
-	public DbCartItem(String cartId, Double price, Integer quantity, DbProduct product,
+	public DbCartItem(Double price, Integer quantity, DbProduct product,
 			DbColor color, DbProductVariationSize pvs) {
-		this.cart.cartId = cartId;
 		this.price = price;
 		this.quantity = quantity;
 		this.product = product;
@@ -32,6 +31,12 @@ public class DbCartItem {
 		this.productVariationSize = pvs;
 	}
 	
+	public DbCartItem(Double price, Integer quantity, String imageUrl) {
+		this.price = price;
+		this.quantity = quantity;
+		this.imageUrl = imageUrl;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer cartItemId;

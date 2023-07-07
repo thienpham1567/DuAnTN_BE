@@ -26,6 +26,7 @@ public class CartItem {
 	
 	public Double price;
 	public Integer quantity;
+	public String imageUrl;
 	
 	public Product product;
 	public Color color;

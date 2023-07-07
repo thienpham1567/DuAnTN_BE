@@ -66,13 +66,13 @@ public class CartService implements ICartService {
 
 	@Override
 	public Integer getTotalQuantity(String cartId) {
-		Collection<CartItem> items = this.cartItemService.retrieveAll();
+		Collection<CartItem> items = this.cartItemService.retrieveAll(cartId);
 		return items.stream().map(CartItem::getQuantity).reduce(0, Integer::sum);
 	}
 
 	@Override
 	public Double getSubTotalPrice(String cartId) {
-		Collection<CartItem> items = this.cartItemService.retrieveAll();
+		Collection<CartItem> items = this.cartItemService.retrieveAll(cartId);
 		return items.stream().map(CartItem::getPrice).reduce(0.0, Double::sum);
 	}
 	

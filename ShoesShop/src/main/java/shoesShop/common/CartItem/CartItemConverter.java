@@ -14,20 +14,14 @@ public class CartItemConverter implements ICombiner<DbCartItem>, IConverter<DbCa
 	
 	@Override
 	public void combine(DbCartItem original, DbCartItem update) {
-		original.price = update.price;
+		original.price = update.price * update.quantity;
 		original.quantity = update.quantity;
-		original.color = update.color;
-		original.product = update.product;
 		original.imageUrl = update.imageUrl;
-		original.productVariationSize = update.productVariationSize;
 	}
 	
 	@Override
 	public DbCartItem convertModelToDb(CartItem input) {
-		return input == null ? null : new DbCartItem(input.cartId ,input.price, input.quantity, 
-				this.productConverter.convertModelToDb(input.product), 
-				this.colorConverter.convertModelToDb(input.color), 
-				this.pvsConverter.convertModelToDb(input.productVariationSize));
+		return new DbCartItem(input.price,input.quantity, input.imageUrl);
 	}
 
 	@Override
@@ -37,6 +31,7 @@ public class CartItemConverter implements ICombiner<DbCartItem>, IConverter<DbCa
 				input.cart.cartId,
 				input.price,
 				input.quantity,
+				input.imageUrl,
 				this.productConverter.convertDbToModel(input.product),
 				this.colorConverter.convertDbToModel(input.color),
 				this.pvsConverter.convertDbToModel(input.productVariationSize)
