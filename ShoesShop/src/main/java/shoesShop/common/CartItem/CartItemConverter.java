@@ -14,8 +14,8 @@ public class CartItemConverter implements ICombiner<DbCartItem>, IConverter<DbCa
 	
 	@Override
 	public void combine(DbCartItem original, DbCartItem update) {
-		original.price = update.price * update.quantity;
-		original.quantity = update.quantity;
+		original.quantity = original.quantity + update.quantity;
+		original.price = original.quantity * update.price;
 		original.imageUrl = update.imageUrl;
 	}
 	
