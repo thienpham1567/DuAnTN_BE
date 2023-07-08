@@ -22,15 +22,6 @@ import shoesShop.common.ProductVariationSizes.DbProductVariationSize;
 @Entity
 @Table(name = "CartItems")
 public class DbCartItem {
-	public DbCartItem(Double price, Integer quantity, DbProduct product,
-			DbColor color, DbProductVariationSize pvs) {
-		this.price = price;
-		this.quantity = quantity;
-		this.product = product;
-		this.color = color;
-		this.productVariationSize = pvs;
-	}
-	
 	public DbCartItem(Double price, Integer quantity, String imageUrl) {
 		this.price = price;
 		this.quantity = quantity;
@@ -50,14 +41,10 @@ public class DbCartItem {
 	public DbCart cart;
 	
 	@ManyToOne
-	@JoinColumn(name = "ProductId")
-	public DbProduct product;
+	@JoinColumn(name = "ProductVariationSizeId")
+	public DbProductVariationSize productVariationSize;
 	
 	@ManyToOne
 	@JoinColumn(name = "ColorId")
 	public DbColor color;
-	
-	@ManyToOne
-	@JoinColumn(name = "ProductVariationSizeId")
-	public DbProductVariationSize productVariationSize;
 }

@@ -8,14 +8,13 @@ import shoesShop.common.Product.ProductConverter;
 import shoesShop.common.ProductVariationSizes.ProductVariationSizeConverter;
 
 public class CartItemConverter implements ICombiner<DbCartItem>, IConverter<DbCartItem, CartItem>{
-	private ProductConverter productConverter = new ProductConverter();
-	private ColorConverter colorConverter = new ColorConverter();
 	private ProductVariationSizeConverter pvsConverter = new ProductVariationSizeConverter();
+	private ColorConverter colorConverter = new ColorConverter();
 	
 	@Override
 	public void combine(DbCartItem original, DbCartItem update) {
 		original.quantity = original.quantity + update.quantity;
-		original.price = original.quantity * update.price;
+		original.price = original.quantity * original.productVariationSize.productVariation.product.price;
 		original.imageUrl = update.imageUrl;
 	}
 	
@@ -32,9 +31,8 @@ public class CartItemConverter implements ICombiner<DbCartItem>, IConverter<DbCa
 				input.price,
 				input.quantity,
 				input.imageUrl,
-				this.productConverter.convertDbToModel(input.product),
-				this.colorConverter.convertDbToModel(input.color),
-				this.pvsConverter.convertDbToModel(input.productVariationSize)
+				this.pvsConverter.convertDbToModel(input.productVariationSize),
+				this.colorConverter.convertDbToModel(input.color)
 			);
 	}
 }

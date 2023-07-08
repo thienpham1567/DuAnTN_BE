@@ -20,12 +20,15 @@ public class CartService implements ICartService {
 
 	private CartConverter cartConverter = new CartConverter();
 	
-	private HashMap<Integer, CartItem> cartItems = new HashMap<>();
+	private HashMap<String, CartItem> cartItems = new HashMap<>();
 
 	@Override
 	public Cart add(String cartId, CartItem cartItem) {
 		String newCartId = this.createCart(cartId);
-		if (cartItems.containsKey(cartItem.cartItemId)) {
+		String keyCartItem = cartItem.productVariationSize.productVariationSizeId + "" + cartItem.color.value;
+		if (cartItems.containsKey(keyCartItem)) {
+			System.out.print(cartItem.productVariationSize.productVariationSizeId);
+			System.out.print(cartItem.color.colorId);
 			return this.update(cartId ,cartItem);
 		}else {
 			Cart cart;
@@ -38,7 +41,7 @@ public class CartService implements ICartService {
 				cartItem = this.cartItemService.create(cartItem);
 				cart = this.cartConverter.convertDbToModel(this.updateCart(newCartId));
 			}
-			this.cartItems.put(cartItem.cartItemId, cartItem);
+			this.cartItems.put(cartItem.productVariationSize.productVariationSizeId + "" + cartItem.color.value, cartItem);
 			return cart;
 		}
 	}
@@ -46,14 +49,14 @@ public class CartService implements ICartService {
 	@Override
 	public Cart remove(String cartId, Integer cartItemId) {
 		CartItem item = this.cartItemService.retrieveOne(cartItemId);
-		this.cartItems.remove(item.cartItemId);
+		this.cartItems.remove(item.cartId);
 		this.cartItemService.delete(item.cartItemId);
 		return this.cartConverter.convertDbToModel(this.updateCart(cartId));
 	}
 
 	@Override
 	public Cart update(String cartId, CartItem cartItem) {
-		this.cartItemService.update(cartItem, cartItem.cartItemId);
+		this.cartItemService.update(cartItem);
 		return this.cartConverter.convertDbToModel(this.updateCart(cartId));
 	}
 
