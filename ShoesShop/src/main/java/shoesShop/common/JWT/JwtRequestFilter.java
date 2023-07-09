@@ -45,6 +45,7 @@ public class JwtRequestFilter extends OncePerRequestFilter{
 			
 			try {
 				email = jwtTokenProvider.getEmailFromJWT(jwtToken);
+				
 			} catch (IllegalArgumentException e) {
 				System.out.println("Unable to get JWT Token");
 			} catch (ExpiredJwtException e) {
@@ -70,6 +71,9 @@ public class JwtRequestFilter extends OncePerRequestFilter{
                 
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
 
+			}else {
+				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // Đặt mã trạng thái 401 Unauthorized
+	            response.getWriter().write("Unauthorized");
 			}
 		}
 		chain.doFilter(request, response);

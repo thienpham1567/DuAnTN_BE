@@ -29,11 +29,11 @@ public class EmailController {
 	@PostMapping("/send-email/{email}")
     public void sendEmail(@PathVariable("email") String email) throws Exception {
 		String newPassword = UUID.randomUUID().toString();
-	
+		
 		User user = this.userService.findByEmail(email);
 		String encodPass =  passwordEncoder.encode(newPassword);
 		user.setPassword(encodPass);
-		//this.userService.update(user, user.userId);
+		this.userService.update(user, user.userId);
 		
         String to = email;
         String subject ="Mat khau moi";

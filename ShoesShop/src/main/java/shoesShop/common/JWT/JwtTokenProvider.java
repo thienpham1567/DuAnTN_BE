@@ -84,6 +84,10 @@ public class JwtTokenProvider {
 	  //validate token
 	    public Boolean validateToken(String token, UserDetails userDetails) {
 	        final String username = getEmailFromJWT(token);
+	        Date dateToken = getExpirationDateFromToken(token);
+	        if(username == null && dateToken.before(dateToken)) {
+	        	System.out.println("The current date is before the expiration date.");
+	        }
 	        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
 	    }
 

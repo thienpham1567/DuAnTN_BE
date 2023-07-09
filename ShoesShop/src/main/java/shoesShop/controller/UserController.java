@@ -121,7 +121,7 @@ public class UserController {
         User userss = userService.findByEmail(email);
         boolean isMatch = passwordEncoder.matches(password,userss.password);
         if (!isMatch) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Sai tên đăng nhập hoặc mật khẩu!");
+           return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Sai tên đăng nhập hoặc mật khẩu!");
         }
 
         // Nếu thông tin đăng nhập hợp lệ, trả về token JWT
@@ -133,10 +133,7 @@ public class UserController {
         Claims claims = jwtTokenProvider.getAllClaimsFromToken(token);
         boolean ckeckTKExp = jwtTokenProvider.isTokenExpired(token);
         
-        System.out.println(ckeckTKExp);
-        System.out.println(claims);
-        System.out.println(date.toString());
-        System.out.println(id);
+
         return ResponseEntity.ok(token);
     }
 	
