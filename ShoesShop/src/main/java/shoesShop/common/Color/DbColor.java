@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import shoesShop.common.CartItem.DbCartItem;
 import shoesShop.common.Product.DbProduct;
 import shoesShop.common.ProductVariations.DbProductVariation;
 
@@ -38,7 +39,9 @@ public class DbColor implements Serializable{
 	// ok
 	@OneToMany(mappedBy = "color")
 	Collection<DbProductVariation> productVariations = new ArrayList<>();
-
+	
+	@OneToMany(mappedBy = "color")
+	Collection<DbCartItem> cartItems = new ArrayList<>();
 
 	// done
 }

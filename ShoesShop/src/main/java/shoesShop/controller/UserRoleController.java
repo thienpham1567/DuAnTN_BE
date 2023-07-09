@@ -1,10 +1,7 @@
 package shoesShop.controller;
 
-import java.util.ArrayList;
 import java.util.Collection;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import shoesShop.common.Brand.Brand;
-import shoesShop.common.Role.Role;
 import shoesShop.common.Role.RoleService;
 import shoesShop.common.UserRole.UserRole;
 import shoesShop.common.UserRole.UserRoleService;

@@ -22,10 +22,17 @@ import shoesShop.common.User.DbUser;
 @Entity
 @Table(name = "Carts")
 public class DbCart {
+	public DbCart(String cartId, Double itemSubtotalPrice, Integer itemTotalQuantity, DbUser user) {
+		this.cartId = cartId;
+		this.itemTotalQuantity = itemTotalQuantity;
+		this.itemSubtotalPrice = itemSubtotalPrice;
+		this.user = user;
+	}
+	
 	public DbCart(String cartId) {
 		this.cartId = cartId;
 	}
-	
+
 	@Id
 	public String cartId;
 	

@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import shoesShop.common.CartItem.CartItem;
+import shoesShop.common.User.User;
 
 @Data
 @AllArgsConstructor
@@ -17,5 +18,6 @@ public class Cart {
 	public Integer itemTotalQuantity;
 	public Double itemSubtotalPrice;
 	
-	Collection<CartItem> cartItems = new ArrayList<>();
+	public User user;
+	public Collection<CartItem> cartItems = new ArrayList<>();
 }
