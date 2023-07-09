@@ -33,7 +33,7 @@ public class OrderLineService  extends RecordManager<OrderLine> {
 	@Override
 	public Collection<OrderLine> retrieveAll() {
 		Collection<OrderLine> orderLines = this.load(null, null).stream()
-				.map(dbOrderLine -> this.converter.convertDbToModel(dbOrderLine)).toList();
+				.map(dbOrderLine -> this.converter.convertDbToModel(dbOrderLine)).collect(Collectors.toList());
 		return orderLines;
 	}
 

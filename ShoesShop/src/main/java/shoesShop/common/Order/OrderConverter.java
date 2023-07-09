@@ -40,7 +40,7 @@ public class OrderConverter  implements ICombiner<DbOrder>, IConverter<DbOrder, 
 	public Order convertDbToModel(DbOrder input) {
 		Collection<OrderLine> orderLine = input.orderLines
 				.stream()
-				.map(or -> this.orderLineConverter.convertDbToModel(or)).toList();
+				.map(or -> this.orderLineConverter.convertDbToModel(or)).collect(Collectors.toList());
 		return input == null ? null : new Order(
 					input.denormalizedAddress,
 					input.orderTotalPrice,
