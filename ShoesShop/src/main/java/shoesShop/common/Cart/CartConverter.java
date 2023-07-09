@@ -1,5 +1,7 @@
 package shoesShop.common.Cart;
 
+import java.util.stream.Collectors;
+
 import shoesShop.common.ICombiner;
 import shoesShop.common.IConverter;
 import shoesShop.common.CartItem.CartItem;
@@ -28,6 +30,6 @@ public class CartConverter implements ICombiner<DbCart>, IConverter<DbCart, Cart
 		return input == null ? null
 				: new Cart(input.cartId, input.itemTotalQuantity, input.itemSubtotalPrice,
 						this.userConverter.convertDbToModel(input.user), input.cartItems.stream()
-								.map(cartItem -> this.cartItemConverter.convertDbToModel(cartItem)).toList());
+								.map(cartItem -> this.cartItemConverter.convertDbToModel(cartItem)).collect(Collectors.toList());
 	}
 }
