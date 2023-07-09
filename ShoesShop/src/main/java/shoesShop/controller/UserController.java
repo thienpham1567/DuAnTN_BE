@@ -15,11 +15,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestBody;ß
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import io.jsonwebtoken.Claims;
-import shoesShop.common.JWT.JwtTokenProvider;
+import shoesShop.common.JWT.JwtTokenProvider;ß
+import shoesShop.common.User.ChangeUserPassword;
 import shoesShop.common.User.CustomUserDetails;
 import shoesShop.common.User.IUserRepository;
 import shoesShop.common.User.User;
@@ -152,4 +153,26 @@ public class UserController {
 	public ResponseEntity<User> delete(@PathVariable("id") Integer id) throws Exception {
 		return this.userService.delete(id) ? new ResponseEntity<User>(HttpStatus.NO_CONTENT) : new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
 	}
+	
+	@PostMapping("/changepassword/{id}")
+	public ResponseEntity<User> update(@PathVariable("id") Integer id, @RequestBody ChangeUserPassword  pass, BindingResult result) throws Exception {
+		if (pass== null ||result.hasErrors()) {
+			return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
+		}
+		User updateUser = this.userService.retrieveOne(id);
+		boolean isMatch = passwordEncoder.matches(pass.getOldPassword(),updateUser.getPassword());
+		
+		if (!isMatch) {
+			return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
+        }
+		String encodPass =  passwordEncoder.encode(pass.getNewPassword());
+		updateUser.setPassword(encodPass);
+		User updatedUser = this.userService.update(updateUser, id);
+
+		return updatedUser != null
+				? new ResponseEntity<User>(updatedUser, HttpStatus.OK)
+				: new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
+	}
+	
+	
 }

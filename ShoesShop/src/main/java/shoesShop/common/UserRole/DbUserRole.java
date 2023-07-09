@@ -28,8 +28,7 @@ public class DbUserRole {
 	}
 
 	public DbUserRole(Integer roleId, Integer userId) {
-		this.user.userId = userId;
-		this.role.roleId = roleId;
+
 	}
 
 	@Id
