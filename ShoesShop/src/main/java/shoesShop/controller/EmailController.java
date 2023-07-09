@@ -33,7 +33,7 @@ public class EmailController {
 		User user = this.userService.findByEmail(email);
 		String encodPass =  passwordEncoder.encode(newPassword);
 		user.setPassword(encodPass);
-		//this.userService.update(user, user.userId);
+		this.userService.update(user, user.userId);
 		
         String to = email;
         String subject ="Mat khau moi";
