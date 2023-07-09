@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import shoesShop.common.Cart.Cart;
 import shoesShop.common.Order.Order;
+import shoesShop.common.ProductVariationSizes.ProductVariationSize;
 
 @Data
 @AllArgsConstructor
@@ -17,7 +18,9 @@ public class OrderLine {
 	// Properties
 	public Double price;
 	public Integer quantity;
-	public String orderId;
 	// Ids
 	public Integer orderLineId;
+	
+	//public Order order;
+	//public ProductVariationSize productVariationSize;
 }
