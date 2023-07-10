@@ -34,6 +34,16 @@ public class DbProductVariationSize implements Serializable{
 		super();
 		this.productVariationSizeId = productVariationSizeId;
 	}
+	
+	
+
+	public DbProductVariationSize(Integer productVariationSizeId, Integer quantity) {
+		super();
+		this.productVariationSizeId = productVariationSizeId;
+		this.quantity = quantity;
+	}
+
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

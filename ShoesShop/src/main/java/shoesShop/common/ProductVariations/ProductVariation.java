@@ -14,6 +14,9 @@ import shoesShop.common.ProductVariationSizes.ProductVariationSize;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductVariation {
+	public ProductVariation(Integer productVariationId, Product product, Color color) {
+		this.productVariationId = productVariationId;
+	}
 	public Integer productVariationId;
 	public Product product;
 	public Color color;
