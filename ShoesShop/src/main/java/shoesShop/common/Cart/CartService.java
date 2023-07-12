@@ -79,6 +79,13 @@ public class CartService implements ICartService {
 		return items.stream().map(CartItem::getPrice).reduce(0.0, Double::sum);
 	}
 	
+	public Cart retriveCart(String cartId) { 
+		DbCart dbCart = this.cartRepo.findById(cartId).get();
+		dbCart.itemSubtotalPrice = this.getSubTotalPrice(dbCart.cartId);
+		dbCart.itemTotalQuantity = this.getTotalQuantity(dbCart.cartId);
+		return this.cartConverter.convertDbToModel(dbCart);
+	}
+	
 	private DbCart updateCart(String cartId) {
 		DbCart dbCart = this.cartRepo.findById(cartId).get();
 		dbCart.itemSubtotalPrice = this.getSubTotalPrice(dbCart.cartId);
