@@ -5,7 +5,6 @@ import shoesShop.common.IConverter;
 import shoesShop.common.Category.CategoryConverter;
 import shoesShop.common.Color.Color;
 import shoesShop.common.Color.ColorConverter;
-import shoesShop.common.Product.DbProduct;
 import shoesShop.common.Product.Product;
 import shoesShop.common.Product.ProductConverter;
 import shoesShop.common.ProductVariations.ProductVariation;
