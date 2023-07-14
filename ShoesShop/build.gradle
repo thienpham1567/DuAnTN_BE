@@ -34,6 +34,26 @@ dependencies {
 	implementation group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.2'
 	implementation group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.2'
 	implementation 'org.springframework.security:spring-security-core:5.5.1'
+	
+	//Test libs
+	testImplementation 'junit:junit:4.12'
+	implementation 'commons-beanutils:commons-beanutils:1.9.4'
+	implementation 'org.apache.poi:poi:5.2.2'
+	implementation 'org.apache.poi:poi-ooxml:5.2.2'
+	
+	
+	// https://mvnrepository.com/artifact/org.testng/testng
+testImplementation group: 'org.testng', name: 'testng', version: '7.7.0'
+	
+	
+	implementation 'org.seleniumhq.selenium:selenium-java:4.9.0'
+	
+	implementation 'io.github.bonigarcia:webdrivermanager:5.1.1'
+
+	
+	
+	
+	
 }
 
 tasks.named('test') {
