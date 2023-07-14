@@ -27,8 +27,6 @@ public class CartService implements ICartService {
 		String newCartId = this.createCart(cartId);
 		String keyCartItem = cartItem.productVariationSize.productVariationSizeId + "" + cartItem.color.value;
 		if (cartItems.containsKey(keyCartItem)) {
-			System.out.print(cartItem.productVariationSize.productVariationSizeId);
-			System.out.print(cartItem.color.colorId);
 			return this.update(cartId ,cartItem);
 		}else {
 			Cart cart;

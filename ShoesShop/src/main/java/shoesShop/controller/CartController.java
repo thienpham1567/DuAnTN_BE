@@ -23,7 +23,7 @@ public class CartController {
 	CartService cartService;
 	
 	@GetMapping
-	public ResponseEntity<Cart> retrieveCart(@RequestParam(name = "cartId", required = true) String cartId) {
+	public ResponseEntity<Cart> retrieveCart(@RequestParam(name = "cartId") String cartId) {
 		Cart cart = this.cartService.retriveCart(cartId);
 		return new ResponseEntity<Cart>(cart, HttpStatus.OK);
 	}
