@@ -1,7 +1,5 @@
 package shoesShop.controller;
 
-import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import shoesShop.common.Cart.Cart;
 import shoesShop.common.Cart.CartService;
 import shoesShop.common.CartItem.CartItem;
-import shoesShop.common.CartItem.CartItemService;
 
 @RestController
 @RequestMapping("api/v1/cart")
@@ -25,13 +22,10 @@ public class CartController {
 	@Autowired
 	CartService cartService;
 	
-	@Autowired
-	CartItemService cartItemService;
-	
 	@GetMapping
-	public ResponseEntity<Collection<CartItem>> retrieveCart(@RequestParam(name = "cart", required = false) String cartId) {
-		Collection<CartItem> cartItems = this.cartItemService.retrieveAll(cartId);
-		return new ResponseEntity<Collection<CartItem>>(cartItems, HttpStatus.OK);
+	public ResponseEntity<Cart> retrieveCart(@RequestParam(name = "cartId") String cartId) {
+		Cart cart = this.cartService.retriveCart(cartId);
+		return new ResponseEntity<Cart>(cart, HttpStatus.OK);
 	}
 	
 	@PostMapping("/update")
@@ -41,7 +35,7 @@ public class CartController {
 	}
 	
 	@DeleteMapping("/remove/{cartId}")
-	public ResponseEntity<Cart> removeProductToCart(@PathVariable String cartId, @RequestParam(name = "cartItem", required = true) Integer cartItemId) {
+	public ResponseEntity<Cart> removeProductToCart(@PathVariable String cartId, @RequestParam(name = "cartItemId", required = true) Integer cartItemId) {
 		Cart updatedCart = this.cartService.remove(cartId, cartItemId);
 		return new ResponseEntity<Cart>(updatedCart, HttpStatus.OK);
 	}
