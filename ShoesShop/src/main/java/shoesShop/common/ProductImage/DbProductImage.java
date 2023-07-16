@@ -29,6 +29,15 @@ public class DbProductImage implements Serializable{
 		this.imageUrl = imageUrl;
 		this.isPrimary = isPrimary;
 	}
+	
+
+	public DbProductImage(String imageUrl, Boolean isPrimary, Integer productImageld) {
+		super();
+		this.imageUrl = imageUrl;
+		this.isPrimary = isPrimary;
+		this.productImageld = productImageld;
+	}
+
 
 	public String imageUrl;
 	public Boolean isPrimary;
