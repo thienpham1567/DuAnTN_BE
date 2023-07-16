@@ -29,13 +29,9 @@ public class DbProvince {
 	public String name;
 	public String code;
 	
-	// ok
 	@OneToMany(mappedBy = "province")  
 	Collection<DbWard> wards = new ArrayList<>();
 	
-	// ok
 	@OneToMany(mappedBy = "province")    
 	Collection<DbDistrict> districts = new ArrayList<>();
-	
-	// done
 }
