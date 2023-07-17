@@ -1,5 +1,6 @@
 package shoesShop.common.ProductVariationSizes;
 
+import shoesShop.common.ICombiner;
 import shoesShop.common.IConverter;
 import shoesShop.common.Category.CategoryConverter;
 import shoesShop.common.Color.Color;
@@ -9,16 +10,24 @@ import shoesShop.common.Product.ProductConverter;
 import shoesShop.common.ProductVariations.ProductVariation;
 import shoesShop.common.Size.Size;
 
-public class ProductVariationSizeConverter implements IConverter<DbProductVariationSize, ProductVariationSize>{
+public class ProductVariationSizeConverter implements ICombiner<DbProductVariationSize>, IConverter<DbProductVariationSize, ProductVariationSize>{
 	private CategoryConverter categoryConverter = new CategoryConverter();
 	private ColorConverter colorConverter = new ColorConverter();
 	private ProductConverter productConverter = new ProductConverter();
 	
+	@Override
+	public void combine(DbProductVariationSize original, DbProductVariationSize update) {
+		original.productVariationSizeId = update.productVariationSizeId;
+		original.quantity = update.quantity;
+		original.productVariation = update.productVariation;
+		original.size = update.size;
+	}
 	
 	@Override
 	public DbProductVariationSize convertModelToDb(ProductVariationSize input) {
 		return input == null ? null : new DbProductVariationSize(
-					input.productVariationSizeId
+					input.productVariationSizeId,
+					input.quantity
 				);
 	}
 

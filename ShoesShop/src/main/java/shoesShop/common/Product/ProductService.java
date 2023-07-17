@@ -54,6 +54,7 @@ public class ProductService extends RecordManager<Product> {
 		return this.converter.convertDbToModel(createdProduct);
 	}
 
+	/*--Update product in Admin page--*/
 	@Override
 	public Product update(Product product, Integer id) {
 		DbProduct updateProduct = this.converter.convertModelToDb(product);

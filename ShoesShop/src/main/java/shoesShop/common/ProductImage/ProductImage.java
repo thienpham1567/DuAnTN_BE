@@ -9,8 +9,8 @@ import shoesShop.common.ProductVariations.ProductVariation;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductImage {
-	public Integer productImageId;
+	public Integer productImageld;
 	public String imageUrl;
 	public Boolean isPrimary;
-//	public ProductVariation productVariation;
+	public ProductVariation productVariation;
 }

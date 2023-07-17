@@ -27,8 +27,6 @@ public class CartService implements ICartService {
 		String newCartId = this.createCart(cartId);
 		String keyCartItem = cartItem.productVariationSize.productVariationSizeId + "" + cartItem.color.value;
 		if (cartItems.containsKey(keyCartItem)) {
-			System.out.print(cartItem.productVariationSize.productVariationSizeId);
-			System.out.print(cartItem.color.colorId);
 			return this.update(cartId ,cartItem);
 		}else {
 			Cart cart;
@@ -77,6 +75,13 @@ public class CartService implements ICartService {
 	public Double getSubTotalPrice(String cartId) {
 		Collection<CartItem> items = this.cartItemService.retrieveAll(cartId);
 		return items.stream().map(CartItem::getPrice).reduce(0.0, Double::sum);
+	}
+	
+	public Cart retriveCart(String cartId) { 
+		DbCart dbCart = this.cartRepo.findById(cartId).get();
+		dbCart.itemSubtotalPrice = this.getSubTotalPrice(dbCart.cartId);
+		dbCart.itemTotalQuantity = this.getTotalQuantity(dbCart.cartId);
+		return this.cartConverter.convertDbToModel(dbCart);
 	}
 	
 	private DbCart updateCart(String cartId) {
