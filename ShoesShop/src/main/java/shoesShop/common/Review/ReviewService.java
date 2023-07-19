@@ -26,8 +26,16 @@ public class ReviewService extends RecordManager<Review> {
 	
 	@Override
 	public Collection<Review> retrieveAll() {
-		Collection<Review> reviews = this.load(null)
+		Collection<Review> reviews = this.load(null, null)
 				.stream().map(dbReivew -> this.converter.convertDbToModel(dbReivew))
+				.collect(Collectors.toList());
+		return reviews;
+	}
+
+	/*--Lấy tất cả review thuộc mã sản phẩm--*/
+	public Collection<Review> getReviewByProductVariationId(Integer productVariationId) {
+		Collection<Review> reviews = this.load(null, productVariationId)
+				.stream().map(dbReview -> this.converter.convertDbToModel(dbReview))
 				.collect(Collectors.toList());
 		return reviews;
 	}
@@ -42,10 +50,12 @@ public class ReviewService extends RecordManager<Review> {
 		return this.converter.convertDbToModel(createdReview);
 	}
 	
-	private Collection<DbReview> load(Integer reviewId){
+	private Collection<DbReview> load(Integer reviewId, Integer productVariationId){
 		Collection<DbReview> dbReviews = this.reviewRepo.findAll();
 		if(reviewId != null)
 			dbReviews = dbReviews.stream().filter(dbReview -> dbReview.reviewId == reviewId).collect(Collectors.toList());
+		if(productVariationId != null)
+			dbReviews = dbReviews.stream().filter(dbReview -> dbReview.productVariation.productVariationId == productVariationId).collect(Collectors.toList());
 		return dbReviews;
 	}
 	
@@ -57,4 +67,6 @@ public class ReviewService extends RecordManager<Review> {
 		}
 		return false;
 	}
+	
+
 }
