@@ -43,7 +43,7 @@ public class ReviewService extends RecordManager<Review> {
 	@Override
 	public Review create(Review review) throws Exception {
 		DbReview dbReview = this.converter.convertModelToDb(review);
-		dbReview.user = this.userRepo.findById(review.getUserId()).get();
+		dbReview.user = this.userRepo.findById(review.user.userId).get();
 		dbReview.productVariation = this.productVariationRepo.findById(review.getProductVariationId()).get();
 		dbReview.createdAt = LocalDateTime.now();
 		DbReview createdReview = this.reviewRepo.save(dbReview);

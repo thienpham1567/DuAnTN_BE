@@ -47,7 +47,7 @@ public class DbReview implements Serializable{
 
 	
 
-	public DbReview(Integer userId, Integer productVariationId, String content, Integer rateStar,
+	public DbReview(Integer productVariationId, String content, Integer rateStar,
 			LocalDateTime createdAt) {
 		this.content = content;
 		this.rateStar = rateStar;
