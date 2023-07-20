@@ -33,6 +33,7 @@ public class JwtTokenProvider {
 	        // Lấy thông tin người dùng và tạo chuỗi JSON cho thông tin đó
 	        Map<String, Object> claims = new HashMap();
 	        claims.put("email", user.getUsername());
+	        claims.put("userId", user.getUserId());
 	        claims.put("fullName", user.getFullName());
 	        claims.put("phoneNumber", user.getPhoneNumber());
 	        claims.put("roles", user.getAuthorities());

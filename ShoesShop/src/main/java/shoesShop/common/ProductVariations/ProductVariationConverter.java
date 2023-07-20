@@ -10,6 +10,8 @@ import shoesShop.common.ProductImage.ProductImage;
 import shoesShop.common.ProductImage.ProductImageConverter;
 import shoesShop.common.ProductVariationSizes.ProductVariationSize;
 import shoesShop.common.ProductVariationSizes.ProductVariationSizeConverter;
+import shoesShop.common.Review.Review;
+import shoesShop.common.Review.ReviewConverter;
 
 public class ProductVariationConverter implements IConverter<DbProductVariation, ProductVariation>{
 
@@ -17,6 +19,7 @@ public class ProductVariationConverter implements IConverter<DbProductVariation,
 	private ProductImageConverter piConverter = new ProductImageConverter();
 	private ColorConverter colorConverter = new ColorConverter();
 	private ProductConverter productConverter = new ProductConverter();
+	private ReviewConverter reviewConverter = new ReviewConverter();
 
 	@Override
 	public DbProductVariation convertModelToDb(ProductVariation input) {
@@ -33,12 +36,16 @@ public class ProductVariationConverter implements IConverter<DbProductVariation,
 		Collection<ProductImage> pis = input.productImages
 				.stream()
 				.map(pi -> this.piConverter.convertDbToModel(pi)).collect(Collectors.toList());
+		Collection<Review> reviews = input.reviews
+				.stream()
+				.map(re -> this.reviewConverter.convertDbToModel(re)).collect(Collectors.toList());
 		return input == null ? null : new ProductVariation(
 					input.productVariationId,
 					this.productConverter.convertDbToModel(input.product),
 					this.colorConverter.convertDbToModel(input.color),
 					pvss,
-					pis
+					pis,
+					reviews
 				);
 	}
 
