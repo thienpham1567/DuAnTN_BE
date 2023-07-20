@@ -26,12 +26,12 @@ public class OrderService extends RecordManager<Order>{
 		return orders;
 	}
 
-	@Override
-	public Order retrieveOne(String id) {
-		Order order = this.load(id, null).stream()
-				.map(dbProduct -> this.converter.convertDbToModel(dbProduct)).findFirst().get();
-		return order;
-	}
+//	@Override
+//	public Order retrieveOne(String id) {
+//		Order order = this.load(id, null).stream()
+//				.map(dbProduct -> this.converter.convertDbToModel(dbProduct)).findFirst().get();
+//		return order;
+//	}
 
 
 	public Collection<Order> retrieveAll(Integer orderId, Integer userId) {
