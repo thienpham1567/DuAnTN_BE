@@ -29,10 +29,9 @@ public class DbAddress {
 	public Integer addressId;
 	
 	public String address;
-
-	@ManyToOne
-	@JoinColumn(name = "WardId")
-	public DbWard ward;
+	public String ward;
+	public String district;
+	public String province;
 	
 	@OneToMany(mappedBy = "address") 
 	Collection<DbUserAddress> addresses = new ArrayList<>(); 

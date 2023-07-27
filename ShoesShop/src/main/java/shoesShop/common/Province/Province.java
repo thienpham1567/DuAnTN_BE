@@ -15,8 +15,4 @@ public class Province {
 	public Integer provinceId;
 	public String name;
 	public String code;
-	
-	public Collection<Ward> wards;
-	
-	public Collection<District> districts;
 }
