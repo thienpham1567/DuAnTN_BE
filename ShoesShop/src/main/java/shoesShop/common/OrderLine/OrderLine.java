@@ -15,6 +15,7 @@ public class OrderLine {
 		this.price = price;
 		this.quantity = quantity;
 	}
+	
 	// Properties
 	public Double price;
 	public Integer quantity;

@@ -39,5 +39,4 @@ public class OrderLineConverter implements ICombiner<DbOrderLine>, IConverter<Db
 				);
 	}
 
-
 }
