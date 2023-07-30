@@ -9,6 +9,7 @@ import shoesShop.common.Color.Color;
 import shoesShop.common.Product.Product;
 import shoesShop.common.ProductImage.ProductImage;
 import shoesShop.common.ProductVariationSizes.ProductVariationSize;
+import shoesShop.common.Review.Review;
 
 @Data
 @AllArgsConstructor
@@ -25,4 +26,5 @@ public class ProductVariation {
 	public Color color;
 	public Collection<ProductVariationSize> productVariationSizes;
 	public Collection<ProductImage> productImages;
+	public Collection<Review> reviews;
 }
