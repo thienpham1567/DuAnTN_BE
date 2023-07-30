@@ -20,6 +20,7 @@ import shoesShop.common.Color.DbColor;
 import shoesShop.common.Product.DbProduct;
 import shoesShop.common.ProductImage.DbProductImage;
 import shoesShop.common.ProductVariationSizes.DbProductVariationSize;
+import shoesShop.common.Review.DbReview;
 
 @Data
 @AllArgsConstructor
@@ -53,4 +54,7 @@ public class DbProductVariation implements Serializable{
 
 	@OneToMany(mappedBy = "productVariation")
 	Collection<DbProductImage> productImages = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "productVariation")
+	Collection<DbReview> reviews = new ArrayList<>();
 }

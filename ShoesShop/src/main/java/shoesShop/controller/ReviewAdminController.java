@@ -18,8 +18,8 @@ import shoesShop.common.Review.Review;
 import shoesShop.common.Review.ReviewService;
 
 @RestController
-@RequestMapping("api/v1/reviews")
-public class ReviewController {
+@RequestMapping("api/v1/admin/reviews")
+public class ReviewAdminController {
 	@Autowired
 	ReviewService reviewService;
 	

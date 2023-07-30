@@ -1,6 +1,15 @@
 package shoesShop.common.Order;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+@Repository
 public interface IOrderRepository extends JpaRepository<DbOrder, String> {
+	// Thống kê Top 5 khách hàng
+	@Query(value = "select count(o.order_id), concat(u.first_name, ' ', u.last_name) from orders o inner join users u on o.user_id = u.user_id "
+			+ "group by (concat(u.first_name, ' ', u.last_name))", nativeQuery = true)
+	List<Object[]> getReportTopUser();
 }

@@ -28,6 +28,7 @@ public class OrderLineService  extends RecordManager<OrderLine> {
 
 	OrderLineConverter converter = new OrderLineConverter();
 	
+	// Thống kê nhản hiệu bán chạy.
 	
 	
 	@Override
