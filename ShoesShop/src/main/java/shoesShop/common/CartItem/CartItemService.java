@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import shoesShop.common.RecordManager;
 import shoesShop.common.Cart.ICartRepository;
-import shoesShop.common.Product.IProductRepository;
+import shoesShop.common.Product.IProductRepositoryService;
 import shoesShop.common.Product.ProductConverter;
 import shoesShop.common.ProductVariationSizes.DbProductVariationSize;
 import shoesShop.common.ProductVariationSizes.IProductVariationSizeRepository;
