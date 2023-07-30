@@ -11,7 +11,7 @@ public class ProvinceConverter implements IConverter<DbProvince, Province>{
 
 	@Override
 	public Province convertDbToModel(DbProvince input) {
-		return null;
+		return input == null ? null : new Province(input.provinceId, input.name, input.code);
 	}
 	
 }

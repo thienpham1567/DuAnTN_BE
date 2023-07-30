@@ -1,12 +1,8 @@
 package shoesShop.common.Province;
 
-import java.util.Collection;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import shoesShop.common.District.District;
-import shoesShop.common.Ward.Ward;
 
 @Data
 @AllArgsConstructor
