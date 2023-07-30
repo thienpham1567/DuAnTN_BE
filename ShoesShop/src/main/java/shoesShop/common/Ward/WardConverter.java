@@ -11,7 +11,7 @@ public class WardConverter implements IConverter<DbWard, Ward>{
 
 	@Override
 	public Ward convertDbToModel(DbWard input) {
-		return null;
+		return input == null ? null : new Ward(input.wardId, input.name, input.prefix, input.district.districtId, input.province.provinceId);
 	}
 	
 }
