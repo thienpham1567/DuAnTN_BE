@@ -46,11 +46,14 @@ public class PaymentController {
 	            // Chuyển hướng người dùng đến URL thanh toán PayPal
 	            return ResponseEntity.ok().body(redirectUrl);
 	        } else {
+	        	// tạo 1 payload chứa các trường thông tin để trả về cho frontend
 	            return ResponseEntity.badRequest().body("Không tạo được thông tin thanh toán");
 	        }
 	    } catch (PayPalRESTException e) {
 	        e.printStackTrace();
 	        return ResponseEntity.status(500).body("Lỗi trong quá trình xử lý thanh toán");
 	    }
+	    
+	    
 	}
 }

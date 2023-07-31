@@ -32,6 +32,12 @@ public class OrderController {
 		return new ResponseEntity<Collection<Order>>(products, HttpStatus.OK); 
 	}
 	
+	@GetMapping("/byuserid")
+	public ResponseEntity<Collection<Order>> retrieveAll(@RequestParam(name = "userId", required = false) Integer userId){
+		Collection<Order> products = orderService.retrieveAll(userId);
+		return new ResponseEntity<Collection<Order>>(products, HttpStatus.OK); 
+	}
+	
 	@GetMapping("{id}")
 	public ResponseEntity<Order> retrieveOne(@PathVariable("id") Integer id) throws Exception {
 		System.out.print(id);
