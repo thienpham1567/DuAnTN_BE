@@ -4,8 +4,11 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import shoesShop.common.RecordManager;
 
+@Service
 public class ProvinceService extends RecordManager<Province>{
 	@Autowired
 	IProvinceRepository provinceRepo;
