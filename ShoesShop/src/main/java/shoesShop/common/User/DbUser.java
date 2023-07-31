@@ -15,10 +15,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import shoesShop.common.Cart.DbCart;
+import shoesShop.common.Favorite.DbFavorite;
 import shoesShop.common.Order.DbOrder;
 import shoesShop.common.Review.DbReview;
 import shoesShop.common.UserAddress.DbUserAddress;
@@ -63,7 +66,10 @@ public class DbUser {
 	
 	@OneToMany(mappedBy = "user")
 	Collection<DbReview> reviews = new ArrayList<>();
-
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "user")
+	Collection<DbFavorite> favorites; 
 	// done
 }	
 	
