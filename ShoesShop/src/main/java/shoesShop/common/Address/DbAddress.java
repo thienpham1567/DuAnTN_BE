@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -16,7 +14,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import shoesShop.common.UserAddress.DbUserAddress;
-import shoesShop.common.Ward.DbWard;
 
 @Data
 @AllArgsConstructor
@@ -24,6 +21,13 @@ import shoesShop.common.Ward.DbWard;
 @Entity
 @Table(name = "Addresses")
 public class DbAddress {
+	public DbAddress(String address, String ward, String district, String province) {
+		this.address = address;
+		this.ward = ward;
+		this.district = district;
+		this.province = province;
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer addressId;
