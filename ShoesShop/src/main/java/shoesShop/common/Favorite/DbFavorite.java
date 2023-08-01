@@ -23,28 +23,29 @@ import shoesShop.common.User.DbUser;
 @Entity
 @Table(name = "Favorites")
 public class DbFavorite {
+	
 	public DbFavorite(Integer favoriteId) {
 		this.favoriteId = favoriteId;
 	}
 
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+		
+	public Integer favoriteId;
+	@ManyToOne
+	@JoinColumn(name = "UserId")
+	public DbUser user;
 	
-public Integer favoriteId;
-@ManyToOne
-@JoinColumn(name = "UserId")
-public DbUser user;
+	@ManyToOne
+	@JoinColumn(name = "ProductVariationId")
+	public DbProductVariation productVariation;
+	
+	
+	public LocalDateTime vieweddate;
+	
+	public Boolean isliked;
 
-@ManyToOne
-@JoinColumn(name = "ProductVariationId")
-public DbProductVariation productVariation;
-
-
-public LocalDateTime vieweddate;
-
-public Boolean isliked;
-
-public LocalDateTime likedDate;
+	public LocalDateTime likedDate;
 
 
 }
