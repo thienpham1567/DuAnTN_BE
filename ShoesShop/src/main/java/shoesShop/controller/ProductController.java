@@ -48,6 +48,7 @@ public class ProductController {
 	@Autowired
 	UserSerivce userService;
 	
+	//Thư viện tự cấu hình để giải mã token để lấy trạng thái user đang login
 	@Autowired
 	private JwtTokenProvider jwt;
 
