@@ -37,21 +37,6 @@ public class OrderConverter  implements ICombiner<DbOrder>, IConverter<DbOrder, 
 	}
 
 	@Override
-//	public Order convertDbToModel(DbOrder input) {
-//		Collection<OrderLine> orderLine = input.orderLines
-//				.stream()
-//				.map(or -> this.orderLineConverter.convertDbToModel(or)).collect(Collectors.toList());
-//		return input == null ? null : new Order(
-//					input.denormalizedAddress,
-//					input.orderTotalPrice,
-//					input.ordersStatus,
-//					input.createdAt,
-//					input.updatedAt,
-//					input.orderId,
-//					this.userConverter.convertDbToModel(input.user),
-//					orderLine
-//			);
-//	}
 	public Order convertDbToModel(DbOrder input) {
 		return input == null ? null
 				: new Order(

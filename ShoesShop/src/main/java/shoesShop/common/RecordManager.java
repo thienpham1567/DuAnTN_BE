@@ -26,4 +26,7 @@ public abstract class RecordManager<T> implements IRecordManager<T> {
 	public T retrieveOne(String id) throws Exception {
 		throw new Exception();
 	}
+	public T update(T record, String id) throws Exception {
+		throw new Exception();
+	}
 }
