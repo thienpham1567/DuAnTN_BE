@@ -44,7 +44,7 @@ public class AddressService extends RecordManager<Address>{
 		if (dbAddress != null) {
 			this.converter.combine(dbAddress, updateAddress);
 			DbAddress updateDbAddress = this.addressRepo.save(dbAddress);
-			return this.converter.convertDbToModel(updateAddress);
+			return this.converter.convertDbToModel(updateDbAddress);
 		}
 		return null;
 	}
