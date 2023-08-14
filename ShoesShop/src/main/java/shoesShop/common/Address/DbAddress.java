@@ -7,13 +7,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import shoesShop.common.District.DbDistrict;
+import shoesShop.common.Province.DbProvince;
+import shoesShop.common.User.DbUser;
 import shoesShop.common.UserAddress.DbUserAddress;
+import shoesShop.common.Ward.DbWard;
 
 @Data
 @AllArgsConstructor
@@ -21,21 +27,23 @@ import shoesShop.common.UserAddress.DbUserAddress;
 @Entity
 @Table(name = "Addresses")
 public class DbAddress {
-	public DbAddress(String address, String ward, String district, String province) {
-		this.address = address;
-		this.ward = ward;
-		this.district = district;
-		this.province = province;
-	}
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer addressId;
 	
 	public String address;
-	public String ward;
-	public String district;
-	public String province;
+	
+	@ManyToOne
+	@JoinColumn(name = "WardId")
+	public DbWard ward;
+	
+	@ManyToOne
+	@JoinColumn(name = "DistrictId")
+	public DbDistrict district;
+	
+	@ManyToOne
+	@JoinColumn(name = "ProvinceId")
+	public DbProvince province;
 	
 	@OneToMany(mappedBy = "address") 
 	Collection<DbUserAddress> addresses = new ArrayList<>(); 

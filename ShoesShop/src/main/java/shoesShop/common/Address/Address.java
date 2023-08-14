@@ -3,6 +3,9 @@ package shoesShop.common.Address;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import shoesShop.common.District.District;
+import shoesShop.common.Province.Province;
+import shoesShop.common.Ward.Ward;
 
 @Data
 @AllArgsConstructor
@@ -10,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class Address {
 	public Integer addressId;
 	public String address;
-	public String ward;
-	public String district;
-	public String province;
+	public Ward ward;
+	public District district;
+	public Province province;
 }
