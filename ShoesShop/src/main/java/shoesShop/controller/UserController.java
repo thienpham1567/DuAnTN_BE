@@ -132,6 +132,10 @@ public class UserController {
     	if (user == null || result.hasErrors()) {
 			return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
 		}
+    	User userCheck = userService.findByEmail(user.emailAddress);
+    	if(userCheck != null) {
+			return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
+    	}
 
 		return new ResponseEntity<User>(this.userService.create(user), HttpStatus.CREATED);
 	}
