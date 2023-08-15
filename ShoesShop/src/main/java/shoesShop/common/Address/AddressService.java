@@ -9,11 +9,26 @@ import org.springframework.stereotype.Service;
 import shoesShop.common.RecordManager;
 import shoesShop.common.Brand.Brand;
 import shoesShop.common.Brand.DbBrand;
+import shoesShop.common.District.DbDistrict;
+import shoesShop.common.District.IDistrictRepository;
+import shoesShop.common.Province.DbProvince;
+import shoesShop.common.Province.IProvinceRepository;
+import shoesShop.common.Ward.DbWard;
+import shoesShop.common.Ward.IWardRepository;
 
 @Service
 public class AddressService extends RecordManager<Address>{
 	@Autowired
 	IAddressRepository addressRepo;
+
+	@Autowired
+	IWardRepository wardRepo;
+	
+	@Autowired
+	IDistrictRepository districtRepo;
+	
+	@Autowired
+	IProvinceRepository provinceRepo;
 	
 	private AddressConverter converter = new AddressConverter();
 	
@@ -32,7 +47,10 @@ public class AddressService extends RecordManager<Address>{
 	
 	@Override
 	public Address create(Address address) throws Exception {
-		DbAddress dbAddress = this.converter.convertModelToDb(address);
+		DbAddress dbAddress = new DbAddress();
+		DbWard dbWard = this.wardRepo.findById(address.wardId).get();
+		DbDistrict dbDistrict = this.districtRepo.findById(address.districtId).get();
+		DbProvince dbProvince = this.provinceRepo.findById(address.provinceId).get();
 		DbAddress createdAddress = this.addressRepo.save(dbAddress);
 		return this.converter.convertDbToModel(createdAddress);
 	}

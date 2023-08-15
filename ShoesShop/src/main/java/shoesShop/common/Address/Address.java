@@ -13,7 +13,7 @@ import shoesShop.common.Ward.Ward;
 public class Address {
 	public Integer addressId;
 	public String address;
-	public Ward ward;
-	public District district;
-	public Province province;
+	public Integer wardId;
+	public Integer districtId;
+	public Integer provinceId;
 }

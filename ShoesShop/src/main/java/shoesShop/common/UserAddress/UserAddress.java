@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserAddress {
-	public boolean isDefault;
 	public Integer userAddressId;
-	public Integer address;
+	public boolean isDefault;
+	public Integer addressId;
 	public Integer userId;
 }
