@@ -15,23 +15,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import shoesShop.common.OrderLine.IReportByBrandService;
+import shoesShop.common.Product.IProductInventoryService;
 
 
 @CrossOrigin("*")
 @RestController
-public class ReportByBrandController {
+public class ProductInventoryController {
 	@Autowired
-	IReportByBrandService reportByBrandsService;
+	IProductInventoryService productInventoryService;
 	
 	/*--Get report by brand in Admin page--*/
-	@GetMapping("/api/v1/admin/report-by-brands")
-	public ResponseEntity<?> getReportByBrands(){
-		List<Object[]> result = reportByBrandsService.getReportByBrands();
+	@GetMapping("/api/v1/admin/product-inventory")
+	public ResponseEntity<?> getProductInventory(){
+		List<Object[]> result = productInventoryService.getProductInventory();
 		List<Map<String, Object>> response = new ArrayList<>();
 		for(Object[] row : result) {
 			Map<String, Object> item = new HashMap<>();
-			item.put("quantity", row[0]);
-			item.put("name", row[1]);
+			item.put("name", row[0]);
+			item.put("quantity", row[1]);
+			item.put("color", row[2]);
+			item.put("size", row[3]);
 			response.add(item);			
 		}
 		return ResponseEntity.ok(response);
