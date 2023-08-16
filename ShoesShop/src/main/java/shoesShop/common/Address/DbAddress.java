@@ -27,6 +27,10 @@ import shoesShop.common.Ward.DbWard;
 @Entity
 @Table(name = "Addresses")
 public class DbAddress {
+	public DbAddress(String address) {
+		this.address = address;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer addressId;

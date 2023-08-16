@@ -29,35 +29,38 @@ public class UserAddressService extends RecordManager<UserAddress> {
 	
 	@Override
 	public Collection<UserAddress> retrieveAll() {
-		Collection<UserAddress> userAddresses = this.load(null).stream().map(dbUserAddress -> this.converter.convertDbToModel(dbUserAddress))
+		Collection<UserAddress> userAddresses = this.load(null, null).stream().map(dbUserAddress -> this.converter.convertDbToModel(dbUserAddress))
 				.collect(Collectors.toList());
 		return userAddresses;
 	}
 
 	@Override
 	public UserAddress retrieveOne(Integer id) throws Exception {
-		UserAddress userAddress = this.load(id).stream().map(dbUserAddress -> this.converter.convertDbToModel(dbUserAddress)).findFirst().get();
+		UserAddress userAddress = this.load(id, null).stream().map(dbUserAddress -> this.converter.convertDbToModel(dbUserAddress)).findFirst().get();
 		return userAddress;
 	}
 	
 	@Override
-	public UserAddress create(UserAddress userAdress) throws Exception {
-		DbUserAddress dbUserAddress = new DbUserAddress();
-		DbAddress dbAddress = this.addressRepo.findById(userAdress.addressId).get();
-		DbUser dbUser = this.userRepo.findById(userAdress.userId).get();
+	public UserAddress create(UserAddress userAddress) throws Exception {
+		DbUserAddress dbUserAddress = this.converter.convertModelToDb(userAddress);
+		DbAddress dbAddress = this.addressRepo.findById(userAddress.addressId).get();
+		DbUser dbUser = this.userRepo.findById(userAddress.userId).get();
 		dbUserAddress.address = dbAddress;
 		dbUserAddress.user = dbUser;
-		dbUserAddress.isDefault = userAdress.isDefault;
 		DbUserAddress createdUserAddress = this.userAddressRepo.save(dbUserAddress);
 		return this.converter.convertDbToModel(createdUserAddress);
 	}
 
 	@Override
 	public UserAddress update(UserAddress userAddress, Integer id) throws Exception {
-		DbUserAddress updateUserAddress = this.converter.convertModelToDb(userAddress);
+		DbUserAddress updatedUserAddress = this.converter.convertModelToDb(userAddress);
+		DbAddress dbAddress = this.addressRepo.findById(userAddress.addressId).get();
+		DbUser dbUser = this.userRepo.findById(userAddress.userId).get();
+		updatedUserAddress.address = dbAddress;
+		updatedUserAddress.user = dbUser;
 		DbUserAddress dbUserAddress = this.userAddressRepo.findById(id).get();
 		if (dbUserAddress != null) {
-			this.converter.combine(dbUserAddress, updateUserAddress);
+			this.converter.combine(dbUserAddress, updatedUserAddress);
 			DbUserAddress updateDbUserAddress = this.userAddressRepo.save(dbUserAddress);
 			return this.converter.convertDbToModel(updateDbUserAddress);
 		}
@@ -73,11 +76,20 @@ public class UserAddressService extends RecordManager<UserAddress> {
 		return false;
 	}
 	
-	private Collection<DbUserAddress> load(Integer userAddressId) {
+	public Collection<UserAddress> retrieveByUser(Integer userId) throws Exception {
+		Collection<UserAddress> userAddresses = this.load(null, userId).stream().map(dbUserAddress -> this.converter.convertDbToModel(dbUserAddress)).collect(Collectors.toList());;
+		return userAddresses;
+	}
+	
+	private Collection<DbUserAddress> load(Integer userAddressId, Integer userId) {
 		Collection<DbUserAddress> dbUserAddresses = this.userAddressRepo.findAll();
 
 		if (userAddressId != null) {
 			dbUserAddresses = dbUserAddresses.stream().filter(dbUserAddress -> dbUserAddress.userAddressId == userAddressId).collect(Collectors.toList());
+		}
+		
+		if (userId != null) {
+			dbUserAddresses = dbUserAddresses.stream().filter(dbUserAddress -> dbUserAddress.user.userId == userId).collect(Collectors.toList());
 		}
 
 		return dbUserAddresses;

@@ -18,7 +18,7 @@ public class UserAddressConverter implements ICombiner<DbUserAddress>, IConverte
 
 	@Override
 	public DbUserAddress convertModelToDb(UserAddress input) {
-		return null;
+		return input == null ? null : new DbUserAddress(input.isDefault);
 	}
 
 	@Override

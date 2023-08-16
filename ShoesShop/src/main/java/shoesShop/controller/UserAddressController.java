@@ -1,5 +1,6 @@
 package shoesShop.controller;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.validation.Valid;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import shoesShop.common.UserAddress.UserAddress;
@@ -27,8 +29,13 @@ public class UserAddressController {
 	UserAddressService userAddressService;
 	
 	@GetMapping
-	public ResponseEntity<Collection<UserAddress>> retrieveAll() throws Exception {
-		Collection<UserAddress> userAddresses = userAddressService.retrieveAll();
+	public ResponseEntity<Collection<UserAddress>> retrieveAll(@RequestParam(name = "userId", required = false) Integer userId) throws Exception {
+		Collection<UserAddress> userAddresses = new ArrayList<>();
+		if (userId != null) {
+			userAddresses = this.userAddressService.retrieveByUser(userId);
+		} else {
+			userAddresses = userAddressService.retrieveAll();
+		}
 		return new ResponseEntity<Collection<UserAddress>>(userAddresses, HttpStatus.OK);
 	}
 

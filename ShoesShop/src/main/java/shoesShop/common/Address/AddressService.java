@@ -47,10 +47,13 @@ public class AddressService extends RecordManager<Address>{
 	
 	@Override
 	public Address create(Address address) throws Exception {
-		DbAddress dbAddress = new DbAddress();
+		DbAddress dbAddress = this.converter.convertModelToDb(address);
 		DbWard dbWard = this.wardRepo.findById(address.wardId).get();
 		DbDistrict dbDistrict = this.districtRepo.findById(address.districtId).get();
 		DbProvince dbProvince = this.provinceRepo.findById(address.provinceId).get();
+		dbAddress.ward = dbWard;
+		dbAddress.district = dbDistrict;
+		dbAddress.province = dbProvince;
 		DbAddress createdAddress = this.addressRepo.save(dbAddress);
 		return this.converter.convertDbToModel(createdAddress);
 	}
@@ -58,6 +61,12 @@ public class AddressService extends RecordManager<Address>{
 	@Override
 	public Address update(Address address, Integer id) throws Exception {
 		DbAddress updateAddress = this.converter.convertModelToDb(address);
+		DbWard dbWard = this.wardRepo.findById(address.wardId).get();
+		DbDistrict dbDistrict = this.districtRepo.findById(address.districtId).get();
+		DbProvince dbProvince = this.provinceRepo.findById(address.provinceId).get();
+		updateAddress.ward = dbWard;
+		updateAddress.district = dbDistrict;
+		updateAddress.province = dbProvince;
 		DbAddress dbAddress = this.addressRepo.findById(id).get();
 		if (dbAddress != null) {
 			this.converter.combine(dbAddress, updateAddress);

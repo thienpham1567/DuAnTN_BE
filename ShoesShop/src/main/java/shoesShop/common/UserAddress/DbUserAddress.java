@@ -20,6 +20,10 @@ import shoesShop.common.User.DbUser;
 @Entity
 @Table(name = "UserAddresses")
 public class DbUserAddress {
+	public DbUserAddress(boolean isDefault) {
+		this.isDefault = isDefault;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer userAddressId;
