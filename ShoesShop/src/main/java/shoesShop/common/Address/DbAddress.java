@@ -27,7 +27,10 @@ import shoesShop.common.Ward.DbWard;
 @Entity
 @Table(name = "Addresses")
 public class DbAddress {
-	public DbAddress(String address) {
+	public DbAddress(String fullName, String phoneNumber, String email, String address) {
+		this.fullName = fullName;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
 		this.address = address;
 	}
 

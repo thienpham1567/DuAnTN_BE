@@ -13,6 +13,9 @@ public class AddressConverter implements ICombiner<DbAddress>, IConverter<DbAddr
 
 	@Override
 	public void combine(DbAddress original, DbAddress update) {
+		original.fullName = update.fullName;
+		original.phoneNumber = update.phoneNumber;
+		original.email = update.email;
 		original.address = update.address;
 		original.ward = update.ward;
 		original.district = update.district;
@@ -21,7 +24,7 @@ public class AddressConverter implements ICombiner<DbAddress>, IConverter<DbAddr
 
 	@Override
 	public DbAddress convertModelToDb(Address input) {
-		return input == null ? null : new DbAddress(input.address);
+		return input == null ? null : new DbAddress(input.fullName, input.phoneNumber, input.email, input.address);
 	}
 
 	@Override
