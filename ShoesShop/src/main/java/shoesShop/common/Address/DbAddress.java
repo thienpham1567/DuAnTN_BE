@@ -36,6 +36,9 @@ public class DbAddress {
 	public Integer addressId;
 	
 	public String address;
+	public String fullName;
+	public String phoneNumber;
+	public String email;
 	
 	@ManyToOne
 	@JoinColumn(name = "WardId")

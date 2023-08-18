@@ -13,6 +13,9 @@ import shoesShop.common.Ward.Ward;
 public class Address {
 	public Integer addressId;
 	public String address;
+	public String fullName;
+	public String phoneNumber;
+	public String email;
 	public Integer wardId;
 	public Integer districtId;
 	public Integer provinceId;

@@ -1,7 +1,6 @@
 package shoesShop.common.CartItem;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +8,8 @@ import org.springframework.stereotype.Service;
 
 import shoesShop.common.RecordManager;
 import shoesShop.common.Cart.ICartRepository;
-import shoesShop.common.Product.IProductRepositoryService;
-import shoesShop.common.Product.ProductConverter;
-import shoesShop.common.ProductVariationSizes.DbProductVariationSize;
 import shoesShop.common.ProductVariationSizes.IProductVariationSizeRepository;
-import shoesShop.common.ProductVariationSizes.ProductVariationSizeConverter;
 import shoesShop.common.Size.ISizeRepository;
-import shoesShop.common.Color.ColorConverter;
 import shoesShop.common.Color.IColorRepository;
 
 @Service

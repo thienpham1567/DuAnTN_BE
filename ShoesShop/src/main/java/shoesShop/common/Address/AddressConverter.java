@@ -27,6 +27,6 @@ public class AddressConverter implements ICombiner<DbAddress>, IConverter<DbAddr
 	@Override
 	public Address convertDbToModel(DbAddress input) {
 		return input == null ? null
-				: new Address(input.addressId, input.address, input.ward.wardId, input.district.districtId, input.province.provinceId);
+				: new Address(input.addressId, input.address, input.fullName, input.phoneNumber, input.email, input.ward.wardId, input.district.districtId, input.province.provinceId);
 	}
 }
