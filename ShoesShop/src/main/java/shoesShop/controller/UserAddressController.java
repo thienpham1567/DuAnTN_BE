@@ -29,10 +29,13 @@ public class UserAddressController {
 	UserAddressService userAddressService;
 	
 	@GetMapping
-	public ResponseEntity<Collection<UserAddress>> retrieveAll(@RequestParam(name = "userId", required = false) Integer userId) throws Exception {
+	public ResponseEntity<Collection<UserAddress>> retrieveAll(@RequestParam(name = "userId", required = false) Integer userId, @RequestParam(name = "isDefault", required = false) Boolean isDefault) throws Exception {
 		Collection<UserAddress> userAddresses = new ArrayList<>();
-		if (userId != null) {
-			userAddresses = this.userAddressService.retrieveByUser(userId);
+		
+		if (userId != null && isDefault != null) {
+			userAddresses = this.userAddressService.retrieveDefaultAddressByUser(userId, isDefault);
+		} else if (userId != null) {
+			userAddresses = userAddressService.retrieveByUser(userId);
 		} else {
 			userAddresses = userAddressService.retrieveAll();
 		}
