@@ -25,7 +25,13 @@ public class OrderLineConverter implements ICombiner<DbOrderLine>, IConverter<Db
 
 	@Override
 	public DbOrderLine convertModelToDb(OrderLine input) {
-		return input == null ? null : new DbOrderLine(input.price, input.quantity, input.imageUrl);
+		return input == null ? null : new DbOrderLine(
+				input.orderId, 
+				input.price, 
+				input.quantity, 
+				this.pvsConverter.convertModelToDb(input.productVariationSize),
+				input.imageUrl,
+				this.colorConverter.convertModelToDb(input.color));
 	}
 
 	@Override

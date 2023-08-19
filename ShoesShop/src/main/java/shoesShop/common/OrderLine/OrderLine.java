@@ -12,10 +12,11 @@ import shoesShop.common.ProductVariationSizes.ProductVariationSize;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderLine {
-	public OrderLine(String orderId, Double price, Integer quantity, ProductVariationSize pvs, Color color) {
+	public OrderLine(String orderId, Double price, Integer quantity, String imageUrl, ProductVariationSize pvs, Color color) {
 		this.orderId = orderId;
 		this.price = price;
 		this.quantity = quantity;
+		this.imageUrl = imageUrl;
 		this.productVariationSize = pvs;
 		this.color = color;
 	}

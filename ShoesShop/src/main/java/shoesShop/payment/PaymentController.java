@@ -1,19 +1,37 @@
 package shoesShop.payment;
 
+import java.util.Collection;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
 
+import shoesShop.common.Cart.Cart;
 import shoesShop.common.Cart.CartService;
 import shoesShop.common.CartItem.CartItem;
+import shoesShop.common.CartItem.CartItemService;
+import shoesShop.common.Color.IColorRepository;
+import shoesShop.common.Order.IOrderRepository;
+import shoesShop.common.Order.Order;
+import shoesShop.common.Order.OrderConverter;
+import shoesShop.common.Order.OrderService;
+import shoesShop.common.OrderLine.DbOrderLine;
+import shoesShop.common.OrderLine.IOrderLineRepository;
+import shoesShop.common.OrderLine.OrderLine;
+import shoesShop.common.OrderLine.OrderLineConverter;
+import shoesShop.common.OrderLine.OrderLineService;
+import shoesShop.common.ProductVariationSizes.IProductVariationSizeRepository;
 
 @RestController
 @RequestMapping("api/v1/payment")
@@ -25,59 +43,129 @@ public class PaymentController {
 	@Autowired
 	private CartService cartService;
 	
+	@Autowired
+	private CartItemService cartItemService;
+	
+	@Autowired
+	private OrderService orderService;
+	
+	@Autowired
+	private OrderLineService orderLineService;
+	
+	@Autowired
+	private IOrderLineRepository orderLineRepository;
+	
+	@Autowired
+	IColorRepository colorRepository;
+	
+	@Autowired
+	IProductVariationSizeRepository pvsRepo;
+	
+	@Autowired
+	IOrderRepository orderRepository;
+	
+	OrderConverter orderConverter = new OrderConverter();
+	OrderLineConverter orderLineConverter =  new OrderLineConverter();
+	
+	public static final String SUCCESS_URL = "paypal/success";
+	public static final String CANCEL_URL = "paypal/cancel";
+	
 	@PostMapping("/checkout")
-	public ResponseEntity<String> processPayment(@RequestBody CartItem cartId) {
-	    try {
-	        Double totalAmount = this.cartService.getSubTotalPrice(null);
-	        String currency = "USD";
-	        String method = "paypal";
-	        String intent = "sale";
-	        String description = "Thanh toán đơn hàng";
-	        String cancelUrl = "https://www.google.com.vn/";
-	        String successUrl = "https://www.google.com.vn/";
-
-	        Payment payment = paypalService.createPayment(totalAmount, currency, method, intent, description, cancelUrl, successUrl);
-
-	        if (payment.getState().equals("created")) {
-	            String redirectUrl = payment.getLinks().stream()
-	                    .filter(link -> link.getRel().equals("approval_url"))
-	                    .findFirst()
-	                    .orElseThrow(() -> new RuntimeException("Không tìm thấy URL chuyển hướng thanh toán"))
-	                    .getHref();
-
-	            // Chuyển hướng người dùng đến URL thanh toán PayPal
-	            return ResponseEntity.ok().body(redirectUrl);
-	        } else {
-	        	// tạo 1 payload chứa các trường thông tin để trả về cho frontend
-	        	System.out.print("cancel tu sandbox");
-	            return ResponseEntity.badRequest().body("Không tạo được thông tin thanh toán");
-	        }
-	    } catch (PayPalRESTException e) {
-	        e.printStackTrace();
-	        System.out.print("cancel tu sandbox");
-	        return ResponseEntity.status(500).body("Lỗi trong quá trình xử lý thanh toán");
-	    }
+	public ResponseEntity<String> processPayment(@RequestBody PaymentRequest paymentRequest) throws Exception {	
+//		Double totalAmount = this.cartService.retriveCart(cart.getCartId()).getItemSubtotalPrice();
+		try {
+	        Payment payment = paypalService.createPayment(
+	        		paymentRequest.cart.getItemSubtotalPrice(), 
+	        		paymentRequest.getCurrency(), 
+	        		paymentRequest.getMethod(), 
+	        		paymentRequest.getIntent(), 
+	        		paymentRequest.getDescription(), 
+	        		"http://localhost:8080/api/v1/payment/" + CANCEL_URL,
+	        		"http://localhost:8080/api/v1/payment/" + SUCCESS_URL);
+	        System.out.println(payment);
+			for(Links link:payment.getLinks()) {
+				if(link.getRel().equals("approval_url")) {
+					
+//					System.out.println("vao trang thanh toan sandbox");
+//					Order order = orderService.createOrderFromCart(paymentRequest);
+//					System.out.println(order);
+//					Order savedOrder = orderService.create(order);
+//					System.out.println(savedOrder);
+//					
+////					System.out.println(link.getHref());
+//					
+//					Collection<OrderLine> orderLines = orderLineService.createOrderLinesFromCartItems(this.cartItemService.retrieveAll(paymentRequest.cart.getCartId()));
+////					Collection<OrderLine> orderLines = orderLineService.createOrderLinesFromCartItems(cart.getCartItems());
+//					System.out.println(orderLines);  
+//		            Collection<DbOrderLine> savedDbOrderLines = orderLineService.createDbOrderLinesFromOrderLines(orderLines); 
+//
+//		            System.out.println(savedDbOrderLines);
+		                // chưa xóa được cartId khi thanh toán thành công, nên khi mua mới orderId sẽ bị ghi đè
+//		                cartService.clear();
+		            
+//		            SUCCESS_URL =
+		            
+					return ResponseEntity.ok().body(link.getHref());
+				}
+			}
+		} catch (PayPalRESTException e) {
+			e.printStackTrace();
+		}
+		System.out.print("cancel tu sandbox");
+        return ResponseEntity.badRequest().body("Không tạo được thông tin thanh toán");
 	}
 	
-	 @GetMapping("/cancel/{cartId}")
-	    public ResponseEntity<String> getCancelUrl(@PathVariable Long cartId) {
-	        try {
-	            String cancelUrl = "https://www.google.com.vn/webhp"; // Thay thế URL hủy thanh toán tại đây
-	            return ResponseEntity.ok().body(cancelUrl);
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	            return ResponseEntity.status(500).body("Lỗi trong quá trình xử lý URL hủy thanh toán");
-	        }
+	 @GetMapping(value = CANCEL_URL)
+	    public ResponseEntity<String>cancelPay() {
+		 System.out.print("cancel tu sandbox ===========");
+		 return ResponseEntity.ok("Cancel");
 	    }
 	 
-	 @GetMapping("/success/{cartId}")
-	    public ResponseEntity<String> getSuccessUrl(@PathVariable Long cartId) {
+	 
+	    @GetMapping(value = SUCCESS_URL)
+	    public ResponseEntity<String> handlePaymentSuccess(@RequestBody PaymentRequest paymentRequest,
+	    													@RequestParam("paymentId") String paymentId, 
+	                                                       @RequestParam("token") String token, 
+	                                                       @RequestParam("PayerID") String payerId) {
 	        try {
-	            String successUrl = "https://www.google.com.vn/webhp"; // Thay thế URL thành công tại đây
-	            return ResponseEntity.ok().body(successUrl);
-	        } catch (Exception e) {
+	        	System.out.println("lỗi ==============");
+	            Payment payment = paypalService.executePayment(paymentId, payerId);
+	            System.out.println("lỗi tùm lum");
+		        System.out.println(payment.toJSON());
+		        System.out.flush();
+		        
+		        
+		        System.out.println("vao trang thanh toan sandbox");
+				Order order = orderService.createOrderFromCart(paymentRequest);
+				System.out.println(order);
+				Order savedOrder = orderService.create(order);
+				System.out.println(savedOrder);
+				
+//				System.out.println(link.getHref());
+				
+				Collection<OrderLine> orderLines = orderLineService.createOrderLinesFromCartItems(this.cartItemService.retrieveAll(paymentRequest.cart.getCartId()));
+//				Collection<OrderLine> orderLines = orderLineService.createOrderLinesFromCartItems(cart.getCartItems());
+				System.out.println(orderLines);  
+	            Collection<DbOrderLine> savedDbOrderLines = orderLineService.createDbOrderLinesFromOrderLines(orderLines); 
+
+	            System.out.println(savedDbOrderLines);
+		        
+	            if (payment.getState().equals("approved")) {
+	            	 System.out.println("heheheheheheheheheheheheh");
+	            	 System.out.flush();
+	                // Xử lý thành công thanh toán ở đây
+	                // ...
+	                return ResponseEntity.ok("Payment successful");
+	            }
+	        } catch (PayPalRESTException e) {
+	        	 System.out.println("lỗi 1");
+	        	 System.out.flush();
 	            e.printStackTrace();
-	            return ResponseEntity.status(500).body("Lỗi trong quá trình xử lý URL thành công");
 	        }
+	        System.out.println("lỗi 2");
+	        System.out.flush();
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Payment failed");
 	    }
+	 
+
 }

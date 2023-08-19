@@ -7,7 +7,7 @@ public class CategoryConverter implements ICombiner<DbCategory>, IConverter<DbCa
 	@Override
 	public void combine(DbCategory original, DbCategory update) {
 		original.name = update.name;
-//		original.code = update.code;
+		original.code = update.code;
 	}
 
 	@Override
