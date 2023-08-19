@@ -11,7 +11,9 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import shoesShop.common.Color.DbColor;
 import shoesShop.common.Order.DbOrder;
+import shoesShop.common.Order.Order;
 import shoesShop.common.ProductVariationSizes.DbProductVariationSize;
 
 @Data
@@ -20,11 +22,17 @@ import shoesShop.common.ProductVariationSizes.DbProductVariationSize;
 @Entity
 @Table(name = "OrderLines")
 public class DbOrderLine {
-	public DbOrderLine(Double price, Integer quantity) {
-		super();
-		this.price = price;
-		this.quantity = quantity;
+	public DbOrderLine(String orderId, Double price, Integer quantity,DbProductVariationSize productVariationSize, String imageUrl, DbColor color) {
+	    this.order = new DbOrder(); // Khởi tạo đối tượng order
+	    this.order.orderId = orderId;
+	    this.price = price;
+	    this.quantity = quantity;
+	    this.productVariationSize = productVariationSize;
+	    this.imageUrl = imageUrl;
+	    this.color = color;	
 	}
+
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,16 +40,19 @@ public class DbOrderLine {
 	
 	public Double price;
 	public Integer quantity;
+	public String imageUrl;
+	// ok
+	@ManyToOne
+	@JoinColumn(name = "OrderId")
+	public DbOrder order;
 	
 	// ok
 	@ManyToOne
 	@JoinColumn(name = "ProductVariationSizeId")
 	public DbProductVariationSize productVariationSize;
 	
-	// ok
 	@ManyToOne
-	@JoinColumn(name = "OrderId")
-	public DbOrder order;
-	
+	@JoinColumn(name = "ColorId")
+	public DbColor color;
 	// done
 }

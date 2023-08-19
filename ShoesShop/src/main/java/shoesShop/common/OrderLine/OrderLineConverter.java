@@ -5,8 +5,7 @@ package shoesShop.common.OrderLine;
 
 import shoesShop.common.ICombiner;
 import shoesShop.common.IConverter;
-//import shoesShop.common.Cart.CartConverter;
-import shoesShop.common.Order.OrderConverter;
+import shoesShop.common.Color.ColorConverter;
 //import shoesShop.common.ProductVariationSizes.ProductVariationSize;
 import shoesShop.common.ProductVariationSizes.ProductVariationSizeConverter;
 
@@ -14,28 +13,38 @@ public class OrderLineConverter implements ICombiner<DbOrderLine>, IConverter<Db
 	//private OrderConverter orderConverter = new OrderConverter();
 //	private CartConverter cartConverter = new CartConverter();
 	//private ProductVariationSizeConverter productVariationSizeConverter = new ProductVariationSizeConverter();
-	
+	private ProductVariationSizeConverter pvsConverter = new ProductVariationSizeConverter();
+	private ColorConverter colorConverter = new ColorConverter();
 	
 	@Override
 	public void combine(DbOrderLine original, DbOrderLine update) {
 		original.price = update.price;
 		original.quantity = update.quantity;
+		original.imageUrl = update.imageUrl;
 	}
 
 	@Override
 	public DbOrderLine convertModelToDb(OrderLine input) {
-		return input == null ? null : new DbOrderLine(input.price, input.quantity);
+		return input == null ? null : new DbOrderLine(
+				input.orderId, 
+				input.price, 
+				input.quantity, 
+				this.pvsConverter.convertModelToDb(input.productVariationSize),
+				input.imageUrl,
+				this.colorConverter.convertModelToDb(input.color));
 	}
 
 	@Override
 	public OrderLine convertDbToModel(DbOrderLine input) {
 
 		return input == null ? null : new OrderLine(
-					input.price,
-					input.quantity,
-					input.orderLineId
-					//this.orderConverter.convertDbToModel(input.order),
-					//this.productVariationSizeConverter.convertDbToModel(input.productVariationSize)
+				input.orderLineId,	
+				input.order.orderId,
+				input.price,
+				input.quantity,
+				input.imageUrl,
+				this.pvsConverter.convertDbToModel(input.productVariationSize),
+				this.colorConverter.convertDbToModel(input.color)
 				);
 	}
 
