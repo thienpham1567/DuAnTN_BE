@@ -25,7 +25,7 @@ public class Order {
 
 	// Properties
 	@NotEmpty
-	public String denormalizedAddress;
+	public Integer addressId;
 	@NotEmpty
 	public Double orderTotalPrice;
 	@NotEmpty

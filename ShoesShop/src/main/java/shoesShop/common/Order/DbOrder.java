@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import shoesShop.common.Address.DbAddress;
 import shoesShop.common.OrderLine.DbOrderLine;
 import shoesShop.common.User.DbUser;
 
@@ -26,9 +27,9 @@ import shoesShop.common.User.DbUser;
 @Entity
 @Table(name = "Orders")
 public class DbOrder {
-	public DbOrder(String orderId, String denormalizedAddress, Double orderTotalPrice, String ordersStatus, LocalDateTime createdAt, LocalDateTime updatedAt, DbUser user ) {
+	public DbOrder(String orderId, DbAddress address, Double orderTotalPrice, String ordersStatus, LocalDateTime createdAt, LocalDateTime updatedAt, DbUser user ) {
 		this.orderId = orderId;
-		this.denormalizedAddress = denormalizedAddress;
+		this.address = address;
 		this.orderTotalPrice = orderTotalPrice;
 		this.ordersStatus = ordersStatus;
 		this.createdAt = createdAt;
@@ -38,8 +39,6 @@ public class DbOrder {
 
 	@Id
 	public String orderId;
-	
-	public String denormalizedAddress;
 	public Double orderTotalPrice;
 	public String ordersStatus;
 	public LocalDateTime createdAt;
@@ -49,6 +48,10 @@ public class DbOrder {
 	@ManyToOne
 	@JoinColumn(name = "UserId")
 	public DbUser user;
+	
+	@ManyToOne
+	@JoinColumn(name = "AddressId")
+	public DbAddress address;
 	 
 	// ok
 	@OneToMany(mappedBy = "order")

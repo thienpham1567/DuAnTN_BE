@@ -10,14 +10,14 @@ import shoesShop.common.User.User;
 //@AllArgsConstructor
 @NoArgsConstructor
 public class PaymentRequest {
-	public PaymentRequest(Integer paymentRequestId, String denormalizedAddress, Cart cart,Integer userId) {
+	public PaymentRequest(Integer paymentRequestId, Integer addressId, Cart cart, Integer userId) {
 		this.paymentRequestId = paymentRequestId;
-		this.denormalizedAddress = denormalizedAddress;
+		this.addressId = addressId;
 		this.cart = cart;
 		this.userId = userId;
 	}
 	public Integer paymentRequestId;
-	public String denormalizedAddress;
+	public Integer addressId;
 	public Cart cart;
 	public Integer userId;
 	private String currency = "USD";

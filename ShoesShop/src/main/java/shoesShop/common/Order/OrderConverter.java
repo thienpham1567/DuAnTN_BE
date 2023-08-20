@@ -16,7 +16,7 @@ public class OrderConverter  implements ICombiner<DbOrder>, IConverter<DbOrder, 
 	
 	@Override
 	public void combine(DbOrder original, DbOrder update) {
-		original.denormalizedAddress = update.denormalizedAddress;
+		original.address = update.address;
 		original.orderTotalPrice = update.orderTotalPrice;
 		original.ordersStatus = update.ordersStatus;
 		original.createdAt = update.createdAt;
@@ -28,7 +28,7 @@ public class OrderConverter  implements ICombiner<DbOrder>, IConverter<DbOrder, 
 	public DbOrder convertModelToDb(Order input) {
 		return input == null ? null : new DbOrder(
 					input.orderId,
-					input.denormalizedAddress,
+					null,
 					input.orderTotalPrice,
 					input.ordersStatus,
 					input.createdAt,
@@ -40,7 +40,7 @@ public class OrderConverter  implements ICombiner<DbOrder>, IConverter<DbOrder, 
 	public Order convertDbToModel(DbOrder input) {
 		return input == null ? null
 				: new Order(
-						input.denormalizedAddress,
+						input.address.addressId,
 						input.orderTotalPrice,
 						input.ordersStatus,
 						input.createdAt,
