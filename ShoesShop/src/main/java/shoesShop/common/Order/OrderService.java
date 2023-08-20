@@ -90,7 +90,7 @@ public class OrderService extends RecordManager<Order>{
 	    }
 	    if (userId != null) {
 	        dbOrders = dbOrders.stream()
-	            .filter(dbOrder -> dbOrder.getUser() != null && dbOrder.getUser().getUserId().equals(userId))
+	            .filter(dbOrder -> dbOrder.getUser() != null && dbOrder.user.userId == userId)
 	            .collect(Collectors.toList());
 	    }
 	    return dbOrders;
@@ -134,8 +134,10 @@ public class OrderService extends RecordManager<Order>{
 	public Order create(Order order) {
 		DbOrder dbOrder = this.orderConverter.convertModelToDb(order);
 		DbUser dbUser = this.userRepo.findById(order.user.userId).get();
+		DbAddress dbAddress = this.addressRepo.findById(order.addressId).get();
 		if (dbUser != null) {
 	        dbOrder.setUser(dbUser);
+	        dbOrder.setAddress(dbAddress);
 	    }
 //		dbOrder.user = dbUser;
 		DbOrder createdOrder = this.orderRepo.save(dbOrder);
