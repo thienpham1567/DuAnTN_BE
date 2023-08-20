@@ -9,13 +9,13 @@ import shoesShop.common.Cart.Cart;
 //@AllArgsConstructor
 @NoArgsConstructor
 public class PaymentRequest {
-	public PaymentRequest(Integer paymentRequestId, String denormalizedAddress, Cart cart) {
+	public PaymentRequest(Integer paymentRequestId, Integer addressId, Cart cart) {
 		this.paymentRequestId = paymentRequestId;
-		this.denormalizedAddress = denormalizedAddress;
+		this.addressId = addressId;
 		this.cart = cart;
 	}
 	public Integer paymentRequestId;
-	public String denormalizedAddress;
+	public Integer addressId;
 	public Cart cart;
 	private String currency = "USD";
 	private String method = "paypal";

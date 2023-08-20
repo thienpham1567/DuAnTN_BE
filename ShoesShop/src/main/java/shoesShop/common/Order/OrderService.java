@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import com.paypal.api.payments.Payment;
 
 import shoesShop.common.RecordManager;
+import shoesShop.common.Address.DbAddress;
+import shoesShop.common.Address.IAddressRepository;
 import shoesShop.common.Brand.Brand;
 import shoesShop.common.Brand.DbBrand;
 import shoesShop.common.Cart.Cart;
@@ -35,6 +37,9 @@ public class OrderService extends RecordManager<Order>{
 	
 	@Autowired
 	private IUserRepository userRepo;
+	
+	@Autowired
+	private IAddressRepository addressRepo;
 	
 	private OrderConverter orderConverter = new OrderConverter();
 	private OrderLineConverter orderLineConverter = new OrderLineConverter();
@@ -61,6 +66,7 @@ public class OrderService extends RecordManager<Order>{
 	public Order update(Order order, String id) throws Exception {
 		DbOrder updateOrder = this.orderConverter.convertModelToDb(order);
 		updateOrder.user = this.userRepo.findById(order.user.userId).get();
+		updateOrder.address = this.addressRepo.findById(order.addressId).get();
 		DbOrder dbOrder = this.orderRepo.findById(id).get();
 		if (dbOrder != null) {
 			this.orderConverter.combine(dbOrder, updateOrder);
@@ -136,8 +142,9 @@ public class OrderService extends RecordManager<Order>{
 	
 	
 	public Order createOrderFromCart(PaymentRequest paymentRequest) {
-	    Order order = new Order();
-	    order.setDenormalizedAddress(paymentRequest.getDenormalizedAddress());
+		Order order = new Order();
+
+	    order.setAddressId(paymentRequest.addressId);
 	    order.setOrderId(paymentRequest.cart.getCartId());
 	    order.setOrderTotalPrice(paymentRequest.cart.getItemSubtotalPrice());
 	    order.setOrdersStatus("Chưa xử lý");
