@@ -24,6 +24,7 @@ import shoesShop.common.User.User;
 public class Order {
 
 	// Properties
+	@NotEmpty
 	public Integer addressId;
 	@NotEmpty
 	public Double orderTotalPrice;
