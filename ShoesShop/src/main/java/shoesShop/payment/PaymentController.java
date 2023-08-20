@@ -74,7 +74,7 @@ public class PaymentController {
 	public static final String SUCCESS_URL = "paypal/success";
 	public static final String CANCEL_URL = "paypal/cancel";
 	
-	
+	PaymentRequest data = new PaymentRequest();
 	
 	
 	@PostMapping("/checkout")
@@ -97,9 +97,10 @@ public class PaymentController {
 	        		paymentRequest.getMethod(), 
 	        		paymentRequest.getIntent(), 
 	        		paymentRequest.getDescription(), 
-	        		"http://localhost:8080/api/v1/payment/" + CANCEL_URL,
-//	        		"http://localhost:5173/");
-	        		"http://localhost:8080/api/v1/payment/" + SUCCESS_URL);
+	        		"http://localhost:5173/payment/paypal/cancel",
+//	        		"http://localhost:8080/api/v1/payment/" + CANCEL_URL,
+	        		"http://localhost:5173/payment/paypal/success");
+//	        		"http://localhost:8080/api/v1/payment/" + SUCCESS_URL);
 	        System.out.println(payment);
 			for(Links link:payment.getLinks()) {
 				if(link.getRel().equals("approval_url")) {
@@ -140,9 +141,17 @@ public class PaymentController {
 		 return ResponseEntity.ok("Cancel");
 	    }
 	 
+//	 @GetMapping(value = SUCCESS_URL)
+//	    public ResponseEntity<String>success() {
+//		 System.out.print("success tu sandbox ===========");
+//		 String redirectScript = "<script>window.location.href = 'http://localhost:5173/payment/paypal/success';</script>";
+//		return ResponseEntity.ok().body(redirectScript);
+////		 return ResponseEntity.ok("Success");
+//	    }
+	 
 	 
 	    @GetMapping(value = SUCCESS_URL)
-	    public ResponseEntity<String> handlePaymentSuccess(@RequestBody PaymentRequest paymentRequest,
+	    public ResponseEntity<String> handlePaymentSuccess(
 	    													@RequestParam("paymentId") String paymentId, 
 	                                                       @RequestParam("token") String token, 
 	                                                       @RequestParam("PayerID") String payerId) {
@@ -154,26 +163,13 @@ public class PaymentController {
 		        System.out.flush();
 		        
 		        
-		        System.out.println("vao trang thanh toan sandbox");
-				Order order = orderService.createOrderFromCart(paymentRequest);
-				System.out.println(order);
-				Order savedOrder = orderService.create(order);
-				System.out.println(savedOrder);
-				
-//				System.out.println(link.getHref());
-				
-				Collection<OrderLine> orderLines = orderLineService.createOrderLinesFromCartItems(this.cartItemService.retrieveAll(paymentRequest.cart.getCartId()));
-//				Collection<OrderLine> orderLines = orderLineService.createOrderLinesFromCartItems(cart.getCartItems());
-				System.out.println(orderLines);  
-	            Collection<DbOrderLine> savedDbOrderLines = orderLineService.createDbOrderLinesFromOrderLines(orderLines); 
-
-	            System.out.println(savedDbOrderLines);
-		        
 	            if (payment.getState().equals("approved")) {
 	            	 System.out.println("heheheheheheheheheheheheh");
 	            	 System.out.flush();
 	                // Xử lý thành công thanh toán ở đây
 	                // ...
+//	            	 String redirectScript = "<script>window.location.href = 'http://localhost:5173/payment/paypal/success';</script>";
+//	         		return ResponseEntity.ok().body(redirectScript);
 	                return ResponseEntity.ok("Payment successful");
 	            }
 	        } catch (PayPalRESTException e) {
