@@ -3,6 +3,8 @@ package shoesShop.payment;
 import java.util.Collection;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import shoesShop.common.Cart.Cart;
 import shoesShop.common.Cart.CartService;
 import shoesShop.common.CartItem.CartItem;
@@ -32,6 +35,7 @@ import shoesShop.common.OrderLine.OrderLine;
 import shoesShop.common.OrderLine.OrderLineConverter;
 import shoesShop.common.OrderLine.OrderLineService;
 import shoesShop.common.ProductVariationSizes.IProductVariationSizeRepository;
+import shoesShop.common.User.User;
 
 @RestController
 @RequestMapping("api/v1/payment")
@@ -70,9 +74,22 @@ public class PaymentController {
 	public static final String SUCCESS_URL = "paypal/success";
 	public static final String CANCEL_URL = "paypal/cancel";
 	
+	
+	
+	
 	@PostMapping("/checkout")
-	public ResponseEntity<String> processPayment(@RequestBody PaymentRequest paymentRequest) throws Exception {	
+	public ResponseEntity<String> processPayment(@RequestBody PaymentRequest paymentRequest, HttpServletRequest request) throws Exception {	
 //		Double totalAmount = this.cartService.retriveCart(cart.getCartId()).getItemSubtotalPrice();
+//		paymentRequest.getCart();
+
+//		paymentRequest.setCart(paymentRequest.getCart());
+//
+		System.out.println(paymentRequest);
+//		System.out.println(paymentRequest.cart);
+//		System.out.println(paymentRequest.user);
+
+		
+		
 		try {
 	        Payment payment = paypalService.createPayment(
 	        		paymentRequest.cart.getItemSubtotalPrice(), 
@@ -81,25 +98,27 @@ public class PaymentController {
 	        		paymentRequest.getIntent(), 
 	        		paymentRequest.getDescription(), 
 	        		"http://localhost:8080/api/v1/payment/" + CANCEL_URL,
+//	        		"http://localhost:5173/");
 	        		"http://localhost:8080/api/v1/payment/" + SUCCESS_URL);
 	        System.out.println(payment);
 			for(Links link:payment.getLinks()) {
 				if(link.getRel().equals("approval_url")) {
 					
-//					System.out.println("vao trang thanh toan sandbox");
-//					Order order = orderService.createOrderFromCart(paymentRequest);
-//					System.out.println(order);
-//					Order savedOrder = orderService.create(order);
-//					System.out.println(savedOrder);
-//					
-////					System.out.println(link.getHref());
-//					
+					
+					System.out.println("vao trang thanh toan sandbox");
+					Order order = orderService.createOrderFromCart(paymentRequest);
+					System.out.println(order);
+					Order savedOrder = orderService.create(order);
+					System.out.println(savedOrder);
+					
+//					System.out.println(link.getHref());
+					
 //					Collection<OrderLine> orderLines = orderLineService.createOrderLinesFromCartItems(this.cartItemService.retrieveAll(paymentRequest.cart.getCartId()));
-////					Collection<OrderLine> orderLines = orderLineService.createOrderLinesFromCartItems(cart.getCartItems());
-//					System.out.println(orderLines);  
-//		            Collection<DbOrderLine> savedDbOrderLines = orderLineService.createDbOrderLinesFromOrderLines(orderLines); 
-//
-//		            System.out.println(savedDbOrderLines);
+					Collection<OrderLine> orderLines = orderLineService.createOrderLinesFromCartItems(paymentRequest.cart.getCartItems());
+					System.out.println(orderLines);  
+		            Collection<DbOrderLine> savedDbOrderLines = orderLineService.createDbOrderLinesFromOrderLines(orderLines); 
+
+		            System.out.println(savedDbOrderLines);
 		                // chưa xóa được cartId khi thanh toán thành công, nên khi mua mới orderId sẽ bị ghi đè
 //		                cartService.clear();
 		            

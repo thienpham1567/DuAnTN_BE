@@ -70,7 +70,8 @@ public class CartController {
 				
 				
 				updatedCart.setUser(user);
-				
+//				System.out.println((user));
+//				System.out.println(updatedCart);
 			} catch (IllegalArgumentException e) {
 				System.out.println("Unable to get JWT Token");
 			} catch (ExpiredJwtException e) {

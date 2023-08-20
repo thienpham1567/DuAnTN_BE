@@ -23,6 +23,8 @@ import shoesShop.common.OrderLine.OrderLineConverter;
 import shoesShop.common.OrderLine.OrderLineService;
 import shoesShop.common.User.DbUser;
 import shoesShop.common.User.IUserRepository;
+import shoesShop.common.User.User;
+import shoesShop.common.User.UserConverter;
 import shoesShop.payment.PaymentRequest;
 
 @Service
@@ -38,6 +40,7 @@ public class OrderService extends RecordManager<Order>{
 	
 	private OrderConverter orderConverter = new OrderConverter();
 	private OrderLineConverter orderLineConverter = new OrderLineConverter();
+	private UserConverter userConverter = new UserConverter();
 	
 	@Override
 	public Collection<Order> retrieveAll() {
@@ -142,8 +145,10 @@ public class OrderService extends RecordManager<Order>{
 	    order.setOrderTotalPrice(paymentRequest.cart.getItemSubtotalPrice());
 	    order.setOrdersStatus("Chưa xử lý");
 	    order.setCreatedAt(LocalDateTime.now());
-	    order.setUser(paymentRequest.cart.getUser());
-	    
+	    DbUser dbUser = this.userRepo.findById(paymentRequest.userId).get();
+	    User user = this.userConverter.convertDbToModel(dbUser);
+	    order.setUser(user);
+	    System.out.println(order);
 	    List<OrderLine> orderLines = new ArrayList<>();
 	    for (CartItem cartItem : paymentRequest.cart.getCartItems()) {
 	        OrderLine orderLine = new OrderLine();
