@@ -20,7 +20,6 @@ public class PaymentRequest {
 	public Integer paymentRequestId;
 	public Integer addressId;
 	public Cart cart;
-	public Integer userId;
 	private String currency = "USD";
 	private String method = "paypal";
 	private String intent = "sale";

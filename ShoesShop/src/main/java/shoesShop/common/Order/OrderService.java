@@ -59,11 +59,11 @@ public class OrderService extends RecordManager<Order>{
 	}
 	
 	@Override
-	public Order update(Order order, String id) throws Exception {
+	public Order update(Order order, String orderid) throws Exception {
 		DbOrder updateOrder = this.orderConverter.convertModelToDb(order);
 		updateOrder.user = this.userRepo.findById(order.user.userId).get();
 		updateOrder.address = this.addressRepo.findById(order.addressId).get();
-		DbOrder dbOrder = this.orderRepo.findById(id).get();
+		DbOrder dbOrder = this.orderRepo.findById(orderid).get();
 		if (dbOrder != null) {
 			this.orderConverter.combine(dbOrder, updateOrder);
 			DbOrder updateDbOrder = this.orderRepo.save(dbOrder);
@@ -78,17 +78,20 @@ public class OrderService extends RecordManager<Order>{
 
 	    if (orderId != null) {
 	        dbOrders = dbOrders.stream()
-	            .filter(dbOrder -> dbOrder.orderId == orderId)
+//	            .filter(dbOrder -> dbOrder.orderId == orderId)
+	            .filter(dbOrder -> dbOrder.getOrderId().equals(orderId))
 	            .collect(Collectors.toList());
 	    }
 	    if (userId != null) {
 	        dbOrders = dbOrders.stream()
-	            .filter(dbOrder -> dbOrder.user.userId == userId)
+//	            .filter(dbOrder -> dbOrder.user.userId == userId)
+	        		.filter(dbOrder -> dbOrder.getUser() != null && dbOrder.getUser().getUserId().equals(userId))
 	            .collect(Collectors.toList());
 	    }
 	    if (addressId != null) {
 	        dbOrders = dbOrders.stream()
-	            .filter(dbOrder -> dbOrder.address.addressId == addressId)
+//	            .filter(dbOrder -> dbOrder.address.addressId == addressId)
+	        		.filter(dbOrder -> dbOrder.getAddress() != null && dbOrder.getAddress().getAddressId().equals(addressId))
 	            .collect(Collectors.toList());
 	    }
 	    return dbOrders;
@@ -137,7 +140,6 @@ public class OrderService extends RecordManager<Order>{
 	        dbOrder.setUser(dbUser);
 	        dbOrder.setAddress(dbAddress);
 	    }
-//		dbOrder.user = dbUser;
 		DbOrder createdOrder = this.orderRepo.save(dbOrder);
 		return this.orderConverter.convertDbToModel(createdOrder);
 	}
