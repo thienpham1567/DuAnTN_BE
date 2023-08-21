@@ -74,11 +74,9 @@ public class PaymentController {
 					paymentRequest.getCurrency(), paymentRequest.getMethod(), paymentRequest.getIntent(),
 					paymentRequest.getDescription(), "http://localhost:8080/api/v1/payment/" + CANCEL_URL,
 					"http://localhost:8080/api/v1/payment/" + SUCCESS_URL);
+			data = paymentRequest;
 			for (Links link : payment.getLinks()) {
 				if (link.getRel().equals("approval_url")) {
-
-					data = paymentRequest;
-
 					return ResponseEntity.ok().body(link.getHref());
 				}
 			}
@@ -111,7 +109,8 @@ public class PaymentController {
 				// xử lí lưu các OrderLine của Order
 				Collection<OrderLine> orderLines = orderLineService
 						.createOrderLinesFromCartItems(data.cart.getCartItems());
-				Collection<DbOrderLine> savedDbOrderLines = orderLineService
+				
+				this.orderLineService
 						.createDbOrderLinesFromOrderLines(orderLines);
 	
 				// chuyển đến frontend 

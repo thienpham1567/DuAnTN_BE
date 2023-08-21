@@ -17,12 +17,8 @@ public class OrderConverter  implements ICombiner<DbOrder>, IConverter<DbOrder, 
 	
 	@Override
 	public void combine(DbOrder original, DbOrder update) {
-		original.address = update.address;
-		original.orderTotalPrice = update.orderTotalPrice;
 		original.ordersStatus = update.ordersStatus;
-		original.createdAt = update.createdAt;
 		original.updatedAt = update.updatedAt;
-		original.user = update.user;
 	}
 
 	@Override

@@ -58,78 +58,26 @@ public class OrderService extends RecordManager<Order>{
 		return order;
 	}
 	
-	@Override
-	public Order update(Order order, String orderid) throws Exception {
-		DbOrder updateOrder = this.orderConverter.convertModelToDb(order);
-		updateOrder.user = this.userRepo.findById(order.user.userId).get();
-		updateOrder.address = this.addressRepo.findById(order.addressId).get();
-		DbOrder dbOrder = this.orderRepo.findById(orderid).get();
-		if (dbOrder != null) {
-			this.orderConverter.combine(dbOrder, updateOrder);
-			DbOrder updateDbOrder = this.orderRepo.save(dbOrder);
-			return this.orderConverter.convertDbToModel(updateDbOrder);
-		}
-		return null;
-	}
-
-
 	private Collection<DbOrder> load(String orderId, Integer userId, Integer addressId) {
 	    Collection<DbOrder> dbOrders = this.orderRepo.findAll();
 
 	    if (orderId != null) {
 	        dbOrders = dbOrders.stream()
-//	            .filter(dbOrder -> dbOrder.orderId == orderId)
 	            .filter(dbOrder -> dbOrder.getOrderId().equals(orderId))
 	            .collect(Collectors.toList());
 	    }
 	    if (userId != null) {
 	        dbOrders = dbOrders.stream()
-//	            .filter(dbOrder -> dbOrder.user.userId == userId)
 	        		.filter(dbOrder -> dbOrder.getUser() != null && dbOrder.getUser().getUserId().equals(userId))
 	            .collect(Collectors.toList());
 	    }
 	    if (addressId != null) {
 	        dbOrders = dbOrders.stream()
-//	            .filter(dbOrder -> dbOrder.address.addressId == addressId)
 	        		.filter(dbOrder -> dbOrder.getAddress() != null && dbOrder.getAddress().getAddressId().equals(addressId))
 	            .collect(Collectors.toList());
 	    }
 	    return dbOrders;
 	}
-
-	
-//	@Override
-//	public Order create(Order order) {
-//	    // Chuyển đổi Order sang DbOrder
-//	    DbOrder dbOrder = this.orderConverter.convertModelToDb(order);
-//
-//	    // Tìm và gán DbUser tương ứng cho dbOrder
-//	    DbUser dbUser = this.userRepo.findById(order.user.userId).get();
-////	    DbUser dbUser = this.userRepo.findById(order.getUser().getUserId()).orElse(null);
-//	    if (dbUser != null) {
-//	        dbOrder.setUser(dbUser);
-//	    }
-//
-//	    // Lưu dbOrder vào cơ sở dữ liệu
-//	    DbOrder createdDbOrder = this.orderRepo.save(dbOrder);
-//
-//	    // Chuyển đổi danh sách OrderLine sang danh sách DbOrderLine và lưu vào cơ sở dữ liệu
-//	    List<DbOrderLine> dbOrderLines = new ArrayList<>();
-//	    for (OrderLine orderLine : order.getOrderLines()) {
-//	        DbOrderLine dbOrderLine = this.orderLineConverter.convertModelToDb(orderLine);
-//	        dbOrderLine.setOrder(createdDbOrder);  // Gán DbOrder cho DbOrderLine
-//	        dbOrderLines.add(dbOrderLine);
-//	    }
-//	    List<DbOrderLine> savedDbOrderLines = this.orderLineRepo.saveAll(dbOrderLines);
-//	    System.out.println(savedDbOrderLines);
-//	    // Chuyển đổi createdDbOrder thành Order và trả về
-//	    Order createdOrder = this.orderConverter.convertDbToModel(createdDbOrder);
-//	    createdOrder.setOrderLiness(savedDbOrderLines.stream()
-//	                                .map(this.orderLineConverter::convertDbToModel)
-//	                                .collect(Collectors.toList()));
-//	    return createdOrder;
-//	}
-
 	
 	@Override
 	public Order create(Order order) {
@@ -144,15 +92,13 @@ public class OrderService extends RecordManager<Order>{
 		return this.orderConverter.convertDbToModel(createdOrder);
 	}
 	
-	
-	
 	public Order createOrderFromCart(PaymentRequest paymentRequest) {
 		Order order = new Order();
 
 	    order.setAddressId(paymentRequest.addressId);
 	    order.setOrderId(paymentRequest.cart.getCartId());
 	    order.setOrderTotalPrice(paymentRequest.cart.getItemSubtotalPrice());
-	    order.setOrdersStatus("Chưa xử lý");
+	    order.setOrdersStatus("Đang xử lý");
 	    order.setCreatedAt(LocalDateTime.now());
 	    
 	    DbUser dbUser = this.userRepo.findById(paymentRequest.userId).get();
@@ -171,15 +117,15 @@ public class OrderService extends RecordManager<Order>{
             orderLine.setColor(cartItem.getColor());
 	        orderLines.add(orderLine);
 	    }
-	    
 	    order.setOrderLines(paymentRequest.cart.getCartItems()); // Ánh xạ các CartItem thành OrderLine
 	    return order;
 	}
 
-	public Order updateOrderStatus(Order order, String id, String orderstatus) throws Exception{
+	@Override
+	public Order update(Order order, String orderid) throws Exception {
 		DbOrder updateOrder = this.orderConverter.convertModelToDb(order);
 		updateOrder.updatedAt = LocalDateTime.now();
-		DbOrder dbOrder = this.orderRepo.findById(id).get();
+		DbOrder dbOrder = this.orderRepo.findById(orderid).get();
 		if (dbOrder != null) {
 			this.orderConverter.combine(dbOrder, updateOrder);
 			DbOrder updateDbOrder = this.orderRepo.save(dbOrder);
@@ -187,54 +133,4 @@ public class OrderService extends RecordManager<Order>{
 		}
 		return null;
 	}
-
-
-
-	
-//	public Order updateOrderStatus(String orderid, String orderstatus) throws Exception {
-//        DbOrder dbOrder = this.orderRepo.findById(orderid).orElse(null);
-//
-//        if (dbOrder != null) {
-//            // Cập nhật trạng thái đơn hàng và thời gian cập nhật
-//            dbOrder.setOrdersStatus(orderstatus);
-//            dbOrder.setUpdatedAt(LocalDateTime.now());
-//
-//            // Lưu đơn hàng đã cập nhật vào cơ sở dữ liệu
-//            DbOrder updatedDbOrder = this.orderRepo.save(dbOrder);
-//
-//            // Chuyển đổi từ DbOrder đã cập nhật thành đối tượng Order và trả về
-//            return this.orderConverter.convertDbToModel(updatedDbOrder);
-//        } else {
-//            // Xử lý trường hợp không tìm thấy đơn hàng với id cụ thể
-//            throw new Exception("Không tìm thấy đơn hàng với ID " + orderid + ".");
-//        }
-//    }
-
-	
-	
-//	public Order createOrderFromCart(Payment paymentRequest) {
-//	    Order order = new Order();
-//	    order.setDenormalizedAddress(paymentRequest.());
-//	    order.setOrderId(paymentRequest.cart.getCartId());
-//	    order.setOrderTotalPrice(paymentRequest.cart.getItemSubtotalPrice());
-//	    order.setOrdersStatus("Chưa xử lý");
-//	    order.setCreatedAt(LocalDateTime.now());
-//	    order.setUser(paymentRequest.cart.getUser());
-//	    
-//	    List<OrderLine> orderLines = new ArrayList<>();
-//	    for (CartItem cartItem : paymentRequest.cart.getCartItems()) {
-//	        OrderLine orderLine = new OrderLine();
-//	        // Gán thông tin cho đối tượng OrderLine
-//	        orderLine.setOrderId(cartItem.getCartId());
-//            orderLine.setPrice(cartItem.getPrice());
-//            orderLine.setQuantity(cartItem.getQuantity());
-//            orderLine.setProductVariationSize(cartItem.getProductVariationSize());
-//            orderLine.setImageUrl(cartItem.getImageUrl());
-//            orderLine.setColor(cartItem.getColor());
-//	        orderLines.add(orderLine);
-//	    }
-//	    
-//	    order.setOrderLines(paymentRequest.cart.getCartItems()); // Ánh xạ các CartItem thành OrderLine
-//	    return order;
-//	}
 }
