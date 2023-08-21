@@ -9,11 +9,16 @@ import org.springframework.stereotype.Service;
 
 import shoesShop.common.CartItem.CartItem;
 import shoesShop.common.CartItem.CartItemService;
+import shoesShop.common.CartItem.DbCartItem;
+import shoesShop.common.CartItem.ICartItemRepository;
 
 @Service
 public class CartService implements ICartService {
 	@Autowired
 	ICartRepository cartRepo;
+	
+	@Autowired
+	ICartItemRepository cartItemRepo;
 	
 	@Autowired
 	CartItemService cartItemService;
@@ -77,6 +82,21 @@ public class CartService implements ICartService {
 		return items.stream().map(CartItem::getPrice).reduce(0.0, Double::sum);
 	}
 	
+	public Boolean removeCart(String cartId) {
+		if (this.cartRepo.existsById(cartId)) {
+			this.cartRepo.deleteById(cartId);
+			return true;
+		}
+		return false;
+	}
+	
+	public Boolean removeCartItem(String cartId) {
+		Collection<DbCartItem> dbCartItems = this.cartItemRepo.findAll();
+		dbCartItems.stream().filter(dbCartItem -> dbCartItem.cart.cartId == cartId);
+		dbCartItems.forEach(dbCartItem -> this.cartItemService.delete(dbCartItem.cartItemId));
+		return true;
+	}
+		
 	public Cart retriveCart(String cartId) { 
 		DbCart dbCart = this.cartRepo.findById(cartId).get();
 		dbCart.itemSubtotalPrice = this.getSubTotalPrice(dbCart.cartId);
