@@ -9,22 +9,17 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.paypal.api.payments.Payment;
-
 import shoesShop.common.RecordManager;
 import shoesShop.common.Address.DbAddress;
 import shoesShop.common.Address.IAddressRepository;
-import shoesShop.common.Brand.Brand;
-import shoesShop.common.Brand.DbBrand;
-import shoesShop.common.Cart.Cart;
 import shoesShop.common.CartItem.CartItem;
-import shoesShop.common.OrderLine.DbOrderLine;
 import shoesShop.common.OrderLine.IOrderLineRepository;
 import shoesShop.common.OrderLine.OrderLine;
 import shoesShop.common.OrderLine.OrderLineConverter;
-import shoesShop.common.OrderLine.OrderLineService;
 import shoesShop.common.User.DbUser;
 import shoesShop.common.User.IUserRepository;
+import shoesShop.common.User.User;
+import shoesShop.common.User.UserConverter;
 import shoesShop.payment.PaymentRequest;
 
 @Service
@@ -43,16 +38,17 @@ public class OrderService extends RecordManager<Order>{
 	
 	private OrderConverter orderConverter = new OrderConverter();
 	private OrderLineConverter orderLineConverter = new OrderLineConverter();
+	private UserConverter userConverter = new UserConverter();
 	
 	@Override
 	public Collection<Order> retrieveAll() {
-		Collection<Order> orders = this.load(null, null).stream()
+		Collection<Order> orders = this.load(null, null, null).stream()
 				.map(dbOrder -> this.orderConverter.convertDbToModel(dbOrder)).collect(Collectors.toList());
 		return orders;
 	}
 
 	public Collection<Order> retrieveOrder(Integer userId) {
-		Collection<Order> orders = this.load(null,userId).stream()
+		Collection<Order> orders = this.load(null,userId,null).stream()
 				.map(dbOrder -> this.orderConverter.convertDbToModel(dbOrder)).collect(Collectors.toList());
 		return orders;
 	}
@@ -77,17 +73,22 @@ public class OrderService extends RecordManager<Order>{
 	}
 
 
-	private Collection<DbOrder> load(String orderId, Integer userId) {
+	private Collection<DbOrder> load(String orderId, Integer userId, Integer addressId) {
 	    Collection<DbOrder> dbOrders = this.orderRepo.findAll();
 
 	    if (orderId != null) {
 	        dbOrders = dbOrders.stream()
-	            .filter(dbOrder -> dbOrder.getOrderId().equals(orderId))
+	            .filter(dbOrder -> dbOrder.orderId == orderId)
 	            .collect(Collectors.toList());
 	    }
 	    if (userId != null) {
 	        dbOrders = dbOrders.stream()
-	            .filter(dbOrder -> dbOrder.getUser() != null && dbOrder.getUser().getUserId().equals(userId))
+	            .filter(dbOrder -> dbOrder.user.userId == userId)
+	            .collect(Collectors.toList());
+	    }
+	    if (addressId != null) {
+	        dbOrders = dbOrders.stream()
+	            .filter(dbOrder -> dbOrder.address.addressId == addressId)
 	            .collect(Collectors.toList());
 	    }
 	    return dbOrders;
@@ -131,8 +132,10 @@ public class OrderService extends RecordManager<Order>{
 	public Order create(Order order) {
 		DbOrder dbOrder = this.orderConverter.convertModelToDb(order);
 		DbUser dbUser = this.userRepo.findById(order.user.userId).get();
+		DbAddress dbAddress = this.addressRepo.findById(order.addressId).get();
 		if (dbUser != null) {
 	        dbOrder.setUser(dbUser);
+	        dbOrder.setAddress(dbAddress);
 	    }
 //		dbOrder.user = dbUser;
 		DbOrder createdOrder = this.orderRepo.save(dbOrder);
@@ -149,7 +152,10 @@ public class OrderService extends RecordManager<Order>{
 	    order.setOrderTotalPrice(paymentRequest.cart.getItemSubtotalPrice());
 	    order.setOrdersStatus("Chưa xử lý");
 	    order.setCreatedAt(LocalDateTime.now());
-	    order.setUser(paymentRequest.cart.getUser());
+	    
+	    DbUser dbUser = this.userRepo.findById(paymentRequest.userId).get();
+	    User user = this.userConverter.convertDbToModel(dbUser);
+	    order.setUser(user);   
 	    
 	    List<OrderLine> orderLines = new ArrayList<>();
 	    for (CartItem cartItem : paymentRequest.cart.getCartItems()) {
@@ -179,6 +185,9 @@ public class OrderService extends RecordManager<Order>{
 		}
 		return null;
 	}
+
+
+
 	
 //	public Order updateOrderStatus(String orderid, String orderstatus) throws Exception {
 //        DbOrder dbOrder = this.orderRepo.findById(orderid).orElse(null);

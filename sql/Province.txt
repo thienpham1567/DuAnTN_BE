@@ -1,23 +1,5 @@
-CREATE TABLE `UserAddress` (
-  `user_address_id` int,
-  `user_id` int,
-  `address_id` int,
-  `is_default` bit,
-  PRIMARY KEY (`user_address_id`),
-  FOREIGN KEY (`address_id`) REFERENCES `Address`(`address_id`),
-  FOREIGN KEY (`user_id`) REFERENCES `Users`(`user_id`)
-);
 
-CREATE TABLE `Address` (
-  `address_id` int,
-  `address` nvarchar(255),
-  `ward` nvarchar(255),
-  `district` nvarchar(255),
-  `province` nvarchar(255),
-  PRIMARY KEY (`address_id`)
-);
-
-INSERT INTO `province` (`id`, `_name`, `_code`) VALUES
+INSERT INTO `provinces` (`province_Id`, `name`, `code`) VALUES
 (1, 'Hồ Chí Minh', 'SG'),
 (2, 'Hà Nội', 'HN'),
 (3, 'Đà Nẵng', 'DDN'),

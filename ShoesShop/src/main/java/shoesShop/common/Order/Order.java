@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import shoesShop.common.Address.Address;
 import shoesShop.common.CartItem.CartItem;
 import shoesShop.common.OrderLine.DbOrderLine;
 import shoesShop.common.OrderLine.OrderLine;
@@ -36,7 +37,8 @@ public class Order {
 	
 	// Ids
 	public String orderId;
-	@NotNull
+	
+	public Address address;
 	public User user;
 	public Collection<OrderLine> orderLines  = new ArrayList<>();
 	
