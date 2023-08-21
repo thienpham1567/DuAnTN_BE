@@ -41,19 +41,10 @@ public class PaymentController {
 	private PaypalService paypalService;
 
 	@Autowired
-	private CartService cartService;
-
-	@Autowired
-	private CartItemService cartItemService;
-
-	@Autowired
 	private OrderService orderService;
 
 	@Autowired
 	private OrderLineService orderLineService;
-
-	@Autowired
-	private IOrderLineRepository orderLineRepository;
 
 	@Autowired
 	IColorRepository colorRepository;
@@ -74,36 +65,15 @@ public class PaymentController {
 
 	@PostMapping("/checkout")
 	public ResponseEntity<String> processPayment(@RequestBody PaymentRequest paymentRequest) throws Exception {
-//		Double totalAmount = this.cartService.retriveCart(cart.getCartId()).getItemSubtotalPrice();
 		try {
 			Payment payment = paypalService.createPayment(paymentRequest.cart.getItemSubtotalPrice(),
 					paymentRequest.getCurrency(), paymentRequest.getMethod(), paymentRequest.getIntent(),
 					paymentRequest.getDescription(), "http://localhost:8080/api/v1/payment/" + CANCEL_URL,
 					"http://localhost:8080/api/v1/payment/" + SUCCESS_URL);
-			System.out.println(payment);
 			for (Links link : payment.getLinks()) {
 				if (link.getRel().equals("approval_url")) {
 
 					data = paymentRequest;
-//					System.out.println("vao trang thanh toan sandbox");
-//					Order order = orderService.createOrderFromCart(paymentRequest);
-//					System.out.println(order);
-//					Order savedOrder = orderService.create(order);
-//					System.out.println(savedOrder);
-//					
-////					System.out.println(link.getHref());
-//					
-//					Collection<OrderLine> orderLines = orderLineService.createOrderLinesFromCartItems(this.cartItemService.retrieveAll(paymentRequest.cart.getCartId()));
-////					Collection<OrderLine> orderLines = orderLineService.createOrderLinesFromCartItems(cart.getCartItems());
-//					System.out.println(orderLines);  
-//		            Collection<DbOrderLine> savedDbOrderLines = orderLineService.createDbOrderLinesFromOrderLines(orderLines); 
-//
-//		            System.out.println(savedDbOrderLines);
-					// chưa xóa được cartId khi thanh toán thành công, nên khi mua mới orderId sẽ bị
-					// ghi đè
-//		                cartService.clear();
-
-//		            SUCCESS_URL =
 
 					return ResponseEntity.ok().body(link.getHref());
 				}
@@ -111,13 +81,11 @@ public class PaymentController {
 		} catch (PayPalRESTException e) {
 			e.printStackTrace();
 		}
-		System.out.print("cancel tu sandbox");
 		return ResponseEntity.badRequest().body("Không tạo được thông tin thanh toán");
 	}
 
 	@GetMapping(value = CANCEL_URL)
 	public ResponseEntity<String> cancelPay() {
-		System.out.print("cancel tu sandbox ===========");
 		String redirectScript = "<script>window.location.href = 'http://localhost:5173/cart';</script>";
 		return ResponseEntity.ok().body(redirectScript);
 	}
@@ -126,40 +94,29 @@ public class PaymentController {
 	public ResponseEntity<String> handlePaymentSuccess(@RequestParam("paymentId") String paymentId,
 			@RequestParam("token") String token, @RequestParam("PayerID") String payerId) {
 		try {
-			System.out.println("lỗi ==============");
 			Payment payment = paypalService.executePayment(paymentId, payerId);
-			System.out.println("lỗi tùm lum");
 			System.out.println(payment.toJSON());
-//		        System.out.flush();
 
 			if (payment.getState().equals("approved")) {
 				// Xử lý thành công thanh toán ở đây
-				System.out.println("vao trang thanh toan sandbox");
 				
 				// xử lí lưu Order => DbOrder
 				Order order = orderService.createOrderFromCart(data);
-				System.out.println(order);
 				Order savedOrder = orderService.create(order);
-				System.out.println(savedOrder);
 				
 				// xử lí lưu các OrderLine của Order
 				Collection<OrderLine> orderLines = orderLineService
 						.createOrderLinesFromCartItems(data.cart.getCartItems());
-				System.out.println(orderLines);
 				Collection<DbOrderLine> savedDbOrderLines = orderLineService
 						.createDbOrderLinesFromOrderLines(orderLines);
-				System.out.println(savedDbOrderLines);
-				
+	
 				// chuyển đến frontend 
 				String redirectScript = "<script>window.location.href = 'http://localhost:5173/payment/paypal/success';</script>";
 				return ResponseEntity.ok().body(redirectScript);
 			}
 		} catch (PayPalRESTException e) {
-			System.out.println("lỗi 1");
 			e.printStackTrace();
 		}
-		System.out.println("lỗi 2");
-		System.out.flush();
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(CANCEL_URL);
 	}
 
