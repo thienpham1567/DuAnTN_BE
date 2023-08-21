@@ -57,7 +57,14 @@ public class ProductVariationService extends RecordManager<ProductVariation> {
 
 	@Override
 	public ProductVariation retrieveOne(Integer id) {
-		ProductVariation product = this.load(id, null, null, null).stream()
+		this.productVariationRepo.flush();
+		Collection<DbProductVariation> dbProductVariations = this.productVariationRepo.findAll();
+		if (id != null) {
+			dbProductVariations = dbProductVariations.stream()
+					.filter(dbProductVariation -> dbProductVariation.productVariationId == id)
+					.collect(Collectors.toList());
+		}
+		ProductVariation product = dbProductVariations.stream()
 				.map(dbProduct -> this.converter.convertDbToModel(dbProduct)).findFirst().get();
 		return product;
 	}
