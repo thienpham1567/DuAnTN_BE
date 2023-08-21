@@ -1,10 +1,8 @@
 package shoesShop.payment;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import shoesShop.common.Cart.Cart;
-import shoesShop.common.User.User;
 
 @Data
 //@AllArgsConstructor

@@ -47,13 +47,6 @@ public class CartController {
 		Cart cart = this.cartService.retriveCart(cartId);
 		return new ResponseEntity<Cart>(cart, HttpStatus.OK);
 	}
-//	
-//	@PostMapping("/update")
-//	public ResponseEntity<Cart> updateCart(@RequestBody CartItem cartItem, HttpServletRequest request) {
-//		Cart updatedCart = this.cartService.add(cartItem.cartId, cartItem);
-//		return new ResponseEntity<Cart>(updatedCart, HttpStatus.OK);
-//	}
-//	
 	
 	@PostMapping("/update")
 	public ResponseEntity<Cart> updateCart(@RequestBody CartItem cartItem, HttpServletRequest request) {
@@ -67,11 +60,7 @@ public class CartController {
 			try {
 				email = jwt.getEmailFromJWT(jwtToken);
 				User user = userService.findByEmail(email);
-				
-				
 				updatedCart.setUser(user);
-//				System.out.println((user));
-//				System.out.println(updatedCart);
 			} catch (IllegalArgumentException e) {
 				System.out.println("Unable to get JWT Token");
 			} catch (ExpiredJwtException e) {
@@ -86,5 +75,17 @@ public class CartController {
 	public ResponseEntity<Cart> removeProductToCart(@PathVariable String cartId, @RequestParam(name = "cartItemId", required = true) Integer cartItemId) {
 		Cart updatedCart = this.cartService.remove(cartId, cartItemId);
 		return new ResponseEntity<Cart>(updatedCart, HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/detele/{cartId}")
+	public ResponseEntity<Boolean> deteleCart(@PathVariable("cartd") String cartId) {
+		Boolean isDeleted = this.cartService.removeCart(cartId);
+		return new ResponseEntity<Boolean>(isDeleted, HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/detele/item/delete/{cartId}")
+	public ResponseEntity<Boolean> deteleCartItem(@PathVariable String cartId) {
+		Boolean isDeleted = this.cartService.removeCartItem(cartId);
+		return new ResponseEntity<Boolean>(isDeleted, HttpStatus.OK);
 	}
 }

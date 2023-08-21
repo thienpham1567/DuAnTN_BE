@@ -3,6 +3,7 @@ package shoesShop.common.Cart;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -39,7 +40,7 @@ public class DbCart {
 	public Integer itemTotalQuantity;
 	public Double itemSubtotalPrice;
 	
-	@OneToMany(mappedBy = "cart")
+	@OneToMany(mappedBy = "cart",cascade = CascadeType.ALL, orphanRemoval = true)
 	Collection<DbCartItem> cartItems = new ArrayList<>();
 	
 	@ManyToOne

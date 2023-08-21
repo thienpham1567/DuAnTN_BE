@@ -12,6 +12,6 @@ public class Ward {
 	public String name;
 	public String prefix;
 	
-	public Integer district;
-	public Integer province;
+	public Integer districtId;
+	public Integer provinceId;
 }
