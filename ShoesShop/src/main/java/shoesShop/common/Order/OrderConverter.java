@@ -4,6 +4,7 @@ import java.util.stream.Collectors;
 
 import shoesShop.common.ICombiner;
 import shoesShop.common.IConverter;
+import shoesShop.common.Address.AddressConverter;
 import shoesShop.common.OrderLine.OrderLineConverter;
 //import shoesShop.common.OrderLine.OrderLine;
 //import shoesShop.common.OrderLine.OrderLineConverter;
@@ -12,7 +13,7 @@ import shoesShop.common.User.UserConverter;
 public class OrderConverter  implements ICombiner<DbOrder>, IConverter<DbOrder, Order> {
 	private UserConverter userConverter = new UserConverter();
 	private OrderLineConverter orderLineConverter = new OrderLineConverter();
-	
+	private AddressConverter addressConverter = new AddressConverter();
 	
 	@Override
 	public void combine(DbOrder original, DbOrder update) {
@@ -46,6 +47,7 @@ public class OrderConverter  implements ICombiner<DbOrder>, IConverter<DbOrder, 
 						input.createdAt,
 						input.updatedAt,
 						input.orderId,
+						this.addressConverter.convertDbToModel(input.address),
 						this.userConverter.convertDbToModel(input.user),
 						input.orderLines.stream()
 								.map(orderLine -> this.orderLineConverter.convertDbToModel(orderLine)).collect(Collectors.toList()));

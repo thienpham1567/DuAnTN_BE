@@ -16,6 +16,7 @@ public class PaymentRequest {
 		this.cart = cart;
 		this.userId = userId;
 	}
+	public Integer userId;
 	public Integer paymentRequestId;
 	public Integer addressId;
 	public Cart cart;
