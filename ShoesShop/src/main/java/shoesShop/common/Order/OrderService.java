@@ -117,7 +117,7 @@ public class OrderService extends RecordManager<Order>{
             orderLine.setColor(cartItem.getColor());
 	        orderLines.add(orderLine);
 	    }
-	    order.setOrderLines(paymentRequest.cart.getCartItems()); // Ánh xạ các CartItem thành OrderLine
+//	    order.setOrderLines(paymentRequest.cart.getCartItems()); // Ánh xạ các CartItem thành OrderLine
 	    return order;
 	}
 
